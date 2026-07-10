@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FamilyFootball at Four: State of the League</title>
+<style>
+  :root {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0d1220;
+      --panel: #151c2e;
+      --ink: #e7eaf2;
+      --ink-soft: #9aa4ba;
+      --line: #2a3450;
+      --navy: #16233f;
+      --navy-text: #c3cde4;
+      --gold: #e8b23a;
+      --gold-strong: #f0c05e;
+      --chip-bg: #222d49;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0d1220;
+    --panel: #151c2e;
+    --ink: #e7eaf2;
+    --ink-soft: #9aa4ba;
+    --line: #2a3450;
+    --navy: #16233f;
+    --navy-text: #c3cde4;
+    --gold: #e8b23a;
+    --gold-strong: #f0c05e;
+    --chip-bg: #222d49;
+  }
+  :root[data-theme="light"] {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 20px 80px;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; }
+
+  .display, h1, h2, h3 {
+    font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  .masthead {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    border-bottom: 3px solid var(--ink);
+    padding: 26px 0 10px;
+  }
+  .masthead .brand {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em;
+    font-size: 0.85rem;
+  }
+  .masthead .brand em { color: var(--gold); font-style: normal; }
+  .masthead .date {
+    font-family: system-ui, sans-serif; font-size: 0.75rem; color: var(--ink-soft);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    margin: 34px 0 14px;
+    text-wrap: balance;
+  }
+  h1 .kick { color: var(--gold); }
+  .deck {
+    font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 18px;
+    line-height: 1.5; text-wrap: balance;
+  }
+  .byline {
+    font-family: system-ui, sans-serif; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 9px 0; margin-bottom: 34px;
+  }
+  .byline b { color: var(--gold); }
+
+  p { margin: 0 0 1.15em; }
+
+  h2 {
+    font-size: 1.5rem; font-weight: 800; margin: 44px 0 18px;
+    padding-top: 18px; border-top: 3px solid var(--ink);
+  }
+  h2 .tag { color: var(--gold); margin-right: 8px; }
+
+  .titles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 22px 0 8px; }
+  .title-card {
+    background: var(--navy); color: #eef1f8;
+    padding: 14px 14px 12px; border-radius: 4px;
+    border-bottom: 4px solid var(--gold);
+  }
+  .title-card .yr {
+    font-family: system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #c5b06a; margin-bottom: 4px;
+  }
+  .title-card .who {
+    font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800;
+    text-transform: uppercase; font-size: 1.12rem; line-height: 1.1;
+  }
+  .title-card .how { font-size: 0.82rem; color: #aab4cd; font-family: system-ui, sans-serif; margin-top: 4px; }
+
+  .team {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 4px;
+    margin: 0 0 22px; overflow: hidden;
+  }
+  .team-head {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 16px; border-bottom: 1px solid var(--line);
+    background: linear-gradient(to right, var(--panel), var(--chip-bg));
+  }
+  .rank {
+    font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800;
+    font-size: 1.7rem; color: var(--gold); min-width: 2ch; text-align: center;
+  }
+  .team-name { flex: 1; }
+  .team-name h3 { font-size: 1.25rem; font-weight: 800; margin: 0; }
+  .record {
+    font-family: system-ui, sans-serif; font-variant-numeric: tabular-nums;
+    font-size: 0.8rem; color: var(--ink-soft); letter-spacing: 0.04em;
+  }
+  .grade {
+    font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800; font-size: 1.3rem;
+    background: var(--navy); color: var(--gold-strong);
+    border-radius: 4px; padding: 4px 12px;
+  }
+  .finishes {
+    display: flex; gap: 0; border-bottom: 1px solid var(--line);
+    font-family: system-ui, sans-serif; font-variant-numeric: tabular-nums;
+    text-align: center; overflow-x: auto;
+  }
+  .finishes div { flex: 1; padding: 7px 4px 8px; min-width: 70px; }
+  .finishes div + div { border-left: 1px solid var(--line); }
+  .finishes .y { display: block; font-size: 0.68rem; letter-spacing: 0.1em; color: var(--ink-soft); }
+  .finishes .p { font-weight: 700; font-size: 0.95rem; }
+  .finishes .p.gold { color: var(--gold); }
+  .team-body { padding: 16px 18px 6px; }
+  .team-body p:first-child::first-letter { }
+
+  .kicker-note {
+    border-left: 4px solid var(--gold); background: var(--panel);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px 4px; margin: 30px 0; font-style: italic; color: var(--ink-soft);
+  }
+
+  .foot {
+    margin-top: 50px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--ink-soft);
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 0 12px 60px; font-size: 15px; }
+    .masthead { flex-wrap: wrap; row-gap: 2px; padding-top: 18px; }
+    h1 { margin-top: 24px; }
+    .deck { font-size: 1.06rem; }
+    .team-head { flex-wrap: wrap; padding: 10px 12px; row-gap: 4px; }
+    .team-name { flex: 1 1 12ch; }
+    .grade { font-size: 1.1rem; padding: 3px 10px; }
+    .team-body { padding: 14px 14px 4px; }
+    .finishes div { min-width: 62px; padding: 6px 2px 7px; }
+    .titles { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="masthead">
+    <span class="brand">FamilyFootball <em>Insider</em></span>
+    <span class="date">Offseason Special &middot; July 2026</span>
+  </div>
+
+  <h1>Four Years of FamilyFootball: <span class="kick">Four Champions, Zero Dynasties</span></h1>
+  <p class="deck">Nobody has repeated. Nobody has even made back-to-back finals — except one team that keeps losing them. Ahead of the 2026 draft, we grade all twelve franchises on the full body of work.</p>
+  <div class="byline">By <b>The Insider Desk</b> &middot; All stats from official league records, 2022&ndash;2025</div>
+
+  <p>Twelve teams. Fifty-six weeks of regular-season football a year. And after four full seasons of this league, the only thing we know for certain is that nobody stays on top. The championship belt has changed hands every single year — a defending champ has never finished better than fifth the following season. Parity? Chaos? A family that refuses to let anyone feel good about themselves for more than nine months? Yes. Below, the desk grades all twelve franchises with the honesty your group chat is too polite for.</p>
+
+  <h2><span class="tag">///</span> The Title Timeline</h2>
+  <div class="titles">
+    <div class="title-card"><div class="yr">2022</div><div class="who">jsdivine</div><div class="how">10&ndash;4 &middot; wire-to-wire contender</div></div>
+    <div class="title-card"><div class="yr">2023</div><div class="who">daymdaym</div><div class="how">10&ndash;4 &middot; won it as a rookie owner</div></div>
+    <div class="title-card"><div class="yr">2024</div><div class="who">jgirsby</div><div class="how">9&ndash;5 &middot; the overdue coronation</div></div>
+    <div class="title-card"><div class="yr">2025</div><div class="who">alyssagenther</div><div class="how">9&ndash;5 &middot; peaked in December</div></div>
+  </div>
+
+  <h2><span class="tag">///</span> The Franchise Report Cards</h2>
+  <p>Ranked by four-year body of work — rings weighted heavily, regular seasons respected, playoff collapses remembered forever. That's the job.</p>
+
+  <div class="team">
+    <div class="team-head">
+      <div class="rank">1</div>
+      <div class="team-name"><h3>jgirsby</h3><div class="record">36&ndash;20 overall &middot; 1 title &middot; 3 playoff berths</div></div>
+      <div class="grade">A</div>
+    </div>
+    <div class="finishes">
+      <div><span class="y">2022</span><span class="p">2nd</span></div>
+      <div><span class="y">2023</span><span class="p">4th</span></div>
+      <div><span class="y">2024</span><span class="p gold">1st 🏆</span></div>
+      <div><span class="y">2025</span><span class="p">7th</span></div>
+    </div>
+    <div class="team-body">
+      <p>The gold standard. Best overall record in league history (36&ndash;20), an 11&ndash;3 debut season that ended one game short, and when the ring finally came in 2024, it came off a 9&ndash;5 record — proof this owner wins in January, not just September. The draft profile is old-school and disciplined: RBs early, tight end aggressive (Kelce in Round 1 of 2023 raised eyebrows; the desk defends it), and no quarterback until Round 7 or 8 because jgirsby simply does not chase shiny things — four years without a single panic pick, which in this league qualifies as a diagnosable condition. The 2025 slide to 7th is the first blemish on the resume. We're calling it a gap year. jgirsby is calling it "resting." Everyone else is calling it hope.</p>
+    </div>
+  </div>
+
+  <div class="team">
+    <div class="team-head">
+      <div class="rank">2</div>
+      <div class="team-name"><h3>alyssagenther</h3><div class="record">34&ndash;22 overall &middot; 1 title &middot; defending champ</div></div>
+      <div class="grade">A&minus;</div>
+    </div>
+    <div class="finishes">
+      <div><span class="y">2022</span><span class="p">5th</span></div>
+      <div><span class="y">2023</span><span class="p">8th</span></div>
+      <div><span class="y">2024</span><span class="p">3rd</span></div>
+      <div><span class="y">2025</span><span class="p gold">1st 🏆</span></div>
+    </div>
+    <div class="team-body">
+      <p>Your reigning champion, and the arrow is pointing straight up: 8th, then 3rd, then the title. The 2025 run was a masterclass in December football — 9&ndash;5 in the regular season, never the loudest team in the room, then flawless when it counted. The draft board tells you why: seven early-round wide receivers over four years, a WR-first identity in a full-PPR league, executed with total conviction (Malik Nabers in Round 1 last year while others reached for RBs). One footnote the trophy case won't mention: the champ finished <em>eighth</em> in total scoring, which the desk is contractually obligated to describe as "clutch" rather than the other word. The only real knock is the 2023 faceplant. Champions get the benefit of the doubt. For roughly nine months.</p>
+    </div>
+  </div>
+
+  <div class="team">
+    <div class="team-head">
+      <div class="rank">3</div>
+      <div class="team-name"><h3>ITouchd0wnThere</h3><div class="record">33&ndash;23 overall &middot; 2&times; runner-up &middot; 0 titles</div></div>
+      <div class="grade">B+</div>
+    </div>
+    <div class="finishes">
+      <div><span class="y">2022</span><span class="p">4th</span></div>
+      <div><span class="y">2023</span><span class="p">11th</span></div>
+      <div><span class="y">2024</span><span class="p">2nd</span></div>
+      <div><span class="y">2025</span><span class="p">2nd</span></div>
+    </div>
+    <div class="team-body">
+      <p>The most talented team without a ring, and it isn't close. Back-to-back Finals appearances. Back-to-back Finals losses. Two different champions have had to go through ITouchd0wnThere to get their trophy, and the resume now reads like a Buffalo Bills documentary. The process is genuinely elite — this owner drafts skill players harder than anyone in the league, refusing to touch a quarterback until Round 8 on average and pouring every early pick into RB/WR capital. That's how you build a juggernaut. It's also, apparently, how you finish second. Two different champions now own rings that were fitted for ITouchd0wnThere's hand. At this point the silver medals need their own shelf, the shelf needs its own room, and the room is where the narrative lives now. The window is wide open. Windows have been known to close on fingers.</p>
+    </div>
+  </div>
+
+  <div class="team">
+    <div class="team-head">
+      <div class="rank">4</div>
+      <div class="team-name"><h3>sammyyy29</h3><div class="record">33&ndash;23 overall &middot; 2025 No. 1 seed &middot; 0 titles</div></div>
+      <div class="grade">B+</div>
+    </div>
+    <div class="finishes">
+      <div><span class="y">2022</span><span class="p">10th</span></div>
+      <div><span class="y">2023</span><span class="p">3rd</span></div>
+      <div><span class="y">2024</span><span class="p">5th</span></div>
+      <div><span class="y">2025</span><span class="p">4th</span></div>
+    </div>
+    <div class="team-body">
+      <p>The league's steadiest climber — 10th to 3rd to 5th to a league-best 11&ndash;3 in 2025 — and then went 0–2 in the only two weeks anyone will remember. An 11–3 season that ends fourth isn't a statement, it's a scar with a participation ribbon on it. Still: three straight playoff trips, a WR-heavy early-round approach (seven of the last twelve premium picks on receivers) that fits this scoring format perfectly, and the best win percentage in the league over the last three seasons. Everything is here except the January résumé. Sound familiar? There's a support group forming, and ITouchd0wnThere is bringing snacks.</p>
+    </div>
+  </div>
+
+  <div class="team">
+    <div class="team-head">
+      <div class="rank">5</div>
+      <div class="team-name"><h3>jsdivine</h3><div class="record">30&ndash;26 overall &middot; inaugural champion</div></div>
+      <div class="grade">B</div>
+    </div>
+    <div class="finishes">
+      <div><span class="y">2022</span><span class="p gold">1st 🏆</span></div>
+      <div><span class="y">2023</span><span class="p">6th</span></div>
+      <div><span class="y">2024</span><span class="p">12th</span></div>
+      <div><span class="y">2025</span><span class="p">5th</span></div>
+    </div>
+    <div class="team-body">
+      <p>The founding champion, and the league's great enigma. The 2022 title team went 10&ndash;4 and looked built to last; two years later this franchise finished dead last — a champion-to-doormat speedrun no one in the league has matched, though several appear to be training for it. The swing maps suspiciously well onto the draft profile: jsdivine takes quarterbacks earlier than anyone — Round 2 on average, including spending a first-round pick on Patrick Mahomes in 2023, a move this desk described at the time as "bold" because we are polite and "a first-round quarterback in a 1QB league" because we are honest. When the early QB hits, banner. When it doesn't, basement — there is no middle setting on this appliance. The 2025 bounce to 5th says the floor is back. The ceiling was never in question. The thermostat, however, remains broken.</p>
+    </div>
+  </div>
+
+  <div class="team">
+    <div class="team-head">
+      <div class="rank">6</div>
+      <div class="team-name"><h3>BrennaLynne</h3><div class="record">31&ndash;25 overall &middot; 2023 runner-up</div></div>
+      <div class="grade">B</div>
+    </div>
+    <div class="finishes">
+      <div><span class="y">2022</span><span class="p">11th</span></div>
+      <div><span class="y">2023</span><span class="p">2nd</span></div>
+      <div><span class="y">2024</span><span class="p">8th</span></div>
+      <div><span class="y">2025</span><span class="p">6th</span></div>
+    </div>
+    <div class="team-body">
+      <p>File under: robbed. BrennaLynne scored more points than anyone in the league in 2025 — 1,726, more than the champ, more than the 11&ndash;3 top seed — and finished sixth, because fantasy football is a game played against a schedule, not a scoreboard. Add the 2023 runner-up campaign and you have a franchise that has been legitimately good three of four years with one final and zero titles to show for it. The drafting is balanced and modern: WRs and RBs early in near-equal measure, QB around Round 3 when the value's right. The desk's official position: if points-for decided titles, we'd be writing a very different article, and BrennaLynne knows it — and has told everyone, repeatedly, at what we assume is every family gathering. Correctly, though. That's the annoying part.</p>
+    </div>
+  </div>
+
+  <div class="team">
+    <div class="team-head">
+      <div class="rank">7</div>
+      <div class="team-name"><h3>daymdaym</h3><div class="record">20&ndash;22 overall (3 seasons) &middot; 1 title</div></div>
+      <div class="grade">B&minus;</div>
+    </div>
+    <div class="finishes">
+      <div><span class="y">2022</span><span class="p">&mdash;</span></div>
+      <div><span class="y">2023</span><span class="p gold">1st 🏆</span></div>
+      <div><span class="y">2024</span><span class="p">11th</span></div>
+      <div><span class="y">2025</span><span class="p">12th</span></div>
+    </div>
+    <div class="team-body">
+      <p>The most spectacular rise-and-fall this league has ever seen. Walked in the door in 2023, went 10&ndash;4, won the whole thing as a first-year owner — and has finished 11th and 12th since. That's not a rebuild, that's a retirement announcement nobody made. The desk's theory: daymdaym achieved everything there was to achieve, got bored, and has spent two seasons speedrunning the other direction just to feel something. In fairness, the 2024 season deserves an asterisk the size of a stadium: daymdaym allowed 1,972 points against, the most brutal schedule luck in league history, while scoring a perfectly respectable 1,659. But 2025 offered no such alibi. The good news at the bottom: last place buys the No. 1 pick in 2026. Champions have been built on less. One of them was this exact team.</p>
+    </div>
+  </div>
+
+  <div class="team">
+    <div class="team-head">
+      <div class="rank">8</div>
+      <div class="team-name"><h3>mmcatee01</h3><div class="record">27&ndash;29 overall &middot; 2025 3rd place</div></div>
+      <div class="grade">C+</div>
+    </div>
+    <div class="finishes">
+      <div><span class="y">2022</span><span class="p">8th</span></div>
+      <div><span class="y">2023</span><span class="p">10th</span></div>
+      <div><span class="y">2024</span><span class="p">9th</span></div>
+      <div><span class="y">2025</span><span class="p">3rd</span></div>
+    </div>
+    <div class="team-body">
+      <p>Three straight seasons in the wilderness, then a genuine breakthrough: 9&ndash;5 and a third-place finish in 2025, built on the league's stingiest points-against. The identity has never wavered — this is the league's most committed RB-first drafter, taking a running back with the first pick in essentially every draft (Jonathan Taylor 2022, McCaffrey 2024, first RB off the board at an average of pick-slot Round 1.2). The desk also feels legally obligated to mention the recurring Round 8&ndash;9 kicker selections — mmcatee01 drafts kickers the way some people buy travel insurance: early, confidently, and to the bafflement of everyone at the table. Four years running. At this point it's not a mistake, it's a belief system. Was 2025 the corner being turned or a schedule-shaped mirage? The 2026 season answers it.</p>
+    </div>
+  </div>
+
+  <div class="team">
+    <div class="team-head">
+      <div class="rank">9</div>
+      <div class="team-name"><h3>divinethought</h3><div class="record">26&ndash;30 overall &middot; 2024 semifinalist</div></div>
+      <div class="grade">C</div>
+    </div>
+    <div class="finishes">
+      <div><span class="y">2022</span><span class="p">6th</span></div>
+      <div><span class="y">2023</span><span class="p">12th</span></div>
+      <div><span class="y">2024</span><span class="p">4th</span></div>
+      <div><span class="y">2025</span><span class="p">9th</span></div>
+    </div>
+    <div class="team-body">
+      <p>6th, 12th, 4th, 9th. If you can find the pattern, call the desk, because we've had analysts on it for weeks and one of them quit. What we can find is a type: divinethought has spent a first-round pick on Justin Jefferson twice (2022, 2024) and used last year's first on rookie Ashton Jeanty — this owner falls in love, commits fully, and lives with the results. The 2024 run to the semifinals showed real ceiling; the seasons on either side of it showed the floor. RB-heavy early, a Round 4&ndash;5 quarterback, and complete unpredictability. In a league where nobody repeats, chaos is arguably a strategy. Arguably. It is also, arguably, just chaos.</p>
+    </div>
+  </div>
+
+  <div class="team">
+    <div class="team-head">
+      <div class="rank">10</div>
+      <div class="team-name"><h3>Dawnieo</h3><div class="record">25&ndash;31 overall &middot; 2022 3rd place</div></div>
+      <div class="grade">C&minus;</div>
+    </div>
+    <div class="finishes">
+      <div><span class="y">2022</span><span class="p">3rd</span></div>
+      <div><span class="y">2023</span><span class="p">9th</span></div>
+      <div><span class="y">2024</span><span class="p">6th</span></div>
+      <div><span class="y">2025</span><span class="p">11th</span></div>
+    </div>
+    <div class="team-body">
+      <p>The trend line is the problem: 3rd, 9th, 6th, and then a 3&ndash;11 season in 2025 that was every bit as grim as the record suggests — last in scoring by 89 points. The signature move is the early quarterback, and it's not subtle: Josh Allen in Round 1 of 2022, Jalen Hurts in Round 1 of 2023, first QB off the board at an average of Round 2.5. When the league's QB-reacher drafts second overall in 2026 (the silver lining of 11th place), every other owner already knows what's coming — our tendency model has it in writing, in a font, with a confidence interval. Eleven people will be mouthing "quarterback" before the card is even in. The desk suggests a plot twist: take a receiver, say nothing, and watch the group chat require a wellness check.</p>
+    </div>
+  </div>
+
+  <div class="team">
+    <div class="team-head">
+      <div class="rank">11</div>
+      <div class="team-name"><h3>D1LLIGAF</h3><div class="record">19&ndash;37 overall &middot; 2023 5th place</div></div>
+      <div class="grade">C&minus;</div>
+    </div>
+    <div class="finishes">
+      <div><span class="y">2022</span><span class="p">9th</span></div>
+      <div><span class="y">2023</span><span class="p">5th</span></div>
+      <div><span class="y">2024</span><span class="p">7th</span></div>
+      <div><span class="y">2025</span><span class="p">8th</span></div>
+    </div>
+    <div class="team-body">
+      <p>The full D1LLIGAF experience: 2&ndash;12, then 9&ndash;5 and a playoff berth, then 2&ndash;12 again — hitting the exact same rock bottom twice is either terrible luck or impressive aim — then a 6&ndash;8 season that was quietly much better than it looked — fourth in the league in scoring at 1,677, undone by a schedule with a personal grudge. This is the streakiest franchise in the league, and the drafting is actually the sane part: patient at quarterback (Round 6 on average, the Lamar Jackson Round 1 pick of 2023 being the exception that fueled the good year), WR-leaning early, and a textbook Ja'Marr Chase 1.01 last summer. The talent evaluation is fine. The luck is criminal. And this offseason, word is the franchise has brought in an analytics department. The rest of the league should be nervous.</p>
+    </div>
+  </div>
+
+  <div class="team">
+    <div class="team-head">
+      <div class="rank">12</div>
+      <div class="team-name"><h3>ozarklu</h3><div class="record">18&ndash;38 overall &middot; best finish: 7th</div></div>
+      <div class="grade">D</div>
+    </div>
+    <div class="finishes">
+      <div><span class="y">2022</span><span class="p">12th</span></div>
+      <div><span class="y">2023</span><span class="p">7th</span></div>
+      <div><span class="y">2024</span><span class="p">10th</span></div>
+      <div><span class="y">2025</span><span class="p">10th</span></div>
+    </div>
+    <div class="team-body">
+      <p>Four seasons, zero playoff appearances, and a best-ever finish of seventh. The numbers do not sugarcoat it and neither will we: 18&ndash;38 is the worst record in league history, and 2024's 1,417 points was the league's lowest full-season output of the decade. Here's the strange part — the first-round picks have been good. Cooper Kupp, Justin Jefferson at 1.01, CeeDee Lamb, Saquon Barkley: that's a wall of correct answers. ozarklu aces the first question of the exam every single year and then eats the scantron. Rounds 2 through 14 remain an unsolved crime scene, which is — technically — fixable. Third pick in the 2026 draft, a WR-early instinct that fits the format, and nowhere to go but up. The desk believes in the bounce. The desk has believed before.</p>
+    </div>
+  </div>
+
+  <div class="kicker-note">
+    <p>One for the road: <b>whatshappening0924</b>, who owned a franchise for the 2022 season only, drafted Christian McCaffrey first overall, went 4&ndash;10, won the consolation bracket, and walked away forever. Undefeated in exits. Legend status: intact.</p>
+  </div>
+
+  <h2><span class="tag">///</span> The 2026 Outlook</h2>
+  <p>The draft order — reverse of last year's standings, as tradition demands — hands daymdaym the No. 1 pick, puts the league's most predictable QB-reacher at No. 2, and buries the defending champ at No. 12, where alyssagenther will find out what life is like without premium draft capital. History says the 2025 champion will not repeat, because no one ever has — alyssagenther is welcome to feel special right up until Week 1. History also says the team nobody is talking about in July is holding the trophy in December. Check the middle of this ranking. That's where champions have been hiding. And if it's ITouchd0wnThere's year at last, the desk promises to act surprised at the third consecutive Finals appearance and say nothing about the first two. That's a lie. We'll bring it up immediately.</p>
+
+  <div class="foot">FamilyFootball Insider &middot; Records, placements, and draft data pulled from official Sleeper league history, 2022&ndash;2025. Grades are final and the desk will not be taking questions.</div>
+</div>
+</body>
+</html>
