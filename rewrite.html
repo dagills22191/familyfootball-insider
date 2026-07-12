@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An independent, data-backed roast of four seasons of FamilyFootball.">
+  <title>FamilyFootball: The Four-Year Audit</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f7f5f0;
+      --surface: #ffffff;
+      --ink: #171918;
+      --muted: #5c625f;
+      --line: #c9ccc8;
+      --red: #b4232d;
+      --teal: #087f72;
+      --gold: #a16d08;
+      --nav: #121615;
+      --nav-ink: #f8f6f0;
+    }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --paper: #111413;
+      --surface: #191d1b;
+      --ink: #f3f1eb;
+      --muted: #aeb5b1;
+      --line: #39403c;
+      --red: #ef5963;
+      --teal: #4ec4b4;
+      --gold: #e3ad3f;
+      --nav: #080a09;
+      --nav-ink: #f8f6f0;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, Cambria, "Times New Roman", serif;
+      font-size: 17px;
+      line-height: 1.68;
+      overflow-x: hidden;
+    }
+    button { font: inherit; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--nav);
+      color: var(--nav-ink);
+      border-bottom: 4px solid var(--red);
+    }
+    .topbar-inner {
+      width: min(1120px, calc(100% - 32px));
+      height: 54px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .brand {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .brand span { color: #ff6872; }
+    .topbar nav {
+      margin-left: auto;
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .topbar a {
+      color: #cfd5d1;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.73rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .theme-button {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      border: 1px solid #606763;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+    }
+    .page { width: min(1120px, calc(100% - 32px)); margin: auto; }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(260px, 0.75fr);
+      gap: 48px;
+      padding: 58px 0 42px;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero > *, .score > * { min-width: 0; }
+    .eyebrow, .section-label, .fact-label, .team-meta, .method {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .eyebrow { color: var(--red); font-size: 0.78rem; margin-bottom: 14px; }
+    h1, h2, h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      letter-spacing: 0;
+      margin: 0;
+    }
+    h1 {
+      max-width: 800px;
+      font-size: clamp(2.8rem, 7vw, 5.8rem);
+      line-height: 0.94;
+      text-transform: uppercase;
+    }
+    .dek { max-width: 780px; margin: 22px 0 0; color: var(--muted); font-size: 1.25rem; line-height: 1.48; }
+    .byline { margin-top: 24px; font-family: Arial, sans-serif; font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .hero-scoreboard {
+      align-self: end;
+      background: var(--nav);
+      color: white;
+      border-top: 5px solid var(--teal);
+      padding: 20px;
+    }
+    .hero-scoreboard .score-title { font-family: Arial, sans-serif; font-size: 0.73rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #aeb8b3; }
+    .hero-scoreboard .score { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #3c4541; padding: 11px 0; }
+    .hero-scoreboard .score:last-child { border-bottom: 0; }
+    .score strong { font-family: Arial, sans-serif; font-size: 1.7rem; color: #67d5c5; }
+    .score span { color: #d9deda; font-size: 0.9rem; text-align: right; }
+    .article-grid { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 52px; align-items: start; }
+    .story { max-width: 760px; padding-top: 38px; }
+    .story > p:first-child::first-letter { float: left; font-family: Arial, sans-serif; font-size: 4.3rem; line-height: 0.78; padding: 9px 9px 0 0; color: var(--red); font-weight: 900; }
+    .rail { position: sticky; top: 82px; margin-top: 38px; }
+    .rail-box { border-top: 4px solid var(--ink); padding: 14px 0 20px; }
+    .rail h2 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+    .rail a { display: flex; justify-content: space-between; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; font-family: Arial, sans-serif; font-size: 0.8rem; font-weight: 700; }
+    .rail a span { color: var(--muted); font-weight: 400; }
+    .method { color: var(--muted); font-size: 0.68rem; line-height: 1.5; letter-spacing: 0.05em; text-transform: none; font-weight: 600; }
+    .section-break { margin: 50px 0 24px; padding-top: 18px; border-top: 5px solid var(--ink); }
+    .section-label { color: var(--red); font-size: 0.72rem; }
+    .section-break h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.02; text-transform: uppercase; margin-top: 5px; }
+    .section-break p { color: var(--muted); margin: 10px 0 0; }
+    .champions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin: 28px 0 36px;
+    }
+    .champion { padding: 16px 12px; border-right: 1px solid var(--line); }
+    .champion:last-child { border-right: 0; }
+    .champion .year { font-family: Arial, sans-serif; color: var(--red); font-size: 0.75rem; font-weight: 900; }
+    .champion strong { display: block; font-family: Arial, sans-serif; font-size: 1rem; margin-top: 2px; }
+    .champion span { color: var(--muted); font-size: 0.78rem; }
+    .luck-board { margin: 32px 0 42px; }
+    .luck-row { display: grid; grid-template-columns: 130px 1fr 58px; gap: 10px; align-items: center; margin: 8px 0; font-family: Arial, sans-serif; font-size: 0.76rem; }
+    .luck-row b { text-align: right; }
+    .luck-track { position: relative; height: 12px; background: color-mix(in srgb, var(--line) 55%, transparent); }
+    .luck-track::after { content: ""; position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px; background: var(--muted); }
+    .luck-bar { position: absolute; height: 8px; top: 2px; }
+    .luck-bar.positive { left: 50%; background: var(--teal); }
+    .luck-bar.negative { right: 50%; background: var(--red); }
+    .team-section { scroll-margin-top: 74px; padding: 31px 0 28px; border-top: 1px solid var(--line); }
+    .team-section:first-of-type { border-top: 0; }
+    .team-kicker { color: var(--teal); font-family: Arial, sans-serif; font-size: 0.74rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; }
+    .team-section h3 { font-size: clamp(1.75rem, 4vw, 2.55rem); line-height: 1; margin-top: 5px; }
+    .team-meta { display: flex; flex-wrap: wrap; gap: 7px 18px; margin: 12px 0 18px; color: var(--muted); font-size: 0.67rem; }
+    .team-meta b { color: var(--ink); }
+    .team-section p { margin: 0 0 1em; }
+    .verdict { border-left: 4px solid var(--gold); padding: 6px 0 6px 14px; font-style: italic; color: var(--muted); }
+    .fact-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); margin: 18px 0; border: 1px solid var(--line); }
+    .fact { background: var(--surface); padding: 12px; }
+    .fact-label { display: block; font-size: 0.58rem; color: var(--muted); }
+    .fact strong { display: block; margin-top: 2px; font-family: Arial, sans-serif; font-size: 1rem; }
+    .former-owner { margin: 38px 0; padding: 18px 20px; background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--teal); }
+    .former-owner h3 { font-size: 1rem; text-transform: uppercase; margin-bottom: 7px; }
+    .closing { margin: 54px 0 70px; padding: 32px 0; border-top: 6px solid var(--red); border-bottom: 1px solid var(--line); }
+    .closing h2 { font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1; text-transform: uppercase; margin-bottom: 18px; }
+    footer { background: var(--nav); color: #b8c0bc; padding: 30px 16px 50px; font-family: Arial, sans-serif; font-size: 0.72rem; text-align: center; }
+    footer a { color: #fff; }
+    @media (max-width: 850px) {
+      .hero { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-top: 40px; }
+      .hero-scoreboard { max-width: 480px; }
+      .article-grid { grid-template-columns: 1fr; }
+      .rail { display: none; }
+      .story { max-width: none; }
+    }
+    @media (max-width: 600px) {
+      body { font-size: 16px; }
+      .topbar-inner, .page { width: min(100% - 22px, 1120px); }
+      .topbar nav { display: none; }
+      .theme-button { margin-left: auto; }
+      .score { display: grid !important; grid-template-columns: 58px minmax(0, 1fr); }
+      .score span { overflow-wrap: anywhere; }
+      .champions { grid-template-columns: repeat(2, 1fr); }
+      .champion:nth-child(2) { border-right: 0; }
+      .champion:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .luck-row { grid-template-columns: 94px 1fr 48px; }
+      .fact-strip { grid-template-columns: 1fr; }
+    }
+    @media print {
+      .topbar, .rail, .theme-button { display: none; }
+      body { background: white; color: black; }
+      .page { width: 100%; }
+      .hero { padding-top: 0; }
+      .article-grid { display: block; }
+      .team-section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">FamilyFootball <span>Insider</span></div>
+      <nav aria-label="Article sections">
+        <a href="#audit">The audit</a>
+        <a href="#champions">Champions</a>
+        <a href="#contenders">Contenders</a>
+        <a href="#variance">Variance</a>
+        <a href="#outlook">2026</a>
+      </nav>
+      <button class="theme-button" id="theme" type="button" aria-label="Toggle color theme" title="Toggle color theme">◐</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">The four-year franchise audit · 2022–2025</div>
+        <h1>No dynasty.<br>Plenty of evidence.</h1>
+        <p class="dek">Four seasons produced four champions, two recurring heartbreaks and one schedule so hostile it may qualify as a dependent. We ran every matchup through the numbers. Now comes the part where nobody enjoys their own section.</p>
+        <div class="byline">An independent FamilyFootball analysis · Official Sleeper history · July 2026</div>
+      </div>
+      <aside class="hero-scoreboard" aria-label="League history snapshot">
+        <div class="score-title">League history, by the numbers</div>
+        <div class="score"><strong>336</strong><span>regular-season<br>matchups</span></div>
+        <div class="score"><strong>4</strong><span>seasons,<br>four champions</span></div>
+        <div class="score"><strong>0</strong><span>repeat winners<br>or stable narratives</span></div>
+        <div class="score"><strong>672</strong><span>draft picks<br>available for judgment</span></div>
+      </aside>
+    </section>
+
+    <div class="article-grid">
+      <article class="story" id="audit">
+        <p>Parity is the polite word. FamilyFootball has spent four years operating more like a regional airport during a thunderstorm: everybody eventually gets a turn near the front, nobody knows where the luggage went, and the loudest person at the gate is usually not helping.</p>
+
+        <p>The championship has changed hands every season. That sounds like competitive balance until you inspect the machinery. Three of the four champions won more regular-season games than their weekly scoring would predict. The 2024 champion ranked ninth in points. The 2025 champion ranked eighth. This league does not require a season-long masterpiece. It requires a playoff invitation, two functioning Sundays and the emotional flexibility to call the result “clutch.”</p>
+
+        <p>To separate quality from scheduling, each weekly score was compared with all 11 opponents. Beat eight scores in a week, earn 8/11 of an expected win. Add 56 weeks, and the mythology starts losing arguments to arithmetic. Some franchises have been exactly what their records say. Some have received concierge service from the schedule. One has been mugged repeatedly in broad daylight.</p>
+
+        <div class="champions" aria-label="Championship timeline">
+          <div class="champion"><div class="year">2022</div><strong>jsdivine</strong><span>10–4 regular season</span></div>
+          <div class="champion"><div class="year">2023</div><strong>daymdaym</strong><span>10–4 regular season</span></div>
+          <div class="champion"><div class="year">2024</div><strong>jgirsby</strong><span>9–5 regular season</span></div>
+          <div class="champion"><div class="year">2025</div><strong>alyssagenther</strong><span>9–5 regular season</span></div>
+        </div>
+
+        <div class="section-break">
+          <div class="section-label">Schedule fortune ledger</div>
+          <h2>Who got the velvet rope?</h2>
+          <p>Actual wins minus all-play expected wins, 2022–2025. Positive is fortunate. Negative is grounds for a strongly worded email to nobody.</p>
+        </div>
+        <div class="luck-board" role="img" aria-label="Schedule luck by current franchise">
+          <div class="luck-row"><span>mmcatee01</span><div class="luck-track"><i class="luck-bar positive" style="width:25.3%"></i></div><b>+3.24</b></div>
+          <div class="luck-row"><span>jgirsby</span><div class="luck-track"><i class="luck-bar positive" style="width:24.1%"></i></div><b>+3.09</b></div>
+          <div class="luck-row"><span>jsdivine</span><div class="luck-track"><i class="luck-bar positive" style="width:15.3%"></i></div><b>+1.96</b></div>
+          <div class="luck-row"><span>BrennaLynne</span><div class="luck-track"><i class="luck-bar positive" style="width:11.4%"></i></div><b>+1.46</b></div>
+          <div class="luck-row"><span>alyssagenther</span><div class="luck-track"><i class="luck-bar positive" style="width:11.3%"></i></div><b>+1.45</b></div>
+          <div class="luck-row"><span>sammyyy29</span><div class="luck-track"><i class="luck-bar positive" style="width:5%"></i></div><b>+0.64</b></div>
+          <div class="luck-row"><span>ITouchd0wnThere</span><div class="luck-track"><i class="luck-bar positive" style="width:3.6%"></i></div><b>+0.46</b></div>
+          <div class="luck-row"><span>divinethought</span><div class="luck-track"><i class="luck-bar negative" style="width:0.8%"></i></div><b>−0.10</b></div>
+          <div class="luck-row"><span>ozarklu</span><div class="luck-track"><i class="luck-bar negative" style="width:9.9%"></i></div><b>−1.27</b></div>
+          <div class="luck-row"><span>Dawnieo</span><div class="luck-track"><i class="luck-bar negative" style="width:10.7%"></i></div><b>−1.37</b></div>
+          <div class="luck-row"><span>daymdaym</span><div class="luck-track"><i class="luck-bar negative" style="width:17%"></i></div><b>−2.18</b></div>
+          <div class="luck-row"><span>D1LLIGAF</span><div class="luck-track"><i class="luck-bar negative" style="width:49.8%"></i></div><b>−6.37</b></div>
+        </div>
+
+        <section class="section-break" id="champions">
+          <div class="section-label">Division I</div>
+          <h2>Champions with receipts</h2>
+          <p>They have the rings. The numbers are here only to determine how loudly everyone else should complain.</p>
+        </section>
+
+        <section class="team-section" id="jgirsby">
+          <div class="team-kicker">The benchmark, with favorable lighting</div>
+          <h3>jgirsby</h3>
+          <div class="team-meta"><span><b>36–20</b> record</span><span><b>1</b> title</span><span><b>2</b> finals</span><span><b>+3.09</b> schedule wins</span></div>
+          <p>The best record in league history belongs here, full stop. jgirsby has two finals, three playoff trips and eight weekly high scores against only one weekly low. That is not a hot streak. That is infrastructure.</p>
+          <p>Now the subpoena: the 2024 championship team finished ninth in regular-season scoring and produced only 6.55 all-play expected wins before posting a 9–5 record. jgirsby did not flatten the league that year. jgirsby found the postseason side entrance, made direct eye contact with security and walked out carrying the trophy. Great franchises call that situational excellence. Everyone else calls it checking the schedule twice.</p>
+          <div class="fact-strip"><div class="fact"><span class="fact-label">First-round history</span><strong>Mixon · Kelce · Bijan · Puka</strong></div><div class="fact"><span class="fact-label">QB arrival</span><strong>Round 7.5 average</strong></div><div class="fact"><span class="fact-label">Weekly floor</span><strong>Only 1 league-low week</strong></div></div>
+          <p class="verdict">ESPN verdict: the league’s best résumé, plus just enough schedule help to make the résumé irritating.</p>
+        </section>
+
+        <section class="team-section" id="alyssagenther">
+          <div class="team-kicker">The reigning champion and noted wide receiver investor</div>
+          <h3>alyssagenther</h3>
+          <div class="team-meta"><span><b>34–22</b> record</span><span><b>1</b> title</span><span><b>9</b> weekly highs</span><span><b>+1.45</b> schedule wins</span></div>
+          <p>No franchise has hit the weekly ceiling more often. Nine times in 56 regular-season weeks, alyssagenther posted the league’s top score. The draft portfolio explains it: Tyreek Hill, Amon-Ra St. Brown and Malik Nabers opened the last three drafts. In full PPR, this is less a preference than a hostile takeover of the reception column.</p>
+          <p>The 2025 title came from eighth in total scoring, which sounds suspicious until you remember the object is to peak in the playoffs, not win a spreadsheet beauty pageant in October. The season was not dominant. The ending was. Wall Street would call that timing the market; fantasy managers call it skill immediately after it works.</p>
+          <div class="fact-strip"><div class="fact"><span class="fact-label">Finishes</span><strong>5 · 8 · 3 · 1</strong></div><div class="fact"><span class="fact-label">WR investment</span><strong>8 top-five-round picks</strong></div><div class="fact"><span class="fact-label">2025 scoring rank</span><strong>8th, then champion</strong></div></div>
+          <p class="verdict">ESPN verdict: the arrow is real, the ring is real, and every receiver is now a potential business expense.</p>
+        </section>
+
+        <section class="team-section" id="jsdivine">
+          <div class="team-kicker">The original champion, still broadcasting on every frequency</div>
+          <h3>jsdivine</h3>
+          <div class="team-meta"><span><b>30–26</b> record</span><span><b>1</b> title</span><span><b>3</b> playoff trips</span><span><b>6</b> weekly highs</span></div>
+          <p>First. Sixth. Twelfth. Fifth. The franchise trend line looks like somebody dropped the controller down the stairs, but the 2022 banner remains safely attached to the wall. jsdivine won the inaugural season at 10–4, then spent three years demonstrating that defending a title is apparently an optional subscription.</p>
+          <p>The draft behavior is aggressive at both ends: first quarterback in Round 2 on average, first defense in Round 8.2. That is a lot of premium capital committed to positions the waiver wire keeps trying to discuss. Sometimes the result is Patrick Mahomes in Round 1. Sometimes the result is a reminder that even Patrick Mahomes is only one starter in a one-QB league.</p>
+          <div class="fact-strip"><div class="fact"><span class="fact-label">First-round history</span><strong>Kamara · Mahomes · Gibbs · Bijan</strong></div><div class="fact"><span class="fact-label">Weekly range</span><strong>6 highs · 5 lows</strong></div><div class="fact"><span class="fact-label">Schedule ledger</span><strong>+1.96 wins</strong></div></div>
+          <p class="verdict">ESPN verdict: capable of winning the league or falling through the league, occasionally in consecutive seasons.</p>
+        </section>
+
+        <section class="team-section" id="daymdaym">
+          <div class="team-kicker">Completed the game in the tutorial</div>
+          <h3>daymdaym</h3>
+          <div class="team-meta"><span><b>20–22</b> record</span><span><b>1</b> title</span><span><b>3</b> seasons</span><span><b>−2.18</b> schedule wins</span></div>
+          <p>daymdaym entered in 2023, went 10–4 and won the championship immediately. Most franchises spend years installing a culture. This one arrived, found the trophy room without asking and started moving furniture.</p>
+          <p>Then came 11th and 12th. The first-round choices remained perfectly respectable—Bijan Robinson, Jonathan Taylor, CeeDee Lamb—while the results began resembling a franchise that had already beaten story mode and was now testing obscure settings. The 2024 collapse did include the worst points-against total in league history, so the schedule deserves accomplice status. It does not get full custody of the blame.</p>
+          <div class="fact-strip"><div class="fact"><span class="fact-label">Finishes</span><strong>1 · 11 · 12</strong></div><div class="fact"><span class="fact-label">2024 points against</span><strong>1,972.40</strong></div><div class="fact"><span class="fact-label">2026 question</span><strong>Was the title a pilot episode?</strong></div></div>
+          <p class="verdict">ESPN verdict: the highest peak-to-sample-size ratio in league history.</p>
+        </section>
+
+        <section class="section-break" id="contenders">
+          <div class="section-label">Division II</div>
+          <h2>The contenders’ waiting room</h2>
+          <p>Excellent process, credible records and enough postseason pain to qualify for a documentary soundtrack.</p>
+        </section>
+
+        <section class="team-section" id="itouchdownthere">
+          <div class="team-kicker">The numbers approve. The trophy case has declined comment.</div>
+          <h3>ITouchd0wnThere</h3>
+          <div class="team-meta"><span><b>33–23</b> record</span><span><b>2</b> finals</span><span><b>0</b> titles</span><span><b>+0.46</b> schedule wins</span></div>
+          <p>If you wanted the cleanest proof that the process works, start here. ITouchd0wnThere has 33 actual wins against 32.54 expected wins. Almost no schedule distortion. Seven weekly highs. Two consecutive finals. The model looks at this franchise and nods professionally.</p>
+          <p>Then the championship game begins and the model leaves the building. Two finals, two losses, two opponents adding ITouchd0wnThere to the acknowledgments section of their title speech. The draft strategy is rational to the point of suspicion: ten early running backs, seven early receivers and quarterbacks delayed until Round 8 on average. This is how analysts tell you to build. Analysts do not have to attend the trophy ceremony.</p>
+          <div class="fact-strip"><div class="fact"><span class="fact-label">Finishes</span><strong>4 · 11 · 2 · 2</strong></div><div class="fact"><span class="fact-label">First-round mix</span><strong>WR · RB · WR · RB</strong></div><div class="fact"><span class="fact-label">Actual vs expected</span><strong>33 vs 32.54 wins</strong></div></div>
+          <p class="verdict">ESPN verdict: the league’s most defensible operation and its least defensible empty shelf.</p>
+        </section>
+
+        <section class="team-section" id="sammyyy29">
+          <div class="team-kicker">A concrete floor beneath a locked playoff ceiling</div>
+          <h3>sammyyy29</h3>
+          <div class="team-meta"><span><b>33–23</b> record</span><span><b>3</b> playoff trips</span><span><b>0</b> finals</span><span><b>1</b> weekly low</span></div>
+          <p>Across 56 regular-season weeks, sammyyy29 finished last in scoring once. Once. Some teams have done it in a month. This is the league’s steadiest weekly floor, backed by nine wide receivers in the first five rounds across four drafts and exactly the kind of boring competence that produces annual contention.</p>
+          <p>It has not produced a final. The 2025 team went 11–3, received 2.91 more wins than its all-play performance predicted and then lost both postseason games. That is not a collapse so much as a full audit arriving at the worst possible time. The regular season wrote a glowing recommendation letter. The playoffs called the references.</p>
+          <div class="fact-strip"><div class="fact"><span class="fact-label">Finishes</span><strong>10 · 3 · 5 · 4</strong></div><div class="fact"><span class="fact-label">2025 record</span><strong>11–3, then 0–2</strong></div><div class="fact"><span class="fact-label">Weekly lows</span><strong>1 in four years</strong></div></div>
+          <p class="verdict">ESPN verdict: nobody wants this team on the schedule, and apparently the final does not either.</p>
+        </section>
+
+        <section class="team-section" id="brennalynne">
+          <div class="team-kicker">The 2025 points champion, which came with no parade</div>
+          <h3>BrennaLynne</h3>
+          <div class="team-meta"><span><b>31–25</b> record</span><span><b>1</b> final</span><span><b>2</b> playoff trips</span><span><b>1,726.42</b> points in 2025</span></div>
+          <p>BrennaLynne scored more points than anyone in 2025 and finished sixth. That sentence is why fantasy football should never be used in schools to teach children about fairness.</p>
+          <p>But the deeper audit changes the charge. Eight actual wins versus 8.18 all-play expected wins means the regular-season schedule was basically fair. The postseason was the trapdoor. Across four seasons, this has been a solid franchise rather than a cursed one: 31 wins, a 2023 final and a balanced early-round profile. The only truly alarming draft habit is a first kicker around Round 9.2, an area of the board normally reserved for players who might still matter in November.</p>
+          <div class="fact-strip"><div class="fact"><span class="fact-label">2025 scoring rank</span><strong>1st</strong></div><div class="fact"><span class="fact-label">2025 expected wins</span><strong>8.18</strong></div><div class="fact"><span class="fact-label">First-round history</span><strong>Cook · CMC · A.J. · Gibbs</strong></div></div>
+          <p class="verdict">ESPN verdict: strong enough to scare everybody, unlucky mainly in the specific weeks that produce hardware.</p>
+        </section>
+
+        <section class="section-break" id="variance">
+          <div class="section-label">Division III</div>
+          <h2>Agents of variance</h2>
+          <p>Every league needs middle-class volatility, unexplained confidence and at least one kicker purchased at luxury pricing.</p>
+        </section>
+
+        <section class="team-section" id="mmcatee01">
+          <div class="team-kicker">Schedule fortune’s preferred customer</div>
+          <h3>mmcatee01</h3>
+          <div class="team-meta"><span><b>27–29</b> record</span><span><b>23.76</b> expected wins</span><span><b>+3.24</b> schedule wins</span><span><b>9</b> weekly lows</span></div>
+          <p>No current franchise has received more help from the schedule. mmcatee01 owns 27 wins on an all-play expectation of 23.76, despite nine weekly last-place scores and only two weekly highs. This is not an insult. This is elite resource extraction.</p>
+          <p>The 2025 breakthrough to third was real enough, but it came with the league’s lowest points-against total. Meanwhile, the draft history features three consecutive first-round running backs and a first kicker around Round 8.7. Perhaps the universe is not rewarding process. Perhaps it is rewarding conviction so pure that statistical models feel rude interrupting.</p>
+          <div class="fact-strip"><div class="fact"><span class="fact-label">Finishes</span><strong>8 · 10 · 9 · 3</strong></div><div class="fact"><span class="fact-label">2025 points against</span><strong>League-low 1,435.56</strong></div><div class="fact"><span class="fact-label">Kicker arrival</span><strong>Round 8.7 average</strong></div></div>
+          <p class="verdict">ESPN verdict: results have outrun the underlying numbers, but the results are still allowed to keep the medal.</p>
+        </section>
+
+        <section class="team-section" id="divinethought">
+          <div class="team-kicker">The league’s control group</div>
+          <h3>divinethought</h3>
+          <div class="team-meta"><span><b>26–30</b> record</span><span><b>26.10</b> expected wins</span><span><b>2</b> playoff trips</span><span><b>1</b> weekly high</span></div>
+          <p>Actual wins: 26. Expected wins: 26.10. Schedule luck: negative one-tenth of a win. If the rest of the league is a laboratory accident, divinethought is the untouched sample labeled “normal.”</p>
+          <p>Normal does not mean predictable. The finishes are sixth, 12th, fourth and ninth, a sequence that reads less like a trajectory than four numbers selected during a fire drill. The first rounds show conviction—Justin Jefferson twice, Austin Ekeler, Ashton Jeanty—and the early rounds lean heavily toward running back. Yet only one weekly high in four years suggests the roster often arrives near contention without ever kicking down the door. It knocks. It waits. Sometimes the playoffs answer.</p>
+          <div class="fact-strip"><div class="fact"><span class="fact-label">Schedule ledger</span><strong>−0.10 wins</strong></div><div class="fact"><span class="fact-label">Finishes</span><strong>6 · 12 · 4 · 9</strong></div><div class="fact"><span class="fact-label">Early RB picks</span><strong>9 in Rounds 1–5</strong></div></div>
+          <p class="verdict">ESPN verdict: empirically average, spiritually unpredictable.</p>
+        </section>
+
+        <section class="team-section" id="dawnieo">
+          <div class="team-kicker">Quarterback confidence, market price optional</div>
+          <h3>Dawnieo</h3>
+          <div class="team-meta"><span><b>25–31</b> record</span><span><b>6</b> weekly highs</span><span><b>4</b> weekly lows</span><span><b>Round 2.5</b> first QB</span></div>
+          <p>Dawnieo has produced six weekly highs, tied with two franchises that own far better records. The ceiling exists. So does the basement, and the elevator has been busy.</p>
+          <p>Josh Allen in Round 1 in 2022. Jalen Hurts in Round 1 in 2023. That is a team-building philosophy written in permanent marker: secure the quarterback, then begin negotiating with positional scarcity after the fact. The approach helped produce third place in 2022. By 2025, the franchise finished last in scoring and 11th overall, proof that a signature strategy can eventually become opposing scouting material.</p>
+          <div class="fact-strip"><div class="fact"><span class="fact-label">Finishes</span><strong>3 · 9 · 6 · 11</strong></div><div class="fact"><span class="fact-label">First-round QBs</span><strong>Allen · Hurts</strong></div><div class="fact"><span class="fact-label">2025 points</span><strong>League-low 1,414.20</strong></div></div>
+          <p class="verdict">ESPN verdict: a high-variance franchise currently approaching a very low-variance scouting report.</p>
+        </section>
+
+        <section class="team-section" id="d1lligaf">
+          <div class="team-kicker">The schedule’s longest-running personal dispute</div>
+          <h3>D1LLIGAF</h3>
+          <div class="team-meta"><span><b>19–37</b> record</span><span><b>25.37</b> expected wins</span><span><b>−6.37</b> schedule wins</span><span><b>1</b> playoff trip</span></div>
+          <p>No current franchise has been treated worse by the matchup draw. D1LLIGAF’s weekly scores project to 25.37 all-play wins; the standings delivered 19. A six-win gap over four years is not a bad bounce. It is a recurring appointment.</p>
+          <p>Now, before the franchise files for historical reparations: 19–37 still contains plenty of decisions made voluntarily. The 2023 playoff season got nine wins from seven expected, so luck has occasionally left a fruit basket. But 2024 alone cost 3.82 wins against expectation, and 2025 produced the seventh-most points—not fourth, as earlier reports suggested—while yielding a 6–8 record. The drafting is more coherent than the standings: nine early receivers, quarterbacks generally delayed, and Ja’Marr Chase at 1.01 in 2025. The new analytics department has evidence. Unfortunately, evidence cannot tackle anybody.</p>
+          <div class="fact-strip"><div class="fact"><span class="fact-label">Finishes</span><strong>9 · 5 · 7 · 8</strong></div><div class="fact"><span class="fact-label">Worst luck season</span><strong>2024: −3.82 wins</strong></div><div class="fact"><span class="fact-label">QB arrival</span><strong>Round 5.8 average</strong></div></div>
+          <p class="verdict">ESPN verdict: the league’s clearest positive-regression candidate, assuming regression has the correct address.</p>
+        </section>
+
+        <section class="team-section" id="ozarklu">
+          <div class="team-kicker">The opening pick is usually excellent. Then the meeting continues.</div>
+          <h3>ozarklu</h3>
+          <div class="team-meta"><span><b>18–38</b> record</span><span><b>0</b> playoff trips</span><span><b>13</b> weekly lows</span><span><b>5,634.94</b> total points</span></div>
+          <p>Thirteen times in 56 weeks, ozarklu posted the league’s lowest score. Nearly one quarter of league history. There is no schedule adjustment large enough to cross-examine that number.</p>
+          <p>The mystery is that the first-round résumé looks like expert-consensus fan fiction: Cooper Kupp, Justin Jefferson, CeeDee Lamb, Saquon Barkley. Four defensible answers. The problems arrive later, after the easy multiple-choice question has been completed and the exam becomes open response. With no playoff appearances and a best finish of seventh, the 2026 objective is refreshingly free of ambiguity: build one complete roster. Not a contender. Not a dynasty. Start with all the parts attached.</p>
+          <div class="fact-strip"><div class="fact"><span class="fact-label">Finishes</span><strong>12 · 7 · 10 · 10</strong></div><div class="fact"><span class="fact-label">Weekly lows</span><strong>13 of 56</strong></div><div class="fact"><span class="fact-label">First-round history</span><strong>Kupp · Jefferson · Lamb · Barkley</strong></div></div>
+          <p class="verdict">ESPN verdict: the first round says playoff team; the full box score has requested a rebuttal.</p>
+        </section>
+
+        <aside class="former-owner">
+          <h3>The one-season comet: whatshappening0924</h3>
+          <p>One season, a 4–10 record, Christian McCaffrey at 1.01, a consolation-bracket win and then permanent exit. The franchise did not build a legacy. It left a perfectly organized anecdote.</p>
+        </aside>
+
+        <section class="closing" id="outlook">
+          <div class="section-label">The 2026 outlook</div>
+          <h2>The draft order is not set. The pressure is.</h2>
+          <p>Sleeper has not assigned the 2026 draft order yet, so any slot projection remains exactly that: a projection. What the history does establish is more useful. ITouchd0wnThere owns the strongest title-free process. sammyyy29 has the most stable weekly floor. D1LLIGAF has the largest case for positive regression. mmcatee01 has the clearest case for the schedule sending an invoice. And every champion should remember the league’s only functioning tradition: the defending winner has never finished better than fifth.</p>
+          <p>Four years are not enough to declare permanent owner tendencies, but they are more than enough to create expectations. Dawnieo will make the room watch the quarterback board. alyssagenther will test the receiver supply. jgirsby will wait on quarterback and act as though patience was invented locally. ozarklu will make an excellent first selection and force the analysts to keep working.</p>
+          <p>The league has no dynasty because it has no stable hierarchy. It has contenders, variance, schedule luck and a two-week playoff that treats four months of evidence as a polite suggestion. That is bad science. It is outstanding television.</p>
+        </section>
+      </article>
+
+      <aside class="rail" aria-label="Team index and methodology">
+        <div class="rail-box">
+          <h2>Franchise index</h2>
+          <a href="#jgirsby">jgirsby <span>36–20</span></a>
+          <a href="#alyssagenther">alyssagenther <span>34–22</span></a>
+          <a href="#jsdivine">jsdivine <span>30–26</span></a>
+          <a href="#daymdaym">daymdaym <span>20–22</span></a>
+          <a href="#itouchdownthere">ITouchd0wnThere <span>33–23</span></a>
+          <a href="#sammyyy29">sammyyy29 <span>33–23</span></a>
+          <a href="#brennalynne">BrennaLynne <span>31–25</span></a>
+          <a href="#mmcatee01">mmcatee01 <span>27–29</span></a>
+          <a href="#divinethought">divinethought <span>26–30</span></a>
+          <a href="#dawnieo">Dawnieo <span>25–31</span></a>
+          <a href="#d1lligaf">D1LLIGAF <span>19–37</span></a>
+          <a href="#ozarklu">ozarklu <span>18–38</span></a>
+        </div>
+        <div class="rail-box">
+          <h2>Method</h2>
+          <p class="method">Regular-season records and scoring come from Sleeper, Weeks 1–14, 2022–2025. All-play expected wins compare each weekly score with the other 11 scores. Playoff finishes come from official winner and consolation brackets. Draft tendencies cover four drafts at most and are treated as tendencies, not prophecies.</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    FamilyFootball Insider · Independent rewrite · Data retrieved from official Sleeper league history<br>
+    <a href="./">Read the original article</a>
+  </footer>
+  <script>
+    const root = document.documentElement;
+    const saved = localStorage.getItem('ffi-theme');
+    if (saved) root.dataset.theme = saved;
+    document.getElementById('theme').addEventListener('click', () => {
+      const dark = root.dataset.theme === 'dark' || (!root.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+      root.dataset.theme = dark ? 'light' : 'dark';
+      localStorage.setItem('ffi-theme', root.dataset.theme);
+    });
+  </script>
+</body>
+</html>
