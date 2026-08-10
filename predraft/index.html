@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The 2026 Draft Order Is Out</title>
+<style>
+  :root {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0d1220;
+      --panel: #151c2e;
+      --ink: #e7eaf2;
+      --ink-soft: #9aa4ba;
+      --line: #2a3450;
+      --navy: #16233f;
+      --navy-text: #c3cde4;
+      --gold: #e8b23a;
+      --gold-strong: #f0c05e;
+      --chip-bg: #222d49;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0d1220;
+    --panel: #151c2e;
+    --ink: #e7eaf2;
+    --ink-soft: #9aa4ba;
+    --line: #2a3450;
+    --navy: #16233f;
+    --navy-text: #c3cde4;
+    --gold: #e8b23a;
+    --gold-strong: #f0c05e;
+    --chip-bg: #222d49;
+  }
+  :root[data-theme="light"] {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 20px 80px;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; }
+
+  .display, h1, h2, h3 {
+    font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  .masthead {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    border-bottom: 3px solid var(--ink);
+    padding: 26px 0 10px;
+  }
+  .masthead .brand {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em;
+    font-size: 0.85rem;
+  }
+  .masthead .brand em { color: var(--gold); font-style: normal; }
+  .masthead .date {
+    font-family: system-ui, sans-serif; font-size: 0.75rem; color: var(--ink-soft);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    margin: 34px 0 14px;
+    text-wrap: balance;
+  }
+  h1 .kick { color: var(--gold); }
+  .deck {
+    font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 18px;
+    line-height: 1.5; text-wrap: balance;
+  }
+  .byline {
+    font-family: system-ui, sans-serif; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 9px 0; margin-bottom: 34px;
+  }
+  .byline b { color: var(--gold); }
+
+  p { margin: 0 0 1.15em; }
+
+  h2 {
+    font-size: 1.5rem; font-weight: 800; margin: 44px 0 18px;
+    padding-top: 18px; border-top: 3px solid var(--ink);
+  }
+  h2 .tag { color: var(--gold); margin-right: 8px; }
+
+  .titles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 22px 0 8px; }
+  .title-card {
+    background: var(--navy); color: #eef1f8;
+    padding: 14px 14px 12px; border-radius: 4px;
+    border-bottom: 4px solid var(--gold);
+  }
+  .title-card .yr {
+    font-family: system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #c5b06a; margin-bottom: 4px;
+  }
+  .title-card .who {
+    font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800;
+    text-transform: uppercase; font-size: 1.12rem; line-height: 1.1;
+  }
+  .title-card .how { font-size: 0.82rem; color: #aab4cd; font-family: system-ui, sans-serif; margin-top: 4px; }
+
+  .team {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 4px;
+    margin: 0 0 22px; overflow: hidden;
+  }
+  .team-head {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 16px; border-bottom: 1px solid var(--line);
+    background: linear-gradient(to right, var(--panel), var(--chip-bg));
+  }
+  .rank {
+    font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800;
+    font-size: 1.7rem; color: var(--gold); min-width: 2ch; text-align: center;
+  }
+  .team-name { flex: 1; }
+  .team-name h3 { font-size: 1.25rem; font-weight: 800; margin: 0; }
+  .record {
+    font-family: system-ui, sans-serif; font-variant-numeric: tabular-nums;
+    font-size: 0.8rem; color: var(--ink-soft); letter-spacing: 0.04em;
+  }
+  .grade {
+    font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800; font-size: 1.3rem;
+    background: var(--navy); color: var(--gold-strong);
+    border-radius: 4px; padding: 4px 12px;
+  }
+  .finishes {
+    display: flex; gap: 0; border-bottom: 1px solid var(--line);
+    font-family: system-ui, sans-serif; font-variant-numeric: tabular-nums;
+    text-align: center; overflow-x: auto;
+  }
+  .finishes div { flex: 1; padding: 7px 4px 8px; min-width: 70px; }
+  .finishes div + div { border-left: 1px solid var(--line); }
+  .finishes .y { display: block; font-size: 0.68rem; letter-spacing: 0.1em; color: var(--ink-soft); }
+  .finishes .p { font-weight: 700; font-size: 0.95rem; }
+  .finishes .p.gold { color: var(--gold); }
+  .team-body { padding: 16px 18px 6px; }
+  .team-body p:first-child::first-letter { }
+
+  .kicker-note {
+    border-left: 4px solid var(--gold); background: var(--panel);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px 4px; margin: 30px 0; font-style: italic; color: var(--ink-soft);
+  }
+
+  .foot {
+    margin-top: 50px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--ink-soft);
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 0 12px 60px; font-size: 15px; }
+    .masthead { flex-wrap: wrap; row-gap: 2px; padding-top: 18px; }
+    h1 { margin-top: 24px; }
+    .deck { font-size: 1.06rem; }
+    .team-head { flex-wrap: wrap; padding: 10px 12px; row-gap: 4px; }
+    .team-name { flex: 1 1 12ch; }
+    .grade { font-size: 1.1rem; padding: 3px 10px; }
+    .team-body { padding: 14px 14px 4px; }
+    .finishes div { min-width: 62px; padding: 6px 2px 7px; }
+    .titles { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="masthead">
+    <span class="brand">FamilyFootball <em>Insider</em></span>
+    <span class="date">Draft Preview &middot; August 2026</span>
+  </div>
+
+  <h1>The 2026 Draft Order Is Out: <span class="kick">Punishment Seating Confirmed</span></h1>
+  <p class="deck">Ten teams, fifteen rounds, one belt. The commissioner has posted the order, the desk has run the numbers, and somebody is about to draft a kicker seven rounds too early. Again.</p>
+  <div class="byline">By <b>The Insider Desk</b> &middot; All stats from official league records, 2022&ndash;2025</div>
+
+  <p>FamilyFootball enters 2026 as a ten-team league, and the math changes more than the group chat has bothered to notice. Fifteen rounds now &mdash; a full-roster draft, no empty seat at the end of your bench. Six of ten teams make the playoffs, which means sixty percent of this league will spend December calling itself a contender. Scoring is untouched: full PPR, the same rules under which four different champions have been crowned in four years. The draft lands September 5 or 6, pending the commissioner's final decree, roughly ninety minutes of football decisions and two and a half hours of everything else.</p>
+
+  <p>The order, as always, is reverse of last season's final standings &mdash; the league's one reliable act of institutional cruelty. Finish badly, pick early, and let everyone see exactly why you're picking early. The desk's verdict on all ten seats:</p>
+
+  <h2><span class="tag">///</span> The Order</h2>
+
+  <p><b>1. Dawnieo.</b> The first overall pick, earned the hard way: 1,414.20 points in 2025, last in the league by a country mile. The good news is that the number one pick is the easiest decision in fantasy football. The bad news is that Dawnieo's career says the second pick of her draft will be a quarterback taken four rounds before anyone else was thinking about one &mdash; her first QB goes off the board at an average of round 2.5, the most telegraphed move in league history. The desk has already set a countdown clock.</p>
+
+  <p><b>2. divinethought.</b> The Daddy Daughter Dynamos pick second after a bottom-third scoring season, and the desk notes &mdash; with genuine affection &mdash; that this franchise's draft-day committee structure remains the league's most adorable competitive disadvantage. Two picks in the top eleven should rebuild the roster fast, provided the committee can agree.</p>
+
+  <p><b>3. D1LLIGAF.</b> Yes, our own analytics department drafts third, and no, we will not be recusing ourselves. The record shows this team has posted a four-year schedule-luck figure of minus 6.36 wins &mdash; the unluckiest mark in league history, computed twice by two independent analysts because the first result seemed too cruel to be true. Third pick, top-heavy board, everything to prove. If this goes wrong the desk will simply report on itself, dryly.</p>
+
+  <p><b>4. jgirsby.</b> The 2024 champion picks fourth and would like you to know the rebuild is ahead of schedule. The luck ledger (+3.09, second-luckiest in league history) would like you to know the schedule did some of the lifting. Both things can be true; only one of them fits on a championship t-shirt.</p>
+
+  <p><b>5. BrennaLynne.</b> The league's reigning points queen &mdash; 1,726.42 in 2025, most in the league &mdash; picks fifth, because scoring the most points and winning things remain, in this league, entirely unrelated hobbies. Finkle is Einhorn. The points are real. The banner remains theoretical.</p>
+
+  <p><b>6. jsdivine.</b> The 2022 champion, whose franchise thermostat has two settings: title and basement. Fourth in scoring last year suggests the dial is swinging warm again. The desk offers no further comment, because the thermostat doesn't respond to commentary.</p>
+
+  <p><b>7. sammyyy29.</b> Second in the league in scoring last season and famously allergic to the waiver wire &mdash; five adds all of last year, a number the desk triple-checked. Show Me Your TDs drafts like the roster is being carved in marble: wideouts early, wideouts often, and whatever happens after that is between the roster and God.</p>
+
+  <p><b>8. mmcatee01.</b> The league's luckiest franchise (+3.23 over four years) and its most devout: the kicker belief system enters its fifth season, with a career average first-kicker selection of round 8.67 and a personal conviction that this is somehow still too late. Fifteen rounds means more roster to fill. The desk fears what faith does with extra space.</p>
+
+  <p><b>9. ITouchd0wnThere.</b> Two straight Finals appearances, two straight silver medals &mdash; the fullest trophy shelf in the league with nothing gold on it. Picks ninth, which the silver shelf faithful will note is exactly where a back-to-back runner-up belongs: close to the end, but not quite there. Waits on quarterbacks until roughly round eight, which has worked twice and finished second twice.</p>
+
+  <p><b>10. alyssagenther.</b> The reigning champion picks last, as tradition demands, and will spend the draft acting like it matters. It does not. This is the owner who put up forty-two waiver claims last season &mdash; the belt was won in October and November, one add at a time, while the rest of the league admired its draft boards. Whoever you draft in September, she will have replaced three of hers by Week 6.</p>
+
+  <h2><span class="tag">///</span> The Fine Print</h2>
+
+  <p>Fifteen rounds, ten teams, 150 picks. Starters: one QB, two RB, two WR, one TE, one flex, one kicker, one defense; six bench spots and an IR slot. Full PPR, six-point passing touchdowns, unchanged since the founding. Playoffs run weeks 15 through 17 and six teams qualify, which means exactly four owners will experience consequences this season. The trade deadline is week 13, which historically threatens nobody &mdash; this league has completed four trades in four years, a pace the desk describes as geological.</p>
+
+  <p>The desk will publish its live draft coverage at this site on draft night, with the booth in mid-season form and at least one voice contractually obligated to be objective. Until then: study the order, respect the fifteenth round, and remember that four drafts have produced four different champions &mdash; whatever you think you know on September 5th, the league has spent four years disproving it.</p>
+
+  <p>The desk will not be taking questions.</p>
+
+  <div class="footer">FamilyFootball Insider &middot; Draft Preview 2026 &middot; divinesleeper.com</div>
+</div>
+
+</body>
+</html>
