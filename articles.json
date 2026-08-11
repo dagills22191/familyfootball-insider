@@ -1,0 +1,15 @@
+{
+ "draft_central": "predraft",
+ "articles": [
+  {"slug": "annual",
+   "title": "Four Years of FamilyFootball",
+   "deck": "Every franchise graded, no feelings spared. Four seasons, four champions, zero dynasties.",
+   "date": "2026-07-11",
+   "section": "annual"},
+  {"slug": "predraft",
+   "title": "Draft Preview 2026",
+   "deck": "Ten seats, fifteen rounds, and a commish who announced the order by screenshot.",
+   "date": "2026-08-10",
+   "section": "predraft"}
+ ]
+}
