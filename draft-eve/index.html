@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Draft Eve 2026: The Desk Files Its Predictions</title>
+<style>
+  :root {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0d1220;
+      --panel: #151c2e;
+      --ink: #e7eaf2;
+      --ink-soft: #9aa4ba;
+      --line: #2a3450;
+      --navy: #16233f;
+      --navy-text: #c3cde4;
+      --gold: #e8b23a;
+      --gold-strong: #f0c05e;
+      --chip-bg: #222d49;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0d1220;
+    --panel: #151c2e;
+    --ink: #e7eaf2;
+    --ink-soft: #9aa4ba;
+    --line: #2a3450;
+    --navy: #16233f;
+    --navy-text: #c3cde4;
+    --gold: #e8b23a;
+    --gold-strong: #f0c05e;
+    --chip-bg: #222d49;
+  }
+  :root[data-theme="light"] {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 20px 80px;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; }
+
+  .display, h1, h2, h3 {
+    font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  .masthead {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    border-bottom: 3px solid var(--ink);
+    padding: 26px 0 10px;
+  }
+  .masthead .brand {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em;
+    font-size: 0.85rem;
+  }
+  .masthead .brand em { color: var(--gold); font-style: normal; }
+  .masthead .date {
+    font-family: system-ui, sans-serif; font-size: 0.75rem; color: var(--ink-soft);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    margin: 34px 0 14px;
+    text-wrap: balance;
+  }
+  h1 .kick { color: var(--gold); }
+  .deck {
+    font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 18px;
+    line-height: 1.5; text-wrap: balance;
+  }
+  .byline {
+    font-family: system-ui, sans-serif; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 9px 0; margin-bottom: 34px;
+  }
+  .byline b { color: var(--gold); }
+
+  p { margin: 0 0 1.15em; }
+
+  h2 {
+    font-size: 1.5rem; font-weight: 800; margin: 44px 0 18px;
+    padding-top: 18px; border-top: 3px solid var(--ink);
+  }
+  h2 .tag { color: var(--gold); margin-right: 8px; }
+
+  .pick { display: block; margin: 0 0 20px; }
+  .pick b { color: var(--ink); }
+
+  .clock-note {
+    border-left: 4px solid var(--gold); background: var(--panel);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px 4px; margin: 30px 0; font-style: italic; color: var(--ink-soft);
+  }
+
+  .foot {
+    margin-top: 50px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--ink-soft);
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 0 12px 60px; font-size: 15px; }
+    .masthead { flex-wrap: wrap; row-gap: 2px; padding-top: 18px; }
+    h1 { margin-top: 24px; }
+    .deck { font-size: 1.06rem; }
+  }
+</style>
+</head>
+<body>
+<div id="dspn-article-nav" style="background:#0b0d12;border-bottom:3px solid #e02b20;font-family:Arial,Helvetica,sans-serif"><div style="max-width:1120px;margin:0 auto;padding:8px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap"><a href="/" style="background:#000;color:#fff;font-weight:900;font-style:italic;font-size:1rem;letter-spacing:1px;padding:3px 11px;text-decoration:none;border-bottom:3px solid #f2b024;margin-right:8px">DSPN</a><a href="/" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Home</a><a href="/annual" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">The Annual</a><a href="/predraft" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Draft Central</a><a href="/live" style="color:#f2b024;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">&#9679; Live</a></div></div>
+
+<div class="wrap">
+  <div class="masthead">
+    <span class="brand">FamilyFootball <em>Insider</em></span>
+    <span class="date">Draft Eve &middot; September 2026</span>
+  </div>
+
+  <h1>Draft Eve: <span class="kick">The Desk Files Its Predictions</span></h1>
+  <p class="deck">The order held. The board survived the cuts. At one o'clock Sunday, ten managers sit down to do precisely what four years of draft tape says they will &mdash; and the desk has watched every frame.</p>
+  <div class="byline">By <b>The Insider Desk</b> &middot; Tendencies from four drafts, 2022&ndash;2025</div>
+
+  <p>Three weeks ago the desk graded the seats. The commissioner has since made it official: the reverse-standings order stands, unchanged, and the board goes live <b>Sunday, September 6th, at 1:00&nbsp;PM Eastern</b> &mdash; ninety minutes of football decisions wrapped, as ever, in two and a half hours of everything else. What follows is not a mock draft. It is a forecast, and forecasts in this league are easy, because the managers have spent four years telling us exactly who they are.</p>
+
+  <p>The board itself came through the roster cuts intact where it counts. The top is chalk, the elite backs and receivers go early, and the annual game of quarterback chicken is loaded and ready. The only drama the cuts introduced was subtraction &mdash; a name or two the board simply no longer carries &mdash; nothing in the first hundred picks a prepared manager hasn't already priced in. Which brings us to the managers, and their prices.</p>
+
+  <h2><span class="tag">///</span> The Predictions</h2>
+
+  <p class="pick"><b>Dawnieo, picking first.</b> The countdown clock the desk installed in August is still running. Her first quarterback has come off the board at an average of round 2.5 across four drafts &mdash; the most telegraphed act in league history &mdash; and nothing about holding the number-one overall pick suggests she will suddenly discover patience. The desk predicts a quarterback inside the first eighteen selections, and a group chat that saw it coming and let it happen anyway.</p>
+
+  <p class="pick"><b>jsdivine, the 2022 champion.</b> The thermostat reads warm &mdash; fourth in scoring a year ago &mdash; which in this franchise means title or basement, and never the hallway in between. Watch the quarterback: jsdivine has quietly out-reached even Dawnieo, taking his first signal-caller at an average of round 2.0, a passer inside the top three rounds four years running. Two of the league's most aggressive quarterback drafters sit in the top six seats. The position will be picked over before the prudent have finished their coffee.</p>
+
+  <p class="pick"><b>mmcatee01, the faithful.</b> The kicker belief system enters its fifth season, and fifteen rounds is more pew than this congregation has ever been handed. Career average first-kicker selection: round 8.67, a number its owner considers embarrassingly late. The desk's prediction is not <em>whether</em> mmcatee reaches for a kicker before it is defensible &mdash; it is by how many rounds, and whether a single soul at the table has the heart to say something.</p>
+
+  <p class="pick"><b>jgirsby, the 2024 champion.</b> The one disciplined forecast on the board. jgirsby opens with a running back nearly every year &mdash; first pick averaging round 1.8 &mdash; and then commits the act the rest of the league treats as heresy: waits on a quarterback until round 7.5, and wins a title doing it. The desk predicts backs early, a shrug at the great quarterback run, and a roster that looks boring right up until December.</p>
+
+  <p class="pick"><b>BrennaLynne, the points queen.</b>1,726.42 points last season, most in the league, banner count still zero &mdash; Finkle is still Einhorn. Her draft is the purest chalk this league produces: a running back at 1.2, a receiver at 1.8, no cleverness, no reaches, the best player available every single time. The desk predicts, once more, a gorgeous roster and a fresh seminar on how thoroughly points and trophies decline to speak to one another.</p>
+
+  <p class="pick"><b>ITouchd0wnThere, the silver shelf.</b> Two Finals, two second-place medals &mdash; the fullest trophy case in the league with nothing gold in it. Waits on a quarterback until roughly round eight, a plan that has reached the championship twice and lost it twice. The desk predicts the same patient, balanced, agonizingly-close-again draft. Bring a coaster for the silver.</p>
+
+  <p class="pick"><b>D1LLIGAF, the analytics department.</b> That's us, picking third, and no, we still will not recuse ourselves. A four-year schedule-luck figure of minus 6.36 wins says the model has earned the right to draft scared; the model, naturally, disagrees, and will take a back or a receiver early like everyone sensible. The one guaranteed forecast: somewhere in the middle rounds the desk's resident homer talks the room into a Washington Commander and calls it the steal of the draft. Circle round nine and name it now &mdash; Stefon Diggs, the Commanders' WR2 &mdash; and let the record show the desk warned you.</p>
+
+  <div class="clock-note">The desk deals in tendencies, not certainties. Tendencies tell you what a manager will do. They have never once told you whether it will work.</div>
+
+  <p>That is the forecast. Four drafts have produced four different champions, which is the league's standing reminder that being predictable and being right are separate hobbies &mdash; ask the points queen. The board goes live Sunday at one. Study the order, respect the fifteenth round, and keep one eye on the countdown clock.</p>
+
+  <p>The desk will not be taking questions.</p>
+
+  <div class="foot">FamilyFootball Insider &middot; Draft Eve 2026 &middot; divinesleeper.com</div>
+</div>
+
+</body>
+</html>

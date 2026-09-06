@@ -1,0 +1,5 @@
+# Map the workstation's old global git identity (a work address that was set
+# in ~/.gitconfig by mistake) onto Tim's personal address. History is
+# deliberately NOT rewritten -- this re-attributes it for `git log`,
+# `git shortlog` and GitHub's contributor views without changing any hash.
+Tim Gill <timgill66@gmail.com> <tim@amstat.org>
