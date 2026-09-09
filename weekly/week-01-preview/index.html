@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kickoff Week: The Desk Sets the Lines</title>
+<style>
+  :root {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0d1220;
+      --panel: #151c2e;
+      --ink: #e7eaf2;
+      --ink-soft: #9aa4ba;
+      --line: #2a3450;
+      --navy: #16233f;
+      --navy-text: #c3cde4;
+      --gold: #e8b23a;
+      --gold-strong: #f0c05e;
+      --chip-bg: #222d49;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0d1220;
+    --panel: #151c2e;
+    --ink: #e7eaf2;
+    --ink-soft: #9aa4ba;
+    --line: #2a3450;
+    --navy: #16233f;
+    --navy-text: #c3cde4;
+    --gold: #e8b23a;
+    --gold-strong: #f0c05e;
+    --chip-bg: #222d49;
+  }
+  :root[data-theme="light"] {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 20px 80px;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; }
+
+  .display, h1, h2, h3 {
+    font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  .masthead {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    border-bottom: 3px solid var(--ink);
+    padding: 26px 0 10px;
+  }
+  .masthead .brand {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em;
+    font-size: 0.85rem;
+  }
+  .masthead .brand em { color: var(--gold); font-style: normal; }
+  .masthead .date {
+    font-family: system-ui, sans-serif; font-size: 0.75rem; color: var(--ink-soft);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    margin: 34px 0 14px;
+    text-wrap: balance;
+  }
+  h1 .kick { color: var(--gold); }
+  .deck {
+    font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 18px;
+    line-height: 1.5; text-wrap: balance;
+  }
+  .byline {
+    font-family: system-ui, sans-serif; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 9px 0; margin-bottom: 34px;
+  }
+  .byline b { color: var(--gold); }
+
+  p { margin: 0 0 1.15em; }
+
+  h2 {
+    font-size: 1.5rem; font-weight: 800; margin: 44px 0 18px;
+    padding-top: 18px; border-top: 3px solid var(--ink);
+  }
+  h2 .tag { color: var(--gold); margin-right: 8px; }
+
+  .pick { display: block; margin: 0 0 20px; }
+  .pick b { color: var(--ink); }
+
+  .clock-note {
+    border-left: 4px solid var(--gold); background: var(--panel);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px 4px; margin: 30px 0; font-style: italic; color: var(--ink-soft);
+  }
+
+  .ranks { margin: 0 0 20px; padding: 0; list-style: none; counter-reset: rk; }
+  .ranks li {
+    counter-increment: rk; position: relative;
+    padding: 8px 0 8px 44px; border-bottom: 1px solid var(--line);
+  }
+  .ranks li::before {
+    content: counter(rk); position: absolute; left: 0; top: 6px;
+    font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800;
+    font-size: 1.2rem; color: var(--gold); width: 32px; text-align: right;
+  }
+  .ranks b { color: var(--ink); }
+
+  h3 {
+    font-size: 1.15rem; font-weight: 800; margin: 30px 0 8px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--line);
+  }
+  h3 .vs { color: var(--gold); margin: 0 6px; }
+  .series {
+    font-family: system-ui, sans-serif; font-size: 0.74rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-soft); margin: -2px 0 12px;
+  }
+  .verdict {
+    display: inline-block; background: var(--chip-bg); color: var(--ink);
+    font-family: system-ui, sans-serif; font-size: 0.82rem; font-weight: 700;
+    padding: 5px 10px; border-radius: 3px; margin: 2px 0 6px;
+  }
+  .verdict b { color: var(--gold-strong); }
+  .foot {
+    margin-top: 50px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--ink-soft);
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 0 12px 60px; font-size: 15px; }
+    .masthead { flex-wrap: wrap; row-gap: 2px; padding-top: 18px; }
+    h1 { margin-top: 24px; }
+    .deck { font-size: 1.06rem; }
+  }
+</style>
+</head>
+<body>
+<div id="dspn-article-nav" style="background:#0b0d12;border-bottom:3px solid #e02b20;font-family:Arial,Helvetica,sans-serif"><div style="max-width:1120px;margin:0 auto;padding:8px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap"><a href="/" style="background:#000;color:#fff;font-weight:900;font-style:italic;font-size:1rem;letter-spacing:1px;padding:3px 11px;text-decoration:none;border-bottom:3px solid #f2b024;margin-right:8px">DSPN</a><a href="/" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Home</a><a href="/annual" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">The Annual</a><a href="/draft-central" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Draft Central</a><a href="/live" style="color:#f2b024;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">&#9679; Live</a></div></div>
+
+<div class="wrap">
+  <div class="masthead">
+    <span class="brand">FamilyFootball <em>Insider</em></span>
+    <span class="date">Week 1 Preview &middot; September 2026</span>
+  </div>
+  <h1>Kickoff Week: <span class="kick">The Desk Sets the Lines</span></h1>
+  <p class="deck">Five games, ten rosters that looked perfect on Sunday, and one franchise that has never won an opener. The desk has consulted four years of tape and is prepared to be wrong in public.</p>
+  <div class="byline">By <b>The Insider Desk</b> &middot; Rosters and injury tags as of press time &middot; Records are 2025 regular season</div>
+
+  <p>The draft is over, the grades are filed, and the part of the season nobody can talk their way out of begins this weekend. Ten lineups are set &mdash; or set-ish, since at least four managers are one Wednesday injury report away from a panic swap. The desk has reviewed every opener this league has played since 2022, cross-referenced every head-to-head series, and arrived at five verdicts it intends to defend right up until the Sunday scores make that impossible.</p>
+
+  <p>One housekeeping note before the games: the desk's own franchise enters Week 1 with an all-time opener record of zero wins and four losses. We mention this now so that nothing that follows can be read as objectivity.</p>
+
+  <h2><span class="tag">///</span>The Games</h2>
+
+  <h3>alyssagenther <span class="vs">vs</span> jsdivine</h3>
+  <div class="series">Series: alyssagenther leads 4&ndash;3 &middot; Split 1&ndash;1 in 2025</div>
+  <p>The reigning champion opens against the 2022 champion, which sounds like a marquee game until you check the openers. alyssagenther has posted Week 1 scores of 81.24 and 67.90 in two of the last four Septembers, and jsdivine's 79.92 last year was the lowest opener among the ten teams still standing. Together they produced 161.16 points in Week 1 of 2025. Separately, that is two lineups the desk would not have started in a bye week.</p>
+  <p>The tape says the champ built the better roster: Christian McCaffrey and Amon-Ra St. Brown in the first two rounds, Nico Collins and Garrett Wilson behind them. McCaffrey carried a questionable tag at press time, which the desk notes only because it is the single word that turns this from a comfortable pick into a coin flip. jsdivine answers with Josh Allen, James Cook, and Travis Kelce &mdash; a real spine &mdash; plus both Cowboys the desk warned about in the draft recap, both of whom are starting, and an eighth-round running back who opens the season listed as not active. The thermostat is set. The desk simply cannot tell which way.</p>
+  <span class="verdict">Desk pick: <b>alyssagenther</b>, on the strength of two first-round-caliber stars the other side cannot match &mdash; provided both are on the field.</span>
+
+  <h3>D1LLIGAF <span class="vs">vs</span> sammyyy29</h3>
+  <div class="series">Series: sammyyy29 leads 3&ndash;2 &middot; Split 1&ndash;1 in 2025</div>
+  <p>The desk graded this roster first in its post-draft rankings and stands by it: Lamar Jackson, Derrick Henry, Ja'Marr Chase, and a bench with Jayden Daniels and Marvin Harrison Jr. on it because the flex position, as the analytics department keeps being reminded, still only accepts one. The problem is not the roster. The problem is September. D1LLIGAF is 0&ndash;4 all-time in Week 1, with openers of 113.20, 75.46, 127.72, and 88.20 &mdash; a four-year average of just over 101 points from a franchise that finished seventh in scoring last year and dead last in schedule luck over four seasons. The desk has run the numbers and concluded the universe is aware of this matchup.</p>
+  <p>sammyyy29 is the one manager in the league whose draft the desk mocked and whose record the desk cannot: 11&ndash;3 in 2025, the best mark in the league, second in points, and a 160.90 hung on this exact opponent last September. Kyren Williams and Justin Herbert lead a lineup that is better than its second round suggested, and yes, the desk checked: Montorie Foster, pick 14, opens the season on the bench. We said he would end up there. We were only off on the timing.</p>
+  <span class="verdict">Desk pick: <b>D1LLIGAF</b>. The paper says so. The paper has said so in four consecutive Septembers.</span>
+
+  <h3>BrennaLynne <span class="vs">vs</span> Dawnieo</h3>
+  <div class="series">Series: BrennaLynne leads 4&ndash;1 &middot; Last meeting 126.02&ndash;79.98, Week 10 of 2025</div>
+  <p>The points queen against the team that scored 1,414.20 last year, a gap of 312 points across a fourteen-game season, or roughly three full Dawnieo Sundays. BrennaLynne led the league with 1,726.42, finished 8&ndash;6, and won nothing, which by now is less a result than a genre. She has also lost three of her four openers, including last year's despite scoring 119.38, so the desk would like everyone to understand that the pick below is made with full knowledge of the pattern.</p>
+  <p>Dawnieo, meanwhile, did the one thing the tape said she never would: waited until pick 61 to take a quarterback. Drake Maye starts, Trevor Lawrence rides the bench as the insurance policy she drafted forty picks later, and Jahmyr Gibbs gives this lineup a genuine first-round engine. She also went 3&ndash;11 last season and beat the eventual champion in Week 1 by 44 points. Both of those things are true. The desk is holding them at arm's length, together, the way one holds a live fish.</p>
+  <span class="verdict">Desk pick: <b>BrennaLynne</b>. Hurts, Smith-Njigba, Nabers, Hampton. The crown remains out of reach; the opener should not.</span>
+
+  <h3>ITouchd0wnThere <span class="vs">vs</span> mmcatee01</h3>
+  <div class="series">Series: ITouchd0wnThere leads 3&ndash;2 &middot; Split 1&ndash;1 in 2025</div>
+  <p>Here is a statistic the desk did not expect to find and now cannot stop looking at: ITouchd0wnThere is 4&ndash;0 in Week 1 openers, undefeated in every September this league has played. The silver shelf, it turns out, is furnished exclusively in December. Justin Jefferson, De'Von Achane, and Trey McBride front a lineup the desk called a genuine contender in the recap, and the desk knows exactly how that sentence ends because it has watched the ending twice.</p>
+  <p>mmcatee01 brings the luckiest schedule in league history &mdash; plus 3.23 wins above expectation over four years &mdash; along with Joe Burrow, Jonathan Taylor, Saquon Barkley, and a ninth-round kicker who starts on Sunday, as the belief system requires. It is a strong core taxed by one act of faith. The desk also notes Patrick Mahomes is on this bench, which is either depth or a hostage situation. Both teams went 9&ndash;5 last year; each beat the other once. This is the closest game on the card.</p>
+  <span class="verdict">Desk pick: <b>ITouchd0wnThere</b>. Four openers, four wins. The desk does not argue with a streak until it has to.</span>
+
+  <h3>divinethought <span class="vs">vs</span> jgirsby</h3>
+  <div class="series">Series: jgirsby leads 5&ndash;1 &middot; divinethought took the most recent meeting, Week 14 of 2025</div>
+  <p>The desk's third-ranked post-draft roster opens against the manager who has beaten it in five of six meetings by an average of 27 points, including a 158.00 in 2022 that divinethought has presumably tried to forget. Bijan Robinson and Quinshon Judkins start, second-round pick Ashton Jeanty sits with a questionable tag, and under center is Jared Goff, the thirteenth-round quarterback the desk still is not certain was drafted on purpose. This is the running-back fortress with the drawbridge left open.</p>
+  <p>jgirsby, the 2024 champion, counters with Puka Nacua, Brock Bowers, Matthew Stafford, and Breece Hall, plus a bench holding Brock Purdy and Dallas Goedert because the shortage he prepared for is still not coming. The catch: four of his Sunday starters, Nacua among them, carried questionable tags at press time. If they all play, the series holds. If two of them do not, the fortress may finally get its bridge up.</p>
+  <span class="verdict">Desk pick: <b>jgirsby</b>, by the tape and the series. divinethought won its opener last year with 141.26 and won the last meeting between these two, which are the kinds of sentences the desk includes to protect itself.</span>
+
+  <h2><span class="tag">///</span>The Week 1 Ledger</h2>
+  <p>Opener records since 2022, for the record and for the group chat:</p>
+  <ul class="ranks">
+    <li><b>ITouchd0wnThere</b> &mdash; 4&ndash;0. Undefeated Septembers, empty Januaries.</li>
+    <li><b>mmcatee01</b> &mdash; 3&ndash;1, two of those wins over the desk's own franchise.</li>
+    <li><b>jgirsby</b> &mdash; 3&ndash;1, and holding a 5&ndash;1 series edge on Sunday's opponent.</li>
+    <li><b>BrennaLynne</b> &mdash; 1&ndash;3 despite averaging 116 points in them. Naturally.</li>
+    <li><b>D1LLIGAF</b> &mdash; 0&ndash;4. The analytics department has requested a recount. There is nothing to recount.</li>
+  </ul>
+
+  <div class="clock-note">Five picks, five games, and a desk whose own analytics department spent the middle rounds of the draft recommending players who were already gone. Consider the source. Then consider the tape.</div>
+
+  <p>The desk will not be taking questions until the Monday night game is final, and even then, only in writing.</p>
+
+  <div class="foot">FamilyFootball Insider &middot; Week 1 Preview 2026 &middot; divinesleeper.com</div>
+</div>
+</body>
+</html>

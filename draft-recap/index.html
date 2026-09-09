@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Desk Grades the Draft</title>
+<style>
+  :root {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0d1220;
+      --panel: #151c2e;
+      --ink: #e7eaf2;
+      --ink-soft: #9aa4ba;
+      --line: #2a3450;
+      --navy: #16233f;
+      --navy-text: #c3cde4;
+      --gold: #e8b23a;
+      --gold-strong: #f0c05e;
+      --chip-bg: #222d49;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0d1220;
+    --panel: #151c2e;
+    --ink: #e7eaf2;
+    --ink-soft: #9aa4ba;
+    --line: #2a3450;
+    --navy: #16233f;
+    --navy-text: #c3cde4;
+    --gold: #e8b23a;
+    --gold-strong: #f0c05e;
+    --chip-bg: #222d49;
+  }
+  :root[data-theme="light"] {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 20px 80px;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; }
+
+  .display, h1, h2, h3 {
+    font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  .masthead {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    border-bottom: 3px solid var(--ink);
+    padding: 26px 0 10px;
+  }
+  .masthead .brand {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em;
+    font-size: 0.85rem;
+  }
+  .masthead .brand em { color: var(--gold); font-style: normal; }
+  .masthead .date {
+    font-family: system-ui, sans-serif; font-size: 0.75rem; color: var(--ink-soft);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    margin: 34px 0 14px;
+    text-wrap: balance;
+  }
+  h1 .kick { color: var(--gold); }
+  .deck {
+    font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 18px;
+    line-height: 1.5; text-wrap: balance;
+  }
+  .byline {
+    font-family: system-ui, sans-serif; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 9px 0; margin-bottom: 34px;
+  }
+  .byline b { color: var(--gold); }
+
+  p { margin: 0 0 1.15em; }
+
+  h2 {
+    font-size: 1.5rem; font-weight: 800; margin: 44px 0 18px;
+    padding-top: 18px; border-top: 3px solid var(--ink);
+  }
+  h2 .tag { color: var(--gold); margin-right: 8px; }
+
+  .pick { display: block; margin: 0 0 20px; }
+  .pick b { color: var(--ink); }
+
+  .clock-note {
+    border-left: 4px solid var(--gold); background: var(--panel);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px 4px; margin: 30px 0; font-style: italic; color: var(--ink-soft);
+  }
+
+  .ranks { margin: 0 0 20px; padding: 0; list-style: none; counter-reset: rk; }
+  .ranks li {
+    counter-increment: rk; position: relative;
+    padding: 8px 0 8px 44px; border-bottom: 1px solid var(--line);
+  }
+  .ranks li::before {
+    content: counter(rk); position: absolute; left: 0; top: 6px;
+    font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800;
+    font-size: 1.2rem; color: var(--gold); width: 32px; text-align: right;
+  }
+  .ranks b { color: var(--ink); }
+
+  .foot {
+    margin-top: 50px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--ink-soft);
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 0 12px 60px; font-size: 15px; }
+    .masthead { flex-wrap: wrap; row-gap: 2px; padding-top: 18px; }
+    h1 { margin-top: 24px; }
+    .deck { font-size: 1.06rem; }
+  }
+</style>
+</head>
+<body>
+<div id="dspn-article-nav" style="background:#0b0d12;border-bottom:3px solid #e02b20;font-family:Arial,Helvetica,sans-serif"><div style="max-width:1120px;margin:0 auto;padding:8px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap"><a href="/" style="background:#000;color:#fff;font-weight:900;font-style:italic;font-size:1rem;letter-spacing:1px;padding:3px 11px;text-decoration:none;border-bottom:3px solid #f2b024;margin-right:8px">DSPN</a><a href="/" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Home</a><a href="/annual" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">The Annual</a><a href="/draft-central" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Draft Central</a><a href="/live" style="color:#f2b024;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">&#9679; Live</a></div></div>
+
+<div class="wrap">
+  <div class="masthead">
+    <span class="brand">FamilyFootball <em>Insider</em></span>
+    <span class="date">Draft Recap &middot; September 2026</span>
+  </div>
+
+  <h1>The Desk Grades <span class="kick">the Draft</span></h1>
+  <p class="deck">Fifteen rounds, one hundred fifty picks, and at least four managers who will spend September explaining decisions they cannot defend. The desk has reviewed the tape.</p>
+  <div class="byline">By <b>The Insider Desk</b> &middot; All one hundred fifty picks, as they happened</div>
+
+  <p>The desk convened at one o'clock, stayed through all fifteen rounds, and emerged with a verdict it is prepared to defend in any court that recognizes fantasy football as binding law. Ten teams entered. Ten teams left convinced they won. Nine of them are mistaken, and we have the pick sheet to prove it.</p>
+
+  <p>We begin where the league began: with a gift. Ja'Marr Chase &mdash; the consensus number-one receiver in the sport &mdash; slid to the third pick and into the waiting arms of D1LLIGAF, who did not so much make a selection as accept a delivery. Two backs went first, the board blinked, and the best pass-catcher alive was simply <em>there</em>. The desk's analytics department has asked us to note that this was &ldquo;the plan all along.&rdquo; That same department spent the middle rounds recommending three separate players who had been drafted several minutes earlier, so we grade its testimony accordingly.</p>
+
+  <h2><span class="tag">///</span> The Storylines</h2>
+
+  <p class="pick"><b>The reach heard 'round the league.</b> sammyyy29, on the clock at pick 14 &mdash; a <em>second</em>-round selection, the same real estate that produced Saquon Barkley elsewhere in this very draft &mdash; announced the name &ldquo;Montorie Foster.&rdquo; The desk respects conviction. The desk does not respect drafting a depth receiver roughly a hundred and forty picks before his address on any public board. It set a tone honored all afternoon, right down to a fifteenth round that produced Deebo Samuel and Josh Downs as if the reach had been a deposit against future sanity.</p>
+
+  <p class="pick"><b>And then there is the kicker.</b> In the ninth round &mdash; pick 88, with useful humans still on the board &mdash; mmcatee01 drafted Brandon Aubrey. A kicker. In the <em>ninth round</em>. A full fourteen picks before the next manager so much as glanced at the position. The desk has maintained for years that mmcatee01 operates a private kicker belief system inaccessible to reason, and pick 88 is now Exhibit A, laminated and entered into evidence. That it was a Cowboys kicker only deepens the theological crisis &mdash; which brings us to the outbreak.</p>
+
+  <p class="pick"><b>The Cowboys outbreak.</b> The desk counted, and would like the room to sit with these numbers: CeeDee Lamb (jsdivine, 16), George Pickens (Dawnieo, 21), Javonte Williams (jsdivine <em>again</em>, 36), Brandon Aubrey (mmcatee01, 88), Jake Ferguson (sammyyy29, 94), and Dak Prescott (alyssagenther, 110). Six Cowboys. Six. jsdivine alone drafted two of them, which is less a draft strategy than a cry for help, and consistent with a thermostat that runs title-or-basement with nothing in between. The desk wishes all six owners a speedy recovery and a better September.</p>
+
+  <p class="pick"><b>Dawnieo broke with tradition,</b> and it deserves the record. This is a manager who has taken a quarterback early so reliably that the desk once set its watch by it &mdash; a career-average first-quarterback slot of roughly the second round. This year, the first passer off her board was Drake Maye at pick <b>61</b>. The streak is dead. The desk observed a moment of silence, which Dawnieo interrupted by panic-drafting a <em>second</em> quarterback forty picks later, because old habits negotiate their own terms.</p>
+
+  <h2><span class="tag">///</span> Around the Ten</h2>
+
+  <p class="pick"><b>alyssagenther</b> quietly assembled the tape everyone will pretend they saw coming &mdash; Christian McCaffrey and Amon-Ra St. Brown to open, Garrett Wilson and Nico Collins behind them. The best draft nobody in the chat complimented.</p>
+
+  <p class="pick"><b>divinethought</b> built a running-back fortress (Bijan, then Ashton Jeanty) and layered Drake London and DK Metcalf on top, then ran the entire draft without a quarterback until Jared Goff in the <em>thirteenth</em> round &mdash; either discipline or forgetting, and the desk cannot rule out forgetting.</p>
+
+  <p class="pick"><b>BrennaLynne</b> did it again: Jaxon Smith-Njigba, Omarion Hampton, Malik Nabers, Davante Adams, Jalen Hurts. A roster engineered to score a hundred and forty a week and finish fourth. The points queen files for the crown she remains contractually forbidden from winning.</p>
+
+  <p class="pick"><b>ITouchd0wnThere</b> &mdash; Justin Jefferson, De'Von Achane, Trey McBride &mdash; turned in a genuine contender, which is precisely how the silver-shelf story always begins. The desk has seen this movie. The desk knows how it ends.</p>
+
+  <p class="pick"><b>jgirsby</b> anchored to Puka Nacua and Brock Bowers, grabbed Breece Hall, and hoarded tight ends and quarterbacks like a man expecting a shortage that isn't coming.</p>
+
+  <p class="pick"><b>And the home team.</b> D1LLIGAF followed the Chase gift with Derrick Henry, Kenneth Walker, DeVonta Smith, and Lamar Jackson &mdash; a spine you could hang a season on &mdash; then drafted, by the desk's count, <em>six</em> wide receivers, apparently under the belief that the flex position accepts three. The analytics department calls it &ldquo;positional flexibility.&rdquo; The desk calls it a man who found a wallet on the sidewalk and kept looking for more wallets. It is, annoyingly, a very good team.</p>
+
+  <h2><span class="tag">///</span> Power Rankings, Post-Draft</h2>
+
+  <ol class="ranks">
+    <li><b>D1LLIGAF</b> &mdash; Chase, Henry, Lamar, and a bench deeper than some starting lineups below it. The homer insists on the top slot; for once the tape agrees.</li>
+    <li><b>alyssagenther</b> &mdash; McCaffrey and St. Brown is a cheat code. The rankings are corrections waiting to happen.</li>
+    <li><b>divinethought</b> &mdash; two elite backs, real receivers, a quarterback drafted as an afterthought. Contender.</li>
+    <li><b>BrennaLynne</b> &mdash; will lead the league in points and lag it in trophies. As foretold.</li>
+    <li><b>mmcatee01</b> &mdash; a strong core (Taylor, Saquon, Burrow) taxed one full round by the kicker sacrament.</li>
+    <li><b>ITouchd0wnThere</b> &mdash; good enough to reach the final, fated to furnish the silverware.</li>
+    <li><b>Dawnieo</b> &mdash; Gibbs, two late tight ends (LaPorta and Mark Andrews at 141, a steal), and two quarterbacks nobody asked for.</li>
+    <li><b>jgirsby</b> &mdash; Nacua and Bowers are a foundation; the house on top is still under construction.</li>
+    <li><b>jsdivine</b> &mdash; Josh Allen is real. So are the two Cowboys, and they are dragging.</li>
+    <li><b>sammyyy29</b> &mdash; Kyren Williams is a fine anchor. The desk is still thinking about Montorie Foster at 14. It always will be.</li>
+  </ol>
+
+  <div class="clock-note">Ten teams, one afternoon, and a full season now obligated to prove the desk wrong. History suggests it won't.</div>
+
+  <p>The desk will not be taking questions.</p>
+
+  <div class="foot">FamilyFootball Insider &middot; Draft Recap 2026 &middot; divinesleeper.com</div>
+</div>
+
+</body>
+</html>
