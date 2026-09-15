@@ -1,0 +1,90 @@
+/* FamilyFootball Insider — shared site identity (hub + weekly issues) */
+:root {
+  --ground: #f1f3f6; --panel: #ffffff; --ink: #131a26; --ink-soft: #4a5468;
+  --line: #d4d9e2; --navy: #16233f; --gold: #b17d08; --gold-strong: #8f6506;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ground: #0d1220; --panel: #151c2e; --ink: #e7eaf2; --ink-soft: #9aa4ba;
+          --line: #2a3450; --gold: #e8b23a; --gold-strong: #f0c05e; }
+}
+* { box-sizing: border-box; }
+body { background: var(--ground); color: var(--ink); margin: 0;
+       font-family: Georgia, 'Times New Roman', serif; line-height: 1.62;
+       padding: 0 20px 80px; }
+.wrap { max-width: 46rem; margin: 0 auto; }
+h1, h2, h3, .display { font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+  font-stretch: condensed; text-transform: uppercase; letter-spacing: .01em; }
+.masthead { display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px; border-bottom: 3px solid var(--ink); padding: 26px 0 10px; flex-wrap: wrap; }
+.masthead .brand { font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .14em; font-size: .85rem;
+  color: var(--ink); text-decoration: none; }
+.masthead .brand em { color: var(--gold); font-style: normal; }
+.masthead .date { font-family: system-ui, sans-serif; font-size: .75rem;
+  color: var(--ink-soft); letter-spacing: .08em; text-transform: uppercase; }
+h1 { font-size: clamp(2.2rem, 7vw, 3.4rem); font-weight: 800; line-height: 1.03;
+     margin: 30px 0 14px; text-wrap: balance; }
+h1 .kick { color: var(--gold); }
+.deck { font-size: 1.12rem; color: var(--ink-soft); margin: 0 0 18px;
+        line-height: 1.5; text-wrap: balance; }
+.byline { font-family: system-ui, sans-serif; font-size: .8rem; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--ink-soft); border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line); padding: 9px 0; margin-bottom: 30px; }
+.byline b { color: var(--gold); }
+p { margin: 0 0 1.15em; }
+h2 { font-size: 1.4rem; font-weight: 800; margin: 40px 0 16px; padding-top: 16px;
+     border-top: 3px solid var(--ink); }
+h2 .tag { color: var(--gold); margin-right: 8px; }
+.game { background: var(--panel); border: 1px solid var(--line); border-radius: 4px;
+        padding: 12px 16px 4px; margin-bottom: 12px; }
+.game h3 { font-size: 1.05rem; margin: 0 0 6px;
+           font-variant-numeric: tabular-nums; }
+.rankings { padding-left: 0; list-style: none; counter-reset: rank; }
+.rankings li { counter-increment: rank; padding: 8px 0; border-bottom: 1px solid var(--line);
+  display: flex; gap: 10px; align-items: baseline; }
+.rankings li::before { content: counter(rank); font-family: 'Arial Narrow', Arial, sans-serif;
+  font-weight: 800; font-size: 1.2rem; color: var(--gold); min-width: 2ch; text-align: right; }
+.move { font-family: system-ui, sans-serif; font-size: .72rem; font-weight: 700;
+        min-width: 3ch; }
+.move.up { color: #3d9960; } .move.down { color: #c25050; }
+.move.hold { color: var(--ink-soft); } .move.new { color: var(--gold); }
+.preview { border-left: 3px solid var(--gold); padding-left: 12px; }
+.foot { margin-top: 46px; padding-top: 14px; border-top: 1px solid var(--line);
+  font-family: system-ui, sans-serif; font-size: .78rem; color: var(--ink-soft); }
+
+/* ---- hub (front page) ---- */
+.hub-hero { padding: 30px 0 8px; border-bottom: 3px solid var(--ink); }
+.hub-hero .over { font-family: system-ui, sans-serif; font-size: .72rem;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+.hub-hero h1 { margin: 6px 0 4px; }
+.hub-hero .est { font-family: system-ui, sans-serif; font-size: .8rem;
+  color: var(--ink-soft); }
+.scorestrip { display: flex; gap: 0; border: 1px solid var(--line); border-radius: 4px;
+  margin: 18px 0; overflow-x: auto; background: var(--panel);
+  font-family: system-ui, sans-serif; font-variant-numeric: tabular-nums; }
+.scorestrip div { flex: 1; min-width: 108px; text-align: center; padding: 8px 6px; }
+.scorestrip div + div { border-left: 1px solid var(--line); }
+.scorestrip .o { display: block; font-size: .7rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-soft); }
+.scorestrip b { font-size: .95rem; }
+.feature { display: block; background: var(--navy); color: #eef1f8; border-radius: 6px;
+  border-bottom: 5px solid var(--gold); padding: 22px 22px 18px; margin: 22px 0;
+  text-decoration: none; }
+.feature .fk { font-family: system-ui, sans-serif; font-size: .72rem;
+  letter-spacing: .16em; text-transform: uppercase; color: #c5b06a; }
+.feature h2 { border: 0; margin: 6px 0 8px; padding: 0; font-size: 1.7rem; color: #eef1f8; }
+.feature .pq { font-style: italic; color: #aab4cd; margin: 0; }
+.rundown { list-style: none; padding: 0; margin: 0; }
+.rundown li { border-bottom: 1px solid var(--line); }
+.rundown a { display: flex; gap: 14px; align-items: baseline; padding: 12px 2px;
+  color: var(--ink); text-decoration: none; }
+.rundown a:hover { background: var(--panel); }
+.rundown .wk { font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800;
+  color: var(--gold); min-width: 6ch; }
+.rundown .hl { flex: 1; }
+.rundown .d { font-family: system-ui, sans-serif; font-size: .75rem; color: var(--ink-soft); }
+.annual-link { display: block; margin: 26px 0; padding: 14px 18px;
+  border: 1px solid var(--gold); border-radius: 4px; color: var(--ink);
+  text-decoration: none; background: var(--panel); }
+.annual-link b { color: var(--gold-strong); }
+@media (max-width: 480px) { body { padding: 0 12px 60px; } }
