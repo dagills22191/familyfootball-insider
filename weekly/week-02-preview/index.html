@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Late Edition: Five Games, One Already Started</title>
+<style>
+  :root {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0d1220;
+      --panel: #151c2e;
+      --ink: #e7eaf2;
+      --ink-soft: #9aa4ba;
+      --line: #2a3450;
+      --navy: #16233f;
+      --navy-text: #c3cde4;
+      --gold: #e8b23a;
+      --gold-strong: #f0c05e;
+      --chip-bg: #222d49;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0d1220;
+    --panel: #151c2e;
+    --ink: #e7eaf2;
+    --ink-soft: #9aa4ba;
+    --line: #2a3450;
+    --navy: #16233f;
+    --navy-text: #c3cde4;
+    --gold: #e8b23a;
+    --gold-strong: #f0c05e;
+    --chip-bg: #222d49;
+  }
+  :root[data-theme="light"] {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 20px 80px;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; }
+
+  .display, h1, h2, h3 {
+    font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  .masthead {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    border-bottom: 3px solid var(--ink);
+    padding: 26px 0 10px;
+  }
+  .masthead .brand {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em;
+    font-size: 0.85rem;
+  }
+  .masthead .brand em { color: var(--gold); font-style: normal; }
+  .masthead .date {
+    font-family: system-ui, sans-serif; font-size: 0.75rem; color: var(--ink-soft);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    margin: 34px 0 14px;
+    text-wrap: balance;
+  }
+  h1 .kick { color: var(--gold); }
+  .deck {
+    font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 18px;
+    line-height: 1.5; text-wrap: balance;
+  }
+  .byline {
+    font-family: system-ui, sans-serif; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 9px 0; margin-bottom: 34px;
+  }
+  .byline b { color: var(--gold); }
+
+  p { margin: 0 0 1.15em; }
+
+  h2 {
+    font-size: 1.5rem; font-weight: 800; margin: 44px 0 18px;
+    padding-top: 18px; border-top: 3px solid var(--ink);
+  }
+  h2 .tag { color: var(--gold); margin-right: 8px; }
+
+  .pick { display: block; margin: 0 0 20px; }
+  .pick b { color: var(--ink); }
+
+  .clock-note {
+    border-left: 4px solid var(--gold); background: var(--panel);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px 4px; margin: 30px 0; font-style: italic; color: var(--ink-soft);
+  }
+
+  .ranks { margin: 0 0 20px; padding: 0; list-style: none; counter-reset: rk; }
+  .ranks li {
+    counter-increment: rk; position: relative;
+    padding: 8px 0 8px 44px; border-bottom: 1px solid var(--line);
+  }
+  .ranks li::before {
+    content: counter(rk); position: absolute; left: 0; top: 6px;
+    font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800;
+    font-size: 1.2rem; color: var(--gold); width: 32px; text-align: right;
+  }
+  .ranks b { color: var(--ink); }
+
+  h3 {
+    font-size: 1.15rem; font-weight: 800; margin: 30px 0 8px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--line);
+  }
+  h3 .vs { color: var(--gold); margin: 0 6px; }
+  .series {
+    font-family: system-ui, sans-serif; font-size: 0.74rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-soft); margin: -2px 0 12px;
+  }
+  .verdict {
+    display: inline-block; background: var(--chip-bg); color: var(--ink);
+    font-family: system-ui, sans-serif; font-size: 0.82rem; font-weight: 700;
+    padding: 5px 10px; border-radius: 3px; margin: 2px 0 6px;
+  }
+  .verdict b { color: var(--gold-strong); }
+  .foot {
+    margin-top: 50px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--ink-soft);
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 0 12px 60px; font-size: 15px; }
+    .masthead { flex-wrap: wrap; row-gap: 2px; padding-top: 18px; }
+    h1 { margin-top: 24px; }
+    .deck { font-size: 1.06rem; }
+  }
+</style>
+</head>
+<body>
+<div id="dspn-article-nav" style="background:#0b0d12;border-bottom:3px solid #e02b20;font-family:Arial,Helvetica,sans-serif"><div style="max-width:1120px;margin:0 auto;padding:8px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap"><a href="/" style="background:#000;color:#fff;font-weight:900;font-style:italic;font-size:1rem;letter-spacing:1px;padding:3px 11px;text-decoration:none;border-bottom:3px solid #f2b024;margin-right:8px">DSPN</a><a href="/" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Home</a><a href="/annual" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">The Annual</a><a href="/draft-central" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Draft Central</a><a href="/live" style="color:#f2b024;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">&#9679; Live</a></div></div>
+
+
+<div class="wrap">
+  <div class="masthead">
+    <span class="brand">FamilyFootball <em>Insider</em></span>
+    <span class="date">Week 2 Preview &middot; September 2026</span>
+  </div>
+  <h1>The Late Edition: <span class="kick">Five Games, One Already Started</span></h1>
+  <p class="deck">The desk intended to file this Wednesday night, after waivers. The desk did not. Buffalo and Detroit are already on the board, Josh Allen has 34.08 of them, and we are going to preview the week anyway, because the alternative is admitting something.</p>
+  <div class="byline">By <b>The Insider Desk</b> &middot; Rosters, lineups and injury tags at press time, Thursday, Sept. 17 &middot; Records are 2026, one week of fourteen</div>
+
+  <p>A word about the timestamp. The cadence this desk publicly committed to two days ago &mdash; recaps Tuesday, previews Wednesday night once waivers clear &mdash; lasted exactly one cycle. The Thursday game is in progress as this goes out and six of the ten rosters already have points on them. We are previewing the week anyway, on the reasoning that partial information beats what the group chat currently has.</p>
+
+  <p>What Week 1 established: very little, loudly. Five favorites, five results, and roughly 240 points left on benches across ten teams. Three of this week's five games pair a 1&ndash;0 against an 0&ndash;1, one pairs two winners, and one pairs two teams that would like Week 1 expunged.</p>
+
+  <h2><span class="tag">///</span>The Games</h2>
+
+  <h3>jsdivine (1&ndash;0) <span class="vs">vs</span> sammyyy29 (0&ndash;1)</h3>
+  <div class="series">Series: even 2&ndash;2 &middot; Last meeting sammyyy29 108.40&ndash;92.04, Week 10 of 2025</div>
+  <p>The thermostat opened at the title setting. jsdivine put up 143.16 in Week 1, second only to the league high, and did it on a 39.66 from Josh Allen and a 32.70 from Christian Watson, which either signals a season or signals a Tuesday. Allen has carried it into Thursday &mdash; 34.08 at press time, with James Cook adding 10.10 &mdash; putting this lineup 44.18 points into a game the opponent has not begun. Not decisive. Merely a head start, awarded to the side that needed one least.</p>
+  <p>sammyyy29 scored 101.66 and benched 77.54, headlined by Isaiah Likely's 27.80 and Deebo Samuel's 18.00. Some corrections have been made: Likely starts, Baker Mayfield takes over from Justin Herbert, Aaron Jones is promoted. The desk must also report, with no pleasure whatsoever, that Montorie Foster &mdash; pick 14, the reach this desk has mentioned in every article it has published since the draft &mdash; was released this week for Caleb Douglas. We said he would end up on the bench. He has gone further than that.</p>
+  <span class="verdict">Desk pick: <b>jsdivine</b>. A corrected lineup is still a lineup that starts Thursday down 44.18.</span>
+
+  <h3>alyssagenther (0&ndash;1) <span class="vs">vs</span> BrennaLynne (0&ndash;1)</h3>
+  <div class="series">Series: BrennaLynne leads 3&ndash;2 &middot; Last meeting alyssagenther 125.50&ndash;121.72, Week 11 of 2025</div>
+  <p>The reigning champion scored 124.60 and lost, which is the least embarrassing way to start 0&ndash;1, and alyssagenther has taken it with the composure of someone who has a trophy at home. Christian McCaffrey, Amon-Ra St. Brown (28.70, plus 2.10 already on Thursday), Nico Collins and Garrett Wilson remain the best-constructed starting five in the league. Two press-time caveats: Collins is questionable, and so is Eddy Pineiro, the kicker she claimed for nothing after cutting the one she drafted.</p>
+  <p>Now the number that decides this game. BrennaLynne scored 93.62 in Week 1 &mdash; the league's lowest &mdash; while her bench scored 93.80. Her reserves outscored her starters by eighteen hundredths of a point. Jaxson Dart put up 32.60 in street clothes, Chuba Hubbard 23.70, Malik Nabers 12.90, while Quentin Johnston started, produced 3.70, and was released this week. Four seasons proving she can outscore this league; one week proving she can also outscore herself. All three of those benched players start Sunday. Field the best nine and this is a 130-point team.</p>
+  <span class="verdict">Desk pick: <b>BrennaLynne</b>. The desk is taking the 93.62 over the 124.60 on the theory that the lineup, not the roster, was the problem &mdash; and the lineup has been fixed.</span>
+
+  <h3>D1LLIGAF (1&ndash;0) <span class="vs">vs</span> mmcatee01 (0&ndash;1)</h3>
+  <div class="series">Series: mmcatee01 leads 4&ndash;2 &middot; Last meeting D1LLIGAF 128.46&ndash;94.48, Week 12 of 2025</div>
+  <p>Disclosure, as always: this is the desk's own franchise, and the desk is 1&ndash;0 for the first time in its history, a fact it has worked into four separate conversations since Sunday. The opener was a 152.46, built on Derrick Henry's 35.30, Kenneth Walker's 34.10 and Lamar Jackson's 26.96. It was also built while 60.26 points sat on the bench, 18.00 of which belonged to Dalton Kincaid, who was benched for Michael Mayer on what this desk described at the time as a gut feeling. The gut has been overruled. Kincaid starts this week and has 14.30 on Thursday night. The analytics department has asked that the record reflect it was not consulted on either decision.</p>
+  <p>mmcatee01 arrives at 0&ndash;1 off a 95.76 and a remarkable piece of lineup management: Patrick Mahomes scored 25.66 on the bench while Joe Burrow started for 16.16, Stefon Diggs adding 15.50 from the same bench. Corrected since &mdash; Mahomes starts, Burrow sits as questionable at press time, Diggs and Hunter Henry promoted. Not corrected, because it is not regarded here as an error, is Brandon Aubrey, who scored 1.00 in Week 1 and starts again. The belief system does not respond to results. It never has. And the series is real: mmcatee01 has won four of six, including both openers it took off this franchise.</p>
+  <span class="verdict">Desk pick: <b>D1LLIGAF</b>, by 56.70 points of Week 1 separation and a kicker differential the desk declines to describe further.</span>
+
+  <h3>Dawnieo (1&ndash;0) <span class="vs">vs</span> divinethought (1&ndash;0)</h3>
+  <div class="series">Series: Dawnieo leads 3&ndash;2 &middot; divinethought has taken the last two, most recently 131.08&ndash;84.80 in Week 11 of 2025</div>
+  <p>The only game between two winners, and the one the desk got most wrong last week. Dawnieo, whose telegraphed early quarterbacks are a matter of public record, waited until pick 61 for Drake Maye, then started Trevor Lawrence &mdash; the insurance policy she drafted forty picks later &mdash; and collected 34.10 for it. This week the two are reversed: Maye starts, Lawrence sits. Jahmyr Gibbs put up 33.60 and has another 18.00 on Thursday. A.J. Brown is on injured reserve at press time, replaced by Romeo Doubs, a waiver claim that cost nothing.</p>
+  <p>divinethought won 144.74&ndash;135.90 in the highest-scoring game of Week 1 and did it exactly the way the draft board said it would: Ashton Jeanty 32.70, Bijan Robinson 31.30, the running-back fortress holding. Jared Goff, the thirteenth-round quarterback this desk repeatedly questioned, delivered 20.44 and is already at 9.42 on Thursday. The one wobble is the flex: Ladd McConkey scored 19.20 and now carries a questionable tag, with Tetairoa McMillan starting in his place. This is the closest game on the board.</p>
+  <span class="verdict">Desk pick: <b>divinethought</b>. Two straight in the series, two first-round backs, and a quarterback the desk has stopped arguing with.</span>
+
+  <h3>ITouchd0wnThere (1&ndash;0) <span class="vs">vs</span> jgirsby (0&ndash;1)</h3>
+  <div class="series">Series: ITouchd0wnThere leads 4&ndash;1 &middot; Last meeting ITouchd0wnThere 129.12&ndash;127.40, Week 4 of 2025</div>
+  <p>183.46 &mdash; the highest score in the league by 30.90 points, from a manager now 5&ndash;0 in season openers who has furnished the silver shelf twice without ever needing a gold one. Caleb Williams 41.26, Justin Jefferson 31.20, David Montgomery 28.90, Chris Olave 28.20: four starters over 28 in one week. Olave is questionable at press time and is the only doubt in this paragraph.</p>
+  <p>jgirsby scored 135.90 and lost, the best losing score of the week, and the reason is right there in the box score: 84.20 points benched, including Brock Purdy's 27.10 and Dallas Goedert's 23.70, while Matthew Stafford started and produced 4.10. The 2024 champion has promoted Purdy and Goedert, benched Stafford, and now finds out whether the problem was the roster or the chair it sat in. He also draws the one opponent he has never solved: one win in six, average margin 33.7 in the five losses.</p>
+  <span class="verdict">Desk pick: <b>ITouchd0wnThere</b>. Five openers, five wins, and now the highest score in the league. The desk will resume doubting this franchise in December, as is tradition.</span>
+
+  <h2><span class="tag">///</span>The Week 2 Ledger</h2>
+  <p>Six lines for the group chat, all of them checkable:</p>
+  <ul class="ranks">
+    <li><b>240 points</b> &mdash; roughly what the ten teams benched in Week 1. Enough to have swung four of the five games.</li>
+    <li><b>BrennaLynne</b> &mdash; bench 93.80, starters 93.62. The first recorded case in this league of a reserve unit winning the internal scrimmage.</li>
+    <li><b>mmcatee01</b> &mdash; started a quarterback who scored 16.16 over one who scored 25.66, then started a kicker who scored 1.00. Two of those three decisions have since been reversed.</li>
+    <li><b>Montorie Foster</b> &mdash; drafted 14th overall in September, released in September. The shortest arc in the file.</li>
+    <li><b>Three moves</b> &mdash; the league's entire waiver and free-agent activity this week. Ten managers, half of them 0&ndash;1. The desk has seen livelier offseasons.</li>
+    <li><b>2&ndash;3</b> &mdash; the desk's Week 1 pick record. It has taken four favorites and one 93.62-point team this week, which is either a lesson learned or the same mistake wearing a hat.</li>
+  </ul>
+
+  <div class="clock-note">Filed Thursday, with one game already in progress and the desk's own tight end scoring points he was not permitted to score last week. Consider the source. Consider the timestamp. Then consider the tape.</div>
+
+  <p>The desk will not be taking questions this week, on the grounds that the first one would be about why this is late.</p>
+
+  <div class="foot">FamilyFootball Insider &middot; Week 2 Preview 2026 &middot; divinesleeper.com</div>
+</div>
+</body>
+</html>
