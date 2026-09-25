@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Late Edition, Again: Four Unbeatens, Nowhere to Hide</title>
+<style>
+  :root {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0d1220;
+      --panel: #151c2e;
+      --ink: #e7eaf2;
+      --ink-soft: #9aa4ba;
+      --line: #2a3450;
+      --navy: #16233f;
+      --navy-text: #c3cde4;
+      --gold: #e8b23a;
+      --gold-strong: #f0c05e;
+      --chip-bg: #222d49;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0d1220;
+    --panel: #151c2e;
+    --ink: #e7eaf2;
+    --ink-soft: #9aa4ba;
+    --line: #2a3450;
+    --navy: #16233f;
+    --navy-text: #c3cde4;
+    --gold: #e8b23a;
+    --gold-strong: #f0c05e;
+    --chip-bg: #222d49;
+  }
+  :root[data-theme="light"] {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 20px 80px;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; }
+
+  .display, h1, h2, h3 {
+    font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  .masthead {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    border-bottom: 3px solid var(--ink);
+    padding: 26px 0 10px;
+  }
+  .masthead .brand {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em;
+    font-size: 0.85rem;
+  }
+  .masthead .brand em { color: var(--gold); font-style: normal; }
+  .masthead .date {
+    font-family: system-ui, sans-serif; font-size: 0.75rem; color: var(--ink-soft);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    margin: 34px 0 14px;
+    text-wrap: balance;
+  }
+  h1 .kick { color: var(--gold); }
+  .deck {
+    font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 18px;
+    line-height: 1.5; text-wrap: balance;
+  }
+  .byline {
+    font-family: system-ui, sans-serif; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 9px 0; margin-bottom: 34px;
+  }
+  .byline b { color: var(--gold); }
+
+  p { margin: 0 0 1.15em; }
+
+  h2 {
+    font-size: 1.5rem; font-weight: 800; margin: 44px 0 18px;
+    padding-top: 18px; border-top: 3px solid var(--ink);
+  }
+  h2 .tag { color: var(--gold); margin-right: 8px; }
+
+  .pick { display: block; margin: 0 0 20px; }
+  .pick b { color: var(--ink); }
+
+  .clock-note {
+    border-left: 4px solid var(--gold); background: var(--panel);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px 4px; margin: 30px 0; font-style: italic; color: var(--ink-soft);
+  }
+
+  .ranks { margin: 0 0 20px; padding: 0; list-style: none; counter-reset: rk; }
+  .ranks li {
+    counter-increment: rk; position: relative;
+    padding: 8px 0 8px 44px; border-bottom: 1px solid var(--line);
+  }
+  .ranks li::before {
+    content: counter(rk); position: absolute; left: 0; top: 6px;
+    font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800;
+    font-size: 1.2rem; color: var(--gold); width: 32px; text-align: right;
+  }
+  .ranks b { color: var(--ink); }
+
+  h3 {
+    font-size: 1.15rem; font-weight: 800; margin: 30px 0 8px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--line);
+  }
+  h3 .vs { color: var(--gold); margin: 0 6px; }
+  .series {
+    font-family: system-ui, sans-serif; font-size: 0.74rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-soft); margin: -2px 0 12px;
+  }
+  .verdict {
+    display: inline-block; background: var(--chip-bg); color: var(--ink);
+    font-family: system-ui, sans-serif; font-size: 0.82rem; font-weight: 700;
+    padding: 5px 10px; border-radius: 3px; margin: 2px 0 6px;
+  }
+  .verdict b { color: var(--gold-strong); }
+  .foot {
+    margin-top: 50px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--ink-soft);
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 0 12px 60px; font-size: 15px; }
+    .masthead { flex-wrap: wrap; row-gap: 2px; padding-top: 18px; }
+    h1 { margin-top: 24px; }
+    .deck { font-size: 1.06rem; }
+  }
+</style>
+</head>
+<body>
+<div id="dspn-article-nav" style="background:#0b0d12;border-bottom:3px solid #e02b20;font-family:Arial,Helvetica,sans-serif"><div style="max-width:1120px;margin:0 auto;padding:8px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap"><a href="/" style="background:#000;color:#fff;font-weight:900;font-style:italic;font-size:1rem;letter-spacing:1px;padding:3px 11px;text-decoration:none;border-bottom:3px solid #f2b024;margin-right:8px">DSPN</a><a href="/" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Home</a><a href="/annual" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">The Annual</a><a href="/draft-central" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Draft Central</a><a href="/live" style="color:#f2b024;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">&#9679; Live</a></div></div>
+
+
+<div class="wrap">
+  <div class="masthead">
+    <span class="brand">FamilyFootball <em>Insider</em></span>
+    <span class="date">Week 3 Preview &middot; September 2026</span>
+  </div>
+  <h1>The Late Edition, Again: <span class="kick">Four Unbeatens, Nowhere to Hide</span></h1>
+  <p class="deck">Four teams are 2&ndash;0 and none of them plays another. Two draw winless teams, one draws Dawnieo, divinethought draws the champion, and the desk is filing on Thursday night for the second week running.</p>
+  <div class="byline">By <b>The Insider Desk</b> &middot; Rosters, lineups and injury tags at press time, Thursday, Sept. 24 &middot; Records are 2026, two weeks of fourteen</div>
+
+  <p>The desk is aware of the timestamp. Last week it said Wednesday and filed Thursday. This week it said Wednesday and filed Thursday, and Atlanta and Green Bay kicked off before this paragraph was typed. One late file is an accident. Two is a schedule, and the desk has no plans to announce a change to it.</p>
+
+  <p>The standings have split cleanly in half. jsdivine, D1LLIGAF, ITouchd0wnThere and divinethought are 2&ndash;0; mmcatee01, jgirsby, BrennaLynne and sammyyy29 are 0&ndash;2; alyssagenther and Dawnieo are 1&ndash;1. The schedule has sent three of the unbeatens into games they are expected to win, and divinethought into the only one that looks like a test: the reigning champion.</p>
+
+  <h2><span class="tag">///</span>The Games</h2>
+
+  <h3>jsdivine (2&ndash;0) <span class="vs">vs</span> BrennaLynne (0&ndash;2)</h3>
+  <div class="series">Series: BrennaLynne leads 4&ndash;3 &middot; Last meeting jsdivine 148.76&ndash;126.98, Week 16 of 2025</div>
+  <p>jsdivine leads the league with 333.18 points, 190.02 of them in Week 2. The thermostat is set to title and taped in place. Josh Allen and James Cook start again, Christian Watson already has 7.40 on Thursday, and the waiver desk added Xavier Worthy ($3), Alvin Kamara ($2) and the Kansas City defense overnight. One small complaint, filed only because nobody else will: Jordan Love has 9.52 on this bench tonight. It will not matter. Allen is the starter and will remain the starter.</p>
+  <p>BrennaLynne has the league's second-lowest point total at 204.58, and the registry item is running live on Thursday night: her bench has 10.80 (Matthew Golden 5.50, Tucker Kraft 5.30) while her starters have none, because none of them play tonight. Kraft sits for Zach Ertz, a free-agent pickup made this afternoon. Colston Loveland was released and Drew Lock added. For the record, Jaxson Dart is on injured reserve after last week's knee injury, and Jalen Hurts starts. She also leads this series, and she won the last regular-season meeting 148.26&ndash;129.94.</p>
+  <span class="verdict">Desk pick: <b>jsdivine</b>. 333 points against 204, and a series lead does not score.</span>
+
+  <h3>mmcatee01 (0&ndash;2) <span class="vs">vs</span> sammyyy29 (0&ndash;2)</h3>
+  <div class="series">Series: sammyyy29 leads 5&ndash;2 &middot; Last meeting mmcatee01 124.02&ndash;118.78, Week 17 of 2025</div>
+  <p>Two 0&ndash;2 teams, and only one of them has an excuse. mmcatee01 has allowed 343.46 points, the most in the league, and lost Week 2 by 12.32 after scoring 147.68, which would have beaten six other teams. The roster is intact: Patrick Mahomes, Jonathan Taylor, Rashee Rice and George Kittle start, Saquon Barkley is questionable at press time and on the bench, and the kicker remains who he has always been. The belief system is not under review.</p>
+  <p>sammyyy29 has scored 180.14 points, last in the league by 24.44, and the front office responded overnight. Justin Herbert was released for Bryce Young. Young starts. Baker Mayfield, the quarterback who replaced Herbert in the lineup last week, is on the bench. Dalton Schultz was claimed and starts at tight end over both Isaiah Likely and Jake Ferguson, which settles the week-to-week Likely/Ferguson question by starting neither of them. The Green Bay defense went on at 2:30 this afternoon and already has 6.00. The series belongs to sammyyy29, five of seven. The lineup is the part the desk can't vouch for.</p>
+  <span class="verdict">Desk pick: <b>mmcatee01</b>. 243 points against 180, and the desk will take an unlucky team over an unsettled one.</span>
+
+  <h3>alyssagenther (1&ndash;1) <span class="vs">vs</span> divinethought (2&ndash;0)</h3>
+  <div class="series">Series: alyssagenther leads 5&ndash;1 &middot; Last meeting alyssagenther 114.50&ndash;111.64, Week 10 of 2025</div>
+  <p>The champion has taken five of six from this opponent, four of them by less than 11 points, including a 124.38&ndash;118.40 decision in December 2024. Coming off a 158.96 in Week 2, she was also the week's biggest spender: $12 on Denzel Boston and $6 on Tyler Shough, $18 of the $36 the league spent on waivers since Wednesday. Shough joins Bo Nix on a bench behind the starter, giving her three quarterbacks for a lineup that uses one. Christian McCaffrey and Amon-Ra St. Brown are healthy. Jaylen Warren, Jalen Coker and Nico Collins are questionable at press time, and Collins is on the bench.</p>
+  <p>divinethought is 2&ndash;0 and fifth in points at 273.12, behind the 1&ndash;1 champion, which makes this the quietest unbeaten record in the league. That changed tonight: Bijan Robinson has 17.20 on Thursday, and the running-back core of Robinson, Ashton Jeanty and Quinshon Judkins starts intact. Jayden Reed is out at press time, and Ladd McConkey, DK Metcalf and Drake London are on the bench, London with 3.10 already. Jared Goff remains the thirteenth-round quarterback the desk has stopped arguing with.</p>
+  <span class="verdict">Desk pick: <b>divinethought</b>, on a 17.20 head start. The 5&ndash;1 series makes this the pick the desk is least confident in.</span>
+
+  <h3>D1LLIGAF (2&ndash;0) <span class="vs">vs</span> jgirsby (0&ndash;2)</h3>
+  <div class="series">Series: jgirsby leads 4&ndash;2 &middot; Last meeting jgirsby 117.48&ndash;95.08, Week 17 of 2025</div>
+  <p>Disclosure: this is the desk's own franchise. It is 2&ndash;0 for the first time in its history, second in points at 312.46, and it beat mmcatee01 160.00&ndash;147.68 last week with Dalton Kincaid in the lineup, where the analytics department wanted him all along. The Wednesday waiver run was mixed. KC Concepcion came in for nothing; a $4 bid on Jonah Coleman lost to a $5 bid. Overnight, $3 turned Michael Mayer into Rachaad White, so the last evidence for the gut feeling is off the roster. Jayden Daniels is out with the elbow injury and Lamar Jackson starts as usual. DeVonta Smith is questionable at press time.</p>
+  <p>jgirsby is 0&ndash;2 by a combined 10.68 points: 144.74&ndash;135.90 in Week 1, then 106.82&ndash;104.98 on Monday night in Week 2. The chair has a pattern. Week 1 he benched Brock Purdy's 27.10; Week 2 he benched Matthew Stafford's 34.98. This week Purdy starts, Stafford sits, and the desk has no idea which one will go off. He replaced Cameron Dicker with Evan McPherson, swapped New England's defense for Cincinnati's, and has Puka Nacua and Zay Flowers questionable at press time, with Brock Bowers questionable on the bench. He has also won the last two meetings, including December's.</p>
+  <span class="verdict">Desk pick: <b>D1LLIGAF</b>, graded to a stricter standard than any other pick on this page. The ethics office signed off. The series did not.</span>
+
+  <h3>ITouchd0wnThere (2&ndash;0) <span class="vs">vs</span> Dawnieo (1&ndash;1)</h3>
+  <div class="series">Series: ITouchd0wnThere leads 3&ndash;2 &middot; Last meeting ITouchd0wnThere 143.56&ndash;103.44, Week 6 of 2025</div>
+  <p>After the Week 1 league high (183.46) came a Week 2 escape: 106.82&ndash;104.98, settled on Monday night. ITouchd0wnThere is 2&ndash;0 and third in points. Caleb Williams is doubtful at press time with a hamstring injury and remains in the starting lineup. The fantasy consequence is straightforward: the bench carries no quarterback, so a Sunday lineup change would mean a waiver move. Justin Jefferson, De'Von Achane, David Montgomery and Trey McBride start around him. Jonah Coleman, the $5 winner of Wednesday's only real bidding war, is questionable and on the bench.</p>
+  <p>Dawnieo's quarterback carousel has turned again: Trevor Lawrence starts, Drake Maye sits, the reverse of what this desk previewed last week. Jahmyr Gibbs and Bucky Irving start at running back; Rashod Bateman ($3) came in for Brian Thomas. DJ Moore is questionable at press time and on the bench, and A.J. Brown remains on injured reserve. The last December meeting belongs to Dawnieo, 194.12&ndash;85.78 in Week 17 of 2022, the most lopsided game in this series by some distance.</p>
+  <span class="verdict">Desk pick: <b>ITouchd0wnThere</b>, provisionally. If Williams is ruled out and no quarterback is added, this pick is withdrawn and the desk will say so on Tuesday.</span>
+
+  <h2><span class="tag">///</span>The Week 3 Ledger</h2>
+  <p>Six lines for the group chat, all of them checkable:</p>
+  <ul class="ranks">
+    <li><b>Four, four, two</b> &mdash; four teams at 2&ndash;0, four at 0&ndash;2, two at 1&ndash;1. No unbeaten plays another, and two of the winless teams play each other.</li>
+    <li><b>10.68 points</b> &mdash; jgirsby's combined margin across two losses. The desk's own opponent, and the unluckiest 0&ndash;2 team in the file.</li>
+    <li><b>343.46</b> &mdash; points scored against mmcatee01 in two weeks, the most in the league. The schedule has been harder on him than anything the kicker did.</li>
+    <li><b>Nineteen moves</b> &mdash; completed adds and drops since Wednesday morning. Last week's preview counted three. Someone read the recap.</li>
+    <li><b>Three quarterbacks</b> &mdash; alyssagenther's count after adding Tyler Shough. Her lineup uses one of them.</li>
+    <li><b>4&ndash;1</b> &mdash; the desk's Week 2 pick record, reinstated with conditions. This week has four favorites and one conflict of interest.</li>
+  </ul>
+
+  <div class="clock-note">Filed Thursday with Green Bay and Atlanta in progress, one bench already outscoring its lineup, and the desk's own kicker at 1.00. The desk has been told that previews are meant to come before the games. The desk has noted this.</div>
+
+  <p>The desk will not be taking questions, least of all about the filing time.</p>
+
+  <div class="foot">FamilyFootball Insider &middot; Week 3 Preview 2026 &middot; divinesleeper.com</div>
+</div>
+</body>
+</html>
