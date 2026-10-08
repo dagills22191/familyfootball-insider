@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Five Starters on a Bye: The Unbeaten Team Owns Three of Them</title>
+<style>
+  :root {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0d1220;
+      --panel: #151c2e;
+      --ink: #e7eaf2;
+      --ink-soft: #9aa4ba;
+      --line: #2a3450;
+      --navy: #16233f;
+      --navy-text: #c3cde4;
+      --gold: #e8b23a;
+      --gold-strong: #f0c05e;
+      --chip-bg: #222d49;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0d1220;
+    --panel: #151c2e;
+    --ink: #e7eaf2;
+    --ink-soft: #9aa4ba;
+    --line: #2a3450;
+    --navy: #16233f;
+    --navy-text: #c3cde4;
+    --gold: #e8b23a;
+    --gold-strong: #f0c05e;
+    --chip-bg: #222d49;
+  }
+  :root[data-theme="light"] {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 20px 80px;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; }
+
+  .display, h1, h2, h3 {
+    font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  .masthead {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    border-bottom: 3px solid var(--ink);
+    padding: 26px 0 10px;
+  }
+  .masthead .brand {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em;
+    font-size: 0.85rem;
+  }
+  .masthead .brand em { color: var(--gold); font-style: normal; }
+  .masthead .date {
+    font-family: system-ui, sans-serif; font-size: 0.75rem; color: var(--ink-soft);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    margin: 34px 0 14px;
+    text-wrap: balance;
+  }
+  h1 .kick { color: var(--gold); }
+  .deck {
+    font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 18px;
+    line-height: 1.5; text-wrap: balance;
+  }
+  .byline {
+    font-family: system-ui, sans-serif; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 9px 0; margin-bottom: 34px;
+  }
+  .byline b { color: var(--gold); }
+
+  p { margin: 0 0 1.15em; }
+
+  h2 {
+    font-size: 1.5rem; font-weight: 800; margin: 44px 0 18px;
+    padding-top: 18px; border-top: 3px solid var(--ink);
+  }
+  h2 .tag { color: var(--gold); margin-right: 8px; }
+
+  .pick { display: block; margin: 0 0 20px; }
+  .pick b { color: var(--ink); }
+
+  .clock-note {
+    border-left: 4px solid var(--gold); background: var(--panel);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px 4px; margin: 30px 0; font-style: italic; color: var(--ink-soft);
+  }
+
+  .ranks { margin: 0 0 20px; padding: 0; list-style: none; counter-reset: rk; }
+  .ranks li {
+    counter-increment: rk; position: relative;
+    padding: 8px 0 8px 44px; border-bottom: 1px solid var(--line);
+  }
+  .ranks li::before {
+    content: counter(rk); position: absolute; left: 0; top: 6px;
+    font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800;
+    font-size: 1.2rem; color: var(--gold); width: 32px; text-align: right;
+  }
+  .ranks b { color: var(--ink); }
+
+  h3 {
+    font-size: 1.15rem; font-weight: 800; margin: 30px 0 8px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--line);
+  }
+  h3 .vs { color: var(--gold); margin: 0 6px; }
+  .series {
+    font-family: system-ui, sans-serif; font-size: 0.74rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-soft); margin: -2px 0 12px;
+  }
+  .verdict {
+    display: inline-block; background: var(--chip-bg); color: var(--ink);
+    font-family: system-ui, sans-serif; font-size: 0.82rem; font-weight: 700;
+    padding: 5px 10px; border-radius: 3px; margin: 2px 0 6px;
+  }
+  .verdict b { color: var(--gold-strong); }
+  .foot {
+    margin-top: 50px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--ink-soft);
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 0 12px 60px; font-size: 15px; }
+    .masthead { flex-wrap: wrap; row-gap: 2px; padding-top: 18px; }
+    h1 { margin-top: 24px; }
+    .deck { font-size: 1.06rem; }
+  }
+</style>
+</head>
+<body>
+<div id="dspn-article-nav" style="background:#0b0d12;border-bottom:3px solid #e02b20;font-family:Arial,Helvetica,sans-serif"><div style="max-width:1120px;margin:0 auto;padding:8px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap"><a href="/" style="background:#000;color:#fff;font-weight:900;font-style:italic;font-size:1rem;letter-spacing:1px;padding:3px 11px;text-decoration:none;border-bottom:3px solid #f2b024;margin-right:8px">DSPN</a><a href="/" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Home</a><a href="/annual" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">The Annual</a><a href="/draft-central" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Draft Central</a><a href="/live" style="color:#f2b024;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">&#9679; Live</a></div></div>
+
+
+<div class="wrap">
+  <div class="masthead">
+    <span class="brand">FamilyFootball <em>Insider</em></span>
+    <span class="date">Week 5 Preview &middot; October 2026</span>
+  </div>
+  <h1>Five Starters on a Bye: <span class="kick">The Unbeaten Team Owns Three of Them</span></h1>
+  <p class="deck">Kansas City and Carolina are off this week, and at press time five of their players are still in starting lineups. Three belong to the only 4&ndash;0 team in the league. The other two include a quarterback this desk said would not be a question this week. Also: a tight end decision finally changed, a quarterback decision did not, and the desk picks against itself.</p>
+  <div class="byline">By <b>The Insider Desk</b> &middot; Rosters, lineups and injury tags at press time, Wednesday, Oct. 7 &middot; Records are 2026, four weeks of fourteen &middot; Projections: FantasyPros, Week 5 PPR</div>
+
+  <p>Second straight Wednesday filing. The desk mentions this for the record and will stop mentioning it when it stops being surprising.</p>
+
+  <p>The week has one theme and one caveat. The theme is the bye: Kansas City and Carolina do not play, and a lineup that has not been opened since Sunday does not know that. The caveat is the injury list, which is long, and which the desk reports straight. Every tag below is as of press time and several will change by Friday. Thursday's Tampa Bay&ndash;Dallas game locks a few lineups early.</p>
+
+  <h2><span class="tag">///</span>The Games</h2>
+
+  <h3>jsdivine (4&ndash;0) <span class="vs">vs</span> divinethought (3&ndash;1)</h3>
+  <div class="series">Series: tied 3&ndash;3 &middot; Last meeting divinethought 150.16&ndash;108.78, Week 4 of 2025</div>
+  <p>First in points (605.16) against second (561.06), and the game of the week on merit. At press time jsdivine's lineup starts Travis Kelce, Harrison Butker and the Kansas City defense. Kansas City is on bye. That is three of nine slots, and with them empty the lineup projects to 101.1. Kyle Pitts is on the bench and playing. CeeDee Lamb and Javonte Williams go Thursday night, so the screen will be open at least once before then.</p>
+  <p>divinethought has been through this. Tetairoa McMillan, 45.20 last week, plays for Carolina and is correctly on the bench. Quinshon Judkins, 21.60 on the bench last week, starts at FLEX. Daniel Jones, claimed for $10 on Saturday, was released Wednesday for Deshaun Watson at $0, a four-day tenure. Projection: 132.1. divinethought has won the last two meetings.</p>
+  <span class="verdict">Desk pick: <b>divinethought</b>. The pick is open to review once three slots are filled.</span>
+
+  <h3>mmcatee01 (1&ndash;3) <span class="vs">vs</span> jgirsby (2&ndash;2)</h3>
+  <div class="series">Series: mmcatee01 leads 3&ndash;2 &middot; Last meeting mmcatee01 137.44&ndash;116.70, Week 10 of 2025</div>
+  <p>Tuesday's recap said the Joe Burrow question would answer itself this week, because Patrick Mahomes is on bye. At press time Mahomes starts and Burrow, projected for 19.7, is on the bench. Rashee Rice, also Kansas City, also starts. The desk withdraws the word "itself." Saquon Barkley and Tee Higgins are both questionable at press time and both start; Barkley did not practice Wednesday. The lineup as set projects to 79.2. Brandon Aubrey kicks Thursday.</p>
+  <p>jgirsby's chair has moved again. After two weeks of Brock Purdy and two scores above 150, Matthew Stafford starts and Purdy sits. The projections agree with the chair, 19.0 to 17.2. D'Andre Swift, Zay Flowers and Brock Bowers are all questionable at press time. Projection: 134.7. mmcatee01 has won the last three meetings.</p>
+  <span class="verdict">Desk pick: <b>jgirsby</b>, by 55.5 projected points, a number that should not survive the week.</span>
+
+  <h3>ITouchd0wnThere (2&ndash;2) <span class="vs">vs</span> BrennaLynne (0&ndash;4)</h3>
+  <div class="series">Series: ITouchd0wnThere leads 4&ndash;1 &middot; Last meeting ITouchd0wnThere 139.08&ndash;97.08, Week 8 of 2025</div>
+  <p>ITouchd0wnThere has acted on the recap. Emanuel Wilson, the $1 claim who scored 27.00 on the bench, starts. Ollie Gordon, the $51 claim, is on the bench. Justin Jefferson is questionable at press time and also on the bench; if he is cleared, this projection moves. Sam Darnold starts again with Caleb Williams out. Projection: 110.2.</p>
+  <p>BrennaLynne has put Malik Nabers back in the lineup after his 23.20 on the bench, with Matthew Golden returning to it. Chuba Hubbard, 25.90 last week, is on bye and correctly benched. Nabers, Cam Skattebo and Jacory Croskey-Merritt are all questionable at press time, which is a lot of this lineup. Jaxon Smith-Njigba projects for 22.4. Projection: 116.5, which makes an 0&ndash;4 team the favorite against a team that leads the series 4&ndash;1.</p>
+  <span class="verdict">Desk pick: <b>BrennaLynne</b>. Somebody has to say it first.</span>
+
+  <h3>sammyyy29 (0&ndash;4) <span class="vs">vs</span> Dawnieo (2&ndash;2)</h3>
+  <div class="series">Series: sammyyy29 leads 5&ndash;2 &middot; Last meeting sammyyy29 119.88&ndash;119.84, Week 7 of 2025</div>
+  <p>The tight end file has an entry the desk did not expect to write. After four weeks and four benched tight ends who outscored the starter, Isaiah Likely starts. He is questionable at press time, which the desk notes without comment. Kirk Cousins starts at quarterback with Bryce Young on bye. Kyren Williams scored 36.70 last week. Projection: 110.7. The last meeting between these two was decided by 0.04.</p>
+  <p>Dawnieo lost by 0.80 with Drake Maye's 32.16 on the bench. At press time Trevor Lawrence starts and Maye sits. Maye projects for 19.4, Lawrence for 17.9. The carousel has now held still for three straight weeks. George Pickens and Bucky Irving play Thursday. DJ Moore is questionable at press time and starts. Will Shipley was claimed for $7. Projection: 120.4.</p>
+  <span class="verdict">Desk pick: <b>Dawnieo</b>, by 9.7 projected points, or 11.2 with the other quarterback.</span>
+
+  <h3>alyssagenther (3&ndash;1) <span class="vs">vs</span> D1LLIGAF (3&ndash;1)</h3>
+  <div class="series">Series: alyssagenther leads 3&ndash;1 &middot; Last meeting alyssagenther 119.34&ndash;94.02, Week 4 of 2025</div>
+  <p>The champion has won three straight and has fixed the one thing the recap listed. Nico Collins, 30.80 on the bench last week, starts; Garrett Wilson moves to the bench. Tyler Shough is questionable at press time and starts, with Dak Prescott behind him. Christian McCaffrey and Amon-Ra St. Brown are healthy, and that is most of the argument. Projection: 128.9. She has won the last two meetings.</p>
+  <p>Disclosure: the desk's own franchise, which won last week by 0.80 and spent the days since in the training room. Jayden Daniels is off injured reserve and starts for the first time since Week 2. Lamar Jackson, Ja'Marr Chase, Terry McLaurin and DeVonta Smith are all questionable at press time and all on the bench. Kenneth Walker is on bye. Wednesday's claims were Austin Ekeler ($10), Khalil Shakir ($6) and Keaton Mitchell ($3); two of the three start. Projection: 100.4, the second-lowest on the board, and the lowest belongs to a lineup with a bye-week quarterback in it.</p>
+  <span class="verdict">Desk pick: <b>alyssagenther</b>. The ethics office is pleased. The analytics department has asked for the pick to be revisited on Friday.</span>
+
+  <h2><span class="tag">///</span>The Week 5 Ledger</h2>
+  <p>Six lines for the group chat, all of them checkable:</p>
+  <ul class="ranks">
+    <li><b>Five</b> &mdash; starters on a bye at press time: Kelce, Butker and the Chiefs defense for jsdivine, Mahomes and Rice for mmcatee01.</li>
+    <li><b>$170</b> &mdash; league FAAB spent after Wednesday's $26 batch. The desk's franchise accounts for $19 of the $26.</li>
+    <li><b>0.04</b> &mdash; the margin of the last sammyyy29&ndash;Dawnieo game.</li>
+    <li><b>Four days</b> &mdash; Daniel Jones's stay with divinethought, at $2.50 a day.</li>
+    <li><b>Three</b> &mdash; teams that still have not spent a FAAB dollar: mmcatee01, sammyyy29, BrennaLynne.</li>
+    <li><b>13&ndash;7</b> &mdash; the desk's pick record. It has taken all five projection favorites again, one of them an 0&ndash;4 team and one of them the team playing the desk.</li>
+  </ul>
+
+  <div class="clock-note">Filed Wednesday night. Thursday is Tampa Bay and Dallas. Sunday starts at 9:30am with Philadelphia and Jacksonville in London, and ends with Atlanta and Baltimore. Monday night is Buffalo and the Rams.</div>
+
+  <p>The desk will not be taking questions. It has several of its own, most of them about a walking boot.</p>
+
+  <div class="foot">FamilyFootball Insider &middot; Week 5 Preview 2026 &middot; divinesleeper.com</div>
+</div>
+</body>
+</html>
