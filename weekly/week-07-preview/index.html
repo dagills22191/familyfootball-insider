@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seven Starters on a Bye: The Desk Fixed Its Own and Is Telling Everyone</title>
+<style>
+  :root {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0d1220;
+      --panel: #151c2e;
+      --ink: #e7eaf2;
+      --ink-soft: #9aa4ba;
+      --line: #2a3450;
+      --navy: #16233f;
+      --navy-text: #c3cde4;
+      --gold: #e8b23a;
+      --gold-strong: #f0c05e;
+      --chip-bg: #222d49;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0d1220;
+    --panel: #151c2e;
+    --ink: #e7eaf2;
+    --ink-soft: #9aa4ba;
+    --line: #2a3450;
+    --navy: #16233f;
+    --navy-text: #c3cde4;
+    --gold: #e8b23a;
+    --gold-strong: #f0c05e;
+    --chip-bg: #222d49;
+  }
+  :root[data-theme="light"] {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 20px 80px;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; }
+
+  .display, h1, h2, h3 {
+    font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  .masthead {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    border-bottom: 3px solid var(--ink);
+    padding: 26px 0 10px;
+  }
+  .masthead .brand {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em;
+    font-size: 0.85rem;
+  }
+  .masthead .brand em { color: var(--gold); font-style: normal; }
+  .masthead .date {
+    font-family: system-ui, sans-serif; font-size: 0.75rem; color: var(--ink-soft);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    margin: 34px 0 14px;
+    text-wrap: balance;
+  }
+  h1 .kick { color: var(--gold); }
+  .deck {
+    font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 18px;
+    line-height: 1.5; text-wrap: balance;
+  }
+  .byline {
+    font-family: system-ui, sans-serif; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 9px 0; margin-bottom: 34px;
+  }
+  .byline b { color: var(--gold); }
+
+  p { margin: 0 0 1.15em; }
+
+  h2 {
+    font-size: 1.5rem; font-weight: 800; margin: 44px 0 18px;
+    padding-top: 18px; border-top: 3px solid var(--ink);
+  }
+  h2 .tag { color: var(--gold); margin-right: 8px; }
+
+  .pick { display: block; margin: 0 0 20px; }
+  .pick b { color: var(--ink); }
+
+  .clock-note {
+    border-left: 4px solid var(--gold); background: var(--panel);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px 4px; margin: 30px 0; font-style: italic; color: var(--ink-soft);
+  }
+
+  .ranks { margin: 0 0 20px; padding: 0; list-style: none; counter-reset: rk; }
+  .ranks li {
+    counter-increment: rk; position: relative;
+    padding: 8px 0 8px 44px; border-bottom: 1px solid var(--line);
+  }
+  .ranks li::before {
+    content: counter(rk); position: absolute; left: 0; top: 6px;
+    font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800;
+    font-size: 1.2rem; color: var(--gold); width: 32px; text-align: right;
+  }
+  .ranks b { color: var(--ink); }
+
+  h3 {
+    font-size: 1.15rem; font-weight: 800; margin: 30px 0 8px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--line);
+  }
+  h3 .vs { color: var(--gold); margin: 0 6px; }
+  .series {
+    font-family: system-ui, sans-serif; font-size: 0.74rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-soft); margin: -2px 0 12px;
+  }
+  .verdict {
+    display: inline-block; background: var(--chip-bg); color: var(--ink);
+    font-family: system-ui, sans-serif; font-size: 0.82rem; font-weight: 700;
+    padding: 5px 10px; border-radius: 3px; margin: 2px 0 6px;
+  }
+  .verdict b { color: var(--gold-strong); }
+  .foot {
+    margin-top: 50px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--ink-soft);
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 0 12px 60px; font-size: 15px; }
+    .masthead { flex-wrap: wrap; row-gap: 2px; padding-top: 18px; }
+    h1 { margin-top: 24px; }
+    .deck { font-size: 1.06rem; }
+  }
+</style>
+</head>
+<body>
+<div id="dspn-article-nav" style="background:#0b0d12;border-bottom:3px solid #e02b20;font-family:Arial,Helvetica,sans-serif"><div style="max-width:1120px;margin:0 auto;padding:8px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap"><a href="/" style="background:#000;color:#fff;font-weight:900;font-style:italic;font-size:1rem;letter-spacing:1px;padding:3px 11px;text-decoration:none;border-bottom:3px solid #f2b024;margin-right:8px">DSPN</a><a href="/" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Home</a><a href="/annual" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">The Annual</a><a href="/draft-central" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Draft Central</a><a href="/live" style="color:#f2b024;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">&#9679; Live</a></div></div>
+
+
+<div class="wrap">
+  <div class="masthead">
+    <span class="brand">FamilyFootball <em>Insider</em></span>
+    <span class="date">Week 7 Preview &middot; October 2026</span>
+  </div>
+  <h1>Seven Starters on a Bye: <span class="kick">The Desk Fixed Its Own and Is Telling Everyone</span></h1>
+  <p class="deck">Buffalo, Jacksonville, the Chargers and Washington are off this week. At press time seven of their players are still in starting lineups, across five teams. Two are the league leader's quarterback and running back. There were eight until Wednesday evening, when the desk noticed its own quarterback and fixed it. Also: Dawnieo's quarterback decision has been made for him, and with every lineup fixed, the desk's game is a 0.6-point coin flip.</p>
+  <div class="byline">By <b>The Insider Desk</b> &middot; Rosters, lineups and injury tags at press time, Wednesday, Oct. 21 &middot; Records are 2026, six weeks of fourteen &middot; Projections: FantasyPros, Week 7 PPR</div>
+
+  <p>Filed Wednesday night, a few hours after a recap filed Wednesday afternoon. The desk is calling that a recovery. Others may call it overcorrection, and the desk will not be taking that question either.</p>
+
+  <p>The theme is the bye, again. Two weeks ago the preview counted five starters on bye teams, and every one was fixed by kickoff. This week there were eight. The desk's own franchise had one of them and fixed it before filing, which it mentions only because nobody else will. Every projection below is given two ways: the lineup as set, with bye players at zero, and the lineup as it ought to be. Thursday's Chicago&ndash;New England game locks a few slots early.</p>
+
+  <h2><span class="tag">///</span>The Games</h2>
+
+  <h3>ITouchd0wnThere (3&ndash;3) <span class="vs">vs</span> jsdivine (5&ndash;1)</h3>
+  <div class="series">Series: jsdivine leads 3&ndash;2 &middot; Last meeting jsdivine 144.26&ndash;98.14, Week 11 of 2025</div>
+  <p>Justin Jefferson is back from the Minnesota bye and, at press time, on the bench, projected for 17.1. Bhayshul Tuten, 24.70 last week, starts and plays for Jacksonville, which is off. Ollie Gordon (10.9) and RJ Harvey (10.4) are on the bench. Caleb Williams goes Thursday night. As set: 89.0. Fixed: 114.7.</p>
+  <p>jsdivine starts Josh Allen and James Cook. Buffalo is on bye. For five straight weeks Jordan Love has cleared 17 points on this bench for a team that had no use for him. This week he is the only quarterback the team has, projected for 19.2. CeeDee Lamb and Javonte Williams play Monday night. As set: 88.8, a hair under the 3&ndash;3 team. Fixed: 116.8.</p>
+  <span class="verdict">Desk pick: <b>jsdivine</b>, on the assumption that Jordan Love is finally allowed to play.</span>
+
+  <h3>jgirsby (3&ndash;3) <span class="vs">vs</span> Dawnieo (3&ndash;3)</h3>
+  <div class="series">Series: jgirsby leads 5&ndash;2 &middot; Last meeting jgirsby 129.28&ndash;105.22, Week 8 of 2025</div>
+  <p>The chair has been right four straight weeks, and it has picked Matthew Stafford (18.8) over Brock Purdy (20.2) again. The desk has stopped questioning the chair. Puka Nacua projects for 24.0. Breece Hall is questionable at press time and starts at FLEX. Colston Loveland, the $11 claim, is on the bench and plays Thursday. Projection: 135.9, the best on the board.</p>
+  <p>Dawnieo's quarterback carousel has been retired by the NFL schedule. Trevor Lawrence is on bye, Drake Maye starts (20.6), and for one week the decision cannot be wrong. The rest of the lineup has not been opened since Sunday. Keon Coleman and Cam Little start for teams on bye, and Romeo Doubs, now on injured reserve, is still in a receiver slot. Jahmyr Gibbs (25.6) and Sam LaPorta (12.9) are back from the Detroit bye and both on the bench. As set: 74.6, the lowest on the board. Fixed: 119.1. The only kicker on the roster is the one on bye.</p>
+  <span class="verdict">Desk pick: <b>jgirsby</b>, by 16.8 even after the repairs.</span>
+
+  <h3>D1LLIGAF (3&ndash;3) <span class="vs">vs</span> divinethought (4&ndash;2)</h3>
+  <div class="series">Series: tied 3&ndash;3 &middot; Last meeting D1LLIGAF 161.06&ndash;80.30, Week 16 of 2025</div>
+  <p>Disclosure: the desk's own franchise, which has spent the week issuing guidance on bye weeks. Until Wednesday evening its lineup started Jayden Daniels. Washington is on bye. Bo Nix, claimed for $5 that morning precisely because Washington is on bye, was on the bench. He now starts, projected for 17.3, and Daniels sits. Dalton Kincaid, Khalil Shakir and Rachaad White are also off, which leaves Tyler Higbee as the only tight end on the roster with a game. Ja'Marr Chase returns from his own bye (19.2). Omar Cooper, the McLaurin replacement, is on the bench. Projection: 125.0, up from 107.7 before the swap. The analytics department and the gut agreed on this one, which is how everyone knew it was serious.</p>
+  <p>divinethought starts Parker Washington, who plays for Jacksonville. Jared Goff is back from the Detroit bye and on the bench (18.9), behind Aaron Rodgers (17.3), who won last week's job. Tetairoa McMillan (15.0) is on the bench for a third straight week and DK Metcalf (13.2) for a second, and the desk has stopped counting out loud. Rhamondre Stevenson starts at FLEX and plays Thursday. As set: 104.7. Fixed: 125.6. The desk has won the last two meetings, by a combined 125.70.</p>
+  <span class="verdict">Desk pick: <b>divinethought</b>, by 0.6 with both lineups fixed. The ethics office notes the desk has now picked against itself in back-to-back previews. The analytics department notes that the last one was correct.</span>
+
+  <h3>alyssagenther (4&ndash;2) <span class="vs">vs</span> mmcatee01 (2&ndash;4)</h3>
+  <div class="series">Series: alyssagenther leads 4&ndash;2 &middot; Last meeting mmcatee01 143.22&ndash;76.28, Week 5 of 2025</div>
+  <p>Tyler Shough, bought back for $6 this morning, is on the bench behind Dak Prescott. Tyler Warren is questionable at press time and starts at tight end, with Pat Freiermuth, the $0 claim, behind him. Christian McCaffrey (20.5), Amon-Ra St. Brown (19.8) and Nico Collins (17.0) are all healthy and all starting. No bye-week starters. Projection: 128.9.</p>
+  <p>The Burrow question has been answered by Burrow's return from the Cincinnati bye. Joe Burrow starts (19.8) and Patrick Mahomes sits (16.1), and for once the desk agrees with the screen. Saquon Barkley and Rashee Rice are both questionable at press time and both start. Brandon Aubrey kicks Monday night, which gives the belief system an extra day of preparation. Projection: 117.2. Last season's meeting went to mmcatee01 by 66.94.</p>
+  <span class="verdict">Desk pick: <b>alyssagenther</b>, by 11.7.</span>
+
+  <h3>sammyyy29 (1&ndash;5) <span class="vs">vs</span> BrennaLynne (2&ndash;4)</h3>
+  <div class="series">Series: sammyyy29 leads 4&ndash;1 &middot; Last meeting sammyyy29 107.06&ndash;99.46, Week 9 of 2025</div>
+  <p>sammyyy29 is coming off the league's only perfect lineup of Week 6, and the tight end file stays closed: Isaiah Likely and Dalton Schultz both start again. The Jacksonville defense also starts and is on bye, and there is no other defense on the roster. Mike Evans is questionable at press time, starts, and projects for 3.1. The desk notes that without comment. Jameson Williams (11.5) and Aaron Jones (11.7) are on the bench. As set: 85.7. Fixed: 98.2, or a little more once a defense is found.</p>
+  <p>BrennaLynne has won two straight and posted the week's high score last Sunday. C.J. Stroud starts again (18.8). Jaxon Smith-Njigba projects for 21.2. Cam Skattebo, 0.00 on six snaps last week, starts again; Omarion Hampton is on the Chargers' bye, so there was not much of a choice. Projection: 120.2. sammyyy29 has won the last three meetings, which is the most confident sentence anyone has written about sammyyy29 this season.</p>
+  <span class="verdict">Desk pick: <b>BrennaLynne</b>, by 34.5 as set and 22.0 after the repairs, plus a defense.</span>
+
+  <h2><span class="tag">///</span>The Week 7 Ledger</h2>
+  <p>Six lines for the group chat, all of them checkable:</p>
+  <ul class="ranks">
+    <li><b>Seven</b> &mdash; starters on a bye at press time: Allen and Cook for jsdivine, Coleman and Little for Dawnieo, and one each for ITouchd0wnThere (Tuten), divinethought (Washington) and sammyyy29 (the Jaguars defense). The desk's was fixed before filing.</li>
+    <li><b>Zero</b> &mdash; quarterback decisions available to Dawnieo this week.</li>
+    <li><b>0.6</b> &mdash; projected margin between the desk and divinethought with both lineups fixed.</li>
+    <li><b>$232</b> &mdash; league FAAB spent this season, after Wednesday's $33 batch. jgirsby spent $16 of it, the desk $11.</li>
+    <li><b>Three</b> &mdash; teams that still have not spent a FAAB dollar: mmcatee01, sammyyy29, BrennaLynne. It is Week 7.</li>
+    <li><b>18&ndash;7</b> &mdash; the desk's pick record. It has taken the fixed-lineup favorite in all five games, including the one against itself.</li>
+  </ul>
+
+  <div class="clock-note">Filed Wednesday night. Thursday is Chicago and New England. Sunday starts at 9:30am with New Orleans and Pittsburgh in Paris, and Monday night is Dallas and Philadelphia. Buffalo, Jacksonville, the Chargers and Washington are off. The desk has checked its own lineup twice, the second time after it was fixed.</div>
+
+  <p>The desk will not be taking questions. Its quarterback is already off the bench.</p>
+
+  <div class="foot">FamilyFootball Insider &middot; Week 7 Preview 2026 &middot; divinesleeper.com</div>
+</div>
+</body>
+</html>
