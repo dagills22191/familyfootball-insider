@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Series Is 6–1: The Desk Has Picked Itself Anyway</title>
+<style>
+  :root {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0d1220;
+      --panel: #151c2e;
+      --ink: #e7eaf2;
+      --ink-soft: #9aa4ba;
+      --line: #2a3450;
+      --navy: #16233f;
+      --navy-text: #c3cde4;
+      --gold: #e8b23a;
+      --gold-strong: #f0c05e;
+      --chip-bg: #222d49;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0d1220;
+    --panel: #151c2e;
+    --ink: #e7eaf2;
+    --ink-soft: #9aa4ba;
+    --line: #2a3450;
+    --navy: #16233f;
+    --navy-text: #c3cde4;
+    --gold: #e8b23a;
+    --gold-strong: #f0c05e;
+    --chip-bg: #222d49;
+  }
+  :root[data-theme="light"] {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 20px 80px;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; }
+
+  .display, h1, h2, h3 {
+    font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  .masthead {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    border-bottom: 3px solid var(--ink);
+    padding: 26px 0 10px;
+  }
+  .masthead .brand {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em;
+    font-size: 0.85rem;
+  }
+  .masthead .brand em { color: var(--gold); font-style: normal; }
+  .masthead .date {
+    font-family: system-ui, sans-serif; font-size: 0.75rem; color: var(--ink-soft);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    margin: 34px 0 14px;
+    text-wrap: balance;
+  }
+  h1 .kick { color: var(--gold); }
+  .deck {
+    font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 18px;
+    line-height: 1.5; text-wrap: balance;
+  }
+  .byline {
+    font-family: system-ui, sans-serif; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 9px 0; margin-bottom: 34px;
+  }
+  .byline b { color: var(--gold); }
+
+  p { margin: 0 0 1.15em; }
+
+  h2 {
+    font-size: 1.5rem; font-weight: 800; margin: 44px 0 18px;
+    padding-top: 18px; border-top: 3px solid var(--ink);
+  }
+  h2 .tag { color: var(--gold); margin-right: 8px; }
+
+  .pick { display: block; margin: 0 0 20px; }
+  .pick b { color: var(--ink); }
+
+  .clock-note {
+    border-left: 4px solid var(--gold); background: var(--panel);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px 4px; margin: 30px 0; font-style: italic; color: var(--ink-soft);
+  }
+
+  .ranks { margin: 0 0 20px; padding: 0; list-style: none; counter-reset: rk; }
+  .ranks li {
+    counter-increment: rk; position: relative;
+    padding: 8px 0 8px 44px; border-bottom: 1px solid var(--line);
+  }
+  .ranks li::before {
+    content: counter(rk); position: absolute; left: 0; top: 6px;
+    font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800;
+    font-size: 1.2rem; color: var(--gold); width: 32px; text-align: right;
+  }
+  .ranks b { color: var(--ink); }
+
+  h3 {
+    font-size: 1.15rem; font-weight: 800; margin: 30px 0 8px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--line);
+  }
+  h3 .vs { color: var(--gold); margin: 0 6px; }
+  .series {
+    font-family: system-ui, sans-serif; font-size: 0.74rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-soft); margin: -2px 0 12px;
+  }
+  .verdict {
+    display: inline-block; background: var(--chip-bg); color: var(--ink);
+    font-family: system-ui, sans-serif; font-size: 0.82rem; font-weight: 700;
+    padding: 5px 10px; border-radius: 3px; margin: 2px 0 6px;
+  }
+  .verdict b { color: var(--gold-strong); }
+  .foot {
+    margin-top: 50px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--ink-soft);
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 0 12px 60px; font-size: 15px; }
+    .masthead { flex-wrap: wrap; row-gap: 2px; padding-top: 18px; }
+    h1 { margin-top: 24px; }
+    .deck { font-size: 1.06rem; }
+  }
+</style>
+</head>
+<body>
+<div id="dspn-article-nav" style="background:#0b0d12;border-bottom:3px solid #e02b20;font-family:Arial,Helvetica,sans-serif"><div style="max-width:1120px;margin:0 auto;padding:8px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap"><a href="/" style="background:#000;color:#fff;font-weight:900;font-style:italic;font-size:1rem;letter-spacing:1px;padding:3px 11px;text-decoration:none;border-bottom:3px solid #f2b024;margin-right:8px">DSPN</a><a href="/" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Home</a><a href="/annual" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">The Annual</a><a href="/draft-central" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Draft Central</a><a href="/live" style="color:#f2b024;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">&#9679; Live</a></div></div>
+
+
+<div class="wrap">
+  <div class="masthead">
+    <span class="brand">FamilyFootball <em>Insider</em></span>
+    <span class="date">Week 8 Preview &middot; October 2026</span>
+  </div>
+  <h1>The Series Is 6&ndash;1: <span class="kick">The Desk Has Picked Itself Anyway</span></h1>
+  <p class="deck">ITouchd0wnThere has beaten the desk's franchise six times in seven meetings, two of them openers. The projections say this is the week that changes, and the desk knows what its projections did last Sunday. Also: five starters on a bye at press time, four on one roster, and Josh Allen projects for 24.3 on jsdivine's bench.</p>
+  <div class="byline">By <b>The Insider Desk</b> &middot; Rosters, lineups and injury tags at press time, Wednesday, Oct. 28, after waivers &middot; Records are 2026, seven weeks of fourteen &middot; Projections: FantasyPros, Week 8 PPR (Sleeper's where FantasyPros has no line)</div>
+
+  <p>Filed Wednesday night, after the morning's waivers cleared. The league spent $44 of FAAB before breakfast, and at least four lineups changed between Tuesday and tonight. The numbers below are a snapshot, and Thursday night is the first lock.</p>
+
+  <p>Houston, New Orleans, the Giants and San Francisco are off. That leaves five starters on a bye at press time, and four belong to one team. Every projection below is given two ways, as set with bye players at zero and as it ought to be. Thursday's Green Bay&ndash;Carolina game locks a few slots early.</p>
+
+  <h2><span class="tag">///</span>The Games</h2>
+
+  <h3>jsdivine (5&ndash;2) <span class="vs">vs</span> Dawnieo (3&ndash;4)</h3>
+  <div class="series">Series: jsdivine leads 4&ndash;2 &middot; Last meeting jsdivine 121.46&ndash;97.46, Week 14 of 2025</div>
+  <p>For five weeks Jordan Love scored on this bench. Last week he started and scored 20.96, and at press time he is still starting, projected for 17.9. Josh Allen is back from the Buffalo bye and on the bench, projected for 24.3. The bench quarterback file has turned inside out. James Cook (16.1) is also on the bench, next to Cam Skattebo, Wednesday's $22 claim, who is on the Giants' bye. Jaylen Waddle is questionable at press time and starts. Three Packers start, and all three play Thursday night. As set: 123.8. Fixed: 135.5.</p>
+  <p>The carousel is back in service. Trevor Lawrence returns from the bye (20.8) and sits, Drake Maye starts (22.3), and for once the projections agree with the screen. The only defense on the roster is San Francisco's, which is on bye and starting. Last week it scored &minus;1.00, so a zero would be an improvement. Jahmyr Gibbs and A.J. Brown are questionable at press time and start. Devaughn Vele, 16.40 on the bench last week, is on the New Orleans bye. As set: 123.8, to the decimal where jsdivine's lineup sits. Fixed: 124.6, still with nothing at defense.</p>
+  <span class="verdict">Desk pick: <b>jsdivine</b>, by 10.9 with Allen in. As set it is a dead heat, and the desk does not pick dead heats.</span>
+
+  <h3>ITouchd0wnThere (4&ndash;3) <span class="vs">vs</span> D1LLIGAF (3&ndash;4)</h3>
+  <div class="series">Series: ITouchd0wnThere leads 6&ndash;1 &middot; Last meeting ITouchd0wnThere 111.46&ndash;99.66, Week 14 of 2025</div>
+  <p>Six wins in seven meetings, including the 2022 and 2024 openers. Wednesday's waivers brought Caleb Douglas ($15) and Geno Smith ($0), and both start: Smith at quarterback (16.9) over Caleb Williams (16.0), Douglas at receiver (7.9). Trey McBride projects for 19.0, the best tight end number on the board. Chris Olave is on the New Orleans bye and correctly benched. Jonah Coleman starts at FLEX (7.8) with RJ Harvey (8.4) on the bench, which is as close to a lineup note as this roster gets. Emeka Egbuka is questionable at press time and on the bench. As set: 111.6. Fixed: 116.5.</p>
+  <p>Disclosure: the desk's own franchise, with three straight losses and a new policy of reading the bench as well as the rows. Lamar Jackson is off injured reserve and on the bench, questionable at press time and projected for 20.5. Jayden Daniels starts at quarterback, projected for 20.1. That decision is four-tenths of a point wide and will be made Saturday. Bo Nix was released to make the room. Kenneth Walker (20.8) and Ja'Marr Chase (19.8, questionable at press time) lead the projections. KC Concepcion, 23.20 on the bench last week, starts at FLEX. Dalton Kincaid is back from the bye at tight end and questionable at press time. As set: 124.4. Fixed: 126.4.</p>
+  <span class="verdict">Desk pick: <b>D1LLIGAF</b>, by 9.9. The desk is picking itself for the first time in three previews, against a 6&ndash;1 series, one week after its own call scored 12.40. The ethics office has asked for this to be noted.</span>
+
+  <h3>alyssagenther (4&ndash;3) <span class="vs">vs</span> jgirsby (4&ndash;3)</h3>
+  <div class="series">Series: jgirsby leads 4&ndash;1 &middot; Last meeting alyssagenther 126.92&ndash;121.28, Week 9 of 2025</div>
+  <p>Three byes land on this roster. Christian McCaffrey and Nico Collins are both on the bench, and so is Tyler Shough, which settles the quarterback room for a week: Dak Prescott starts (22.0). Tuesday's two Out tags are down to questionable, and Jeremiyah Love and Tyler Warren both start, along with Amon-Ra St. Brown, also questionable at press time. Jaylen Warren is the only other running back with a game. Jalen Coker plays Thursday. The lineup as set is already the best this roster can field: 118.3 either way.</p>
+  <p>Brock Purdy is on the San Francisco bye, so the chair gets the week off and Matthew Stafford starts (17.4). Puka Nacua projects for 22.4 and Zay Flowers for 18.3. Michael Wilson (13.6) moved into the lineup at FLEX, and Breece Hall, questionable at press time, sits. Wednesday's waivers added Jordan Mason and the Cincinnati defense, which starts. Colston Loveland, 19.90 on the bench last week, plays Monday night behind Brock Bowers. As set: 132.5. Fixed: 132.6.</p>
+  <span class="verdict">Desk pick: <b>jgirsby</b>, by 14.3. Tuesday's margin was 24.9; the questionable tags did the rest.</span>
+
+  <h3>divinethought (5&ndash;2) <span class="vs">vs</span> sammyyy29 (1&ndash;6)</h3>
+  <div class="series">Series: divinethought leads 5&ndash;2 &middot; Last meeting sammyyy29 144.18&ndash;112.72, Week 8 of 2025</div>
+  <p>Tied for first. The lineup moved since Tuesday: Parker Washington (15.4) and Rhamondre Stevenson (13.6) are in, and Tetairoa McMillan (14.7) and DK Metcalf are on the bench. Stevenson and Quinshon Judkins combined for 45.90 on the bench last week, and one of them has made it out. Bijan Robinson (20.0) and Ashton Jeanty (15.9) lead the backfield. The Patriots defense (7.3) still sits behind Minnesota's (5.5), and Jake Elliott, the Monday kicker pickup, still sits behind Jason Myers. As set: 122.2. Fixed: 125.1.</p>
+  <p>Four starters are on a bye: Brandin Cooks (San Francisco), Dalton Schultz and Ka'imi Fairbairn (Houston), and Isaiah Likely (Giants). Aaron Jones starts and is questionable at press time. Wednesday's waivers did not help: a $7 bid on Caleb Douglas lost to ITouchd0wnThere's $15. The bench has one tight end and the Jacksonville defense with games this week, and no receiver or kicker. Bryce Young starts again (16.9) over Kirk Cousins (14.2), and this time the projections side with him. As set: 59.5. Fixed: 69.7, with three slots nobody on the roster can fill. Free agents are still available until kickoff. sammyyy29 won this meeting last year by 31.46.</p>
+  <span class="verdict">Desk pick: <b>divinethought</b>, by 55.4 on the lineups as they stand. The desk would still like that number to be a typo by Sunday.</span>
+
+  <h3>mmcatee01 (3&ndash;4) <span class="vs">vs</span> BrennaLynne (3&ndash;4)</h3>
+  <div class="series">Series: mmcatee01 leads 3&ndash;2 &middot; Last meeting mmcatee01 156.88&ndash;116.34, Week 6 of 2025</div>
+  <p>Coming off 169.38, the week's high. Woody Marks and George Kittle, both on a bye and both starting on Tuesday, have been benched. Stefon Diggs (12.0) and Saquon Barkley (11.2) are in, and Barkley and Rashee Rice are questionable at press time. Joe Burrow starts (22.2) over Patrick Mahomes (15.8). Brandon Aubrey projects for 9.4, the best kicker number on the board, and the belief system takes that as scripture. As set: 116.0. Fixed: 116.3.</p>
+  <p>The only roster in the league that planned for this bye a week early. BrennaLynne added the Kansas City defense on Sunday afternoon with Houston's off week coming, and Michael Penix, 26.40 on the bench last week, starts for C.J. Stroud. Malik Nabers is on the Giants' bye and benched. Matthew Golden is questionable at press time and plays Thursday. Jaxon Smith-Njigba projects for 23.6, the best receiver number on the board. As set: 109.5. Fixed: 111.9.</p>
+  <span class="verdict">Desk pick: <b>mmcatee01</b>, by 4.4. On Tuesday this pick needed two bye starters to come out of the lineup. They came out.</span>
+
+  <h2><span class="tag">///</span>The Week 8 Ledger</h2>
+  <p>Five lines for the group chat, all of them checkable:</p>
+  <ul class="ranks">
+    <li><b>Five</b> &mdash; starters on a bye at press time: four for sammyyy29 (Cooks, Schultz, Likely, Fairbairn) and Dawnieo's 49ers defense, the only one on her roster. On Tuesday it was seven; mmcatee01 cleared both of his.</li>
+    <li><b>24.3</b> &mdash; Josh Allen's projection, on jsdivine's bench at press time.</li>
+    <li><b>6&ndash;1</b> &mdash; ITouchd0wnThere's series lead over the desk's franchise. The desk picked itself anyway.</li>
+    <li><b>Three</b> &mdash; teams still at $0 of FAAB after Wednesday's waivers: mmcatee01, sammyyy29, BrennaLynne. The league has spent $281, $44 of it this morning. It is Week 8.</li>
+    <li><b>21&ndash;9</b> &mdash; the desk's pick record. It has taken the fixed-lineup favorite in every game, including the one involving itself.</li>
+  </ul>
+
+  <div class="clock-note">Filed Wednesday, after waivers. Thursday is Green Bay and Carolina, Sunday night is Washington and Philadelphia, and Monday night is Chicago and Seattle. Houston, New Orleans, the Giants and San Francisco are off. The desk has checked its own lineup and will check it again Saturday, because last week it checked the wrong part.</div>
+
+  <p>The desk will not be taking questions. It has read the rows, and this week it is reading the bench too.</p>
+
+  <div class="foot">FamilyFootball Insider &middot; Week 8 Preview 2026 &middot; divinesleeper.com</div>
+</div>
+</body>
+</html>
