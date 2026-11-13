@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 10 Is a Rerun of Week 1</title>
+<style>
+  :root {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0d1220;
+      --panel: #151c2e;
+      --ink: #e7eaf2;
+      --ink-soft: #9aa4ba;
+      --line: #2a3450;
+      --navy: #16233f;
+      --navy-text: #c3cde4;
+      --gold: #e8b23a;
+      --gold-strong: #f0c05e;
+      --chip-bg: #222d49;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0d1220;
+    --panel: #151c2e;
+    --ink: #e7eaf2;
+    --ink-soft: #9aa4ba;
+    --line: #2a3450;
+    --navy: #16233f;
+    --navy-text: #c3cde4;
+    --gold: #e8b23a;
+    --gold-strong: #f0c05e;
+    --chip-bg: #222d49;
+  }
+  :root[data-theme="light"] {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 20px 80px;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; }
+
+  .display, h1, h2, h3 {
+    font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  .masthead {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    border-bottom: 3px solid var(--ink);
+    padding: 26px 0 10px;
+  }
+  .masthead .brand {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em;
+    font-size: 0.85rem;
+  }
+  .masthead .brand em { color: var(--gold); font-style: normal; }
+  .masthead .date {
+    font-family: system-ui, sans-serif; font-size: 0.75rem; color: var(--ink-soft);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    margin: 34px 0 14px;
+    text-wrap: balance;
+  }
+  h1 .kick { color: var(--gold); }
+  .deck {
+    font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 18px;
+    line-height: 1.5; text-wrap: balance;
+  }
+  .byline {
+    font-family: system-ui, sans-serif; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 9px 0; margin-bottom: 34px;
+  }
+  .byline b { color: var(--gold); }
+
+  p { margin: 0 0 1.15em; }
+
+  h2 {
+    font-size: 1.5rem; font-weight: 800; margin: 44px 0 18px;
+    padding-top: 18px; border-top: 3px solid var(--ink);
+  }
+  h2 .tag { color: var(--gold); margin-right: 8px; }
+
+  .pick { display: block; margin: 0 0 20px; }
+  .pick b { color: var(--ink); }
+
+  .clock-note {
+    border-left: 4px solid var(--gold); background: var(--panel);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px 4px; margin: 30px 0; font-style: italic; color: var(--ink-soft);
+  }
+
+  .ranks { margin: 0 0 20px; padding: 0; list-style: none; counter-reset: rk; }
+  .ranks li {
+    counter-increment: rk; position: relative;
+    padding: 8px 0 8px 44px; border-bottom: 1px solid var(--line);
+  }
+  .ranks li::before {
+    content: counter(rk); position: absolute; left: 0; top: 6px;
+    font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800;
+    font-size: 1.2rem; color: var(--gold); width: 32px; text-align: right;
+  }
+  .ranks b { color: var(--ink); }
+
+  h3 {
+    font-size: 1.15rem; font-weight: 800; margin: 30px 0 8px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--line);
+  }
+  h3 .vs { color: var(--gold); margin: 0 6px; }
+  .series {
+    font-family: system-ui, sans-serif; font-size: 0.74rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-soft); margin: -2px 0 12px;
+  }
+  .verdict {
+    display: inline-block; background: var(--chip-bg); color: var(--ink);
+    font-family: system-ui, sans-serif; font-size: 0.82rem; font-weight: 700;
+    padding: 5px 10px; border-radius: 3px; margin: 2px 0 6px;
+  }
+  .verdict b { color: var(--gold-strong); }
+  .foot {
+    margin-top: 50px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--ink-soft);
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 0 12px 60px; font-size: 15px; }
+    .masthead { flex-wrap: wrap; row-gap: 2px; padding-top: 18px; }
+    h1 { margin-top: 24px; }
+    .deck { font-size: 1.06rem; }
+  }
+</style>
+</head>
+<body>
+<div id="dspn-article-nav" style="background:#0b0d12;border-bottom:3px solid #e02b20;font-family:Arial,Helvetica,sans-serif"><div style="max-width:1120px;margin:0 auto;padding:8px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap"><a href="/" style="background:#000;color:#fff;font-weight:900;font-style:italic;font-size:1rem;letter-spacing:1px;padding:3px 11px;text-decoration:none;border-bottom:3px solid #f2b024;margin-right:8px">DSPN</a><a href="/" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Home</a><a href="/annual" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">The Annual</a><a href="/draft-central" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Draft Central</a><a href="/live" style="color:#f2b024;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">&#9679; Live</a></div></div>
+
+
+<div class="wrap">
+  <div class="masthead">
+    <span class="brand">FamilyFootball <em>Insider</em></span>
+    <span class="date">Week 10 Preview &middot; November 2026</span>
+  </div>
+  <h1>Week 10 Is a Rerun of Week 1: <span class="kick">The Desk Would Like the Same Ending</span></h1>
+  <p class="deck">All five games are Week 1 rematches. The desk's franchise draws sammyyy29, the team it beat by 50.80 in September, five losses ago. Also: a starting defense on a bye with nobody behind it, the McMillan screen off again, and a preview filed after Thursday's game was over.</p>
+  <div class="byline">By <b>The Insider Desk</b> &middot; Rosters, lineups and injury tags at press time, Friday, Nov. 13 &middot; Records are 2026, nine weeks of fourteen &middot; Projections: FantasyPros, Week 10 PPR; Thursday players at actual points</div>
+
+  <p>Filed Friday. The Week 2 and Week 3 previews were filed Thursday with the game in progress. This one was filed after the Thursday game had ended, and the desk is handling that internally. Thursday was the Giants at Washington, so six starters are already locked, and their real points are used below in place of projections. Chicago, Denver, Philadelphia and Tampa Bay are off. The schedule has also run out of new matchups: every Week 10 game repeats a Week 1 game. In Week 1 the desk went 2&ndash;3. This week it is reversing three of those picks.</p>
+
+  <h2><span class="tag">///</span>The Games</h2>
+
+  <h3>D1LLIGAF (3&ndash;6) <span class="vs">vs</span> sammyyy29 (2&ndash;7)</h3>
+  <div class="series">Series: tied 4&ndash;4 &middot; Last meeting D1LLIGAF 152.46&ndash;101.66, Week 1 of 2026</div>
+  <p>Disclosure: the desk's own franchise. It has lost five straight since beating Dawnieo in Week 4, and that Week 1 win over sammyyy29 is still its biggest margin of the year. Jayden Daniels is already in: 26.76 on Thursday against a projection of 18.6. Rachaad White started at FLEX and scored 6.20, against 10.8 projected. DeVonta Smith is on injured reserve. Thursday night the roster added Eli Raridon and the kicker Evan McPherson as free agents, and released Will Reichard, the $2 kicker who scored 19.00 in Week 4. At tight end, Kyle Pitts starts (8.8), and Dalton Kincaid, questionable at press time, projects for 10.2 on the bench. The analytics department made that call and cites the tag. The gut was not consulted. As set: 125.7. With Kincaid: 127.1.</p>
+  <p>Isaiah Likely started Thursday and scored 27.70. The tight end file is in good order. T.J. Hockenson, questionable at press time, starts at FLEX (11.0). The quarterback file holds: Bryce Young starts (18.6) and Kirk Cousins sits (14.0). Austin Ekeler, a $0 claim Wednesday, scored 9.20 on the bench Thursday. Thursday afternoon sammyyy29 added Khalil Shakir, who starts (10.7), and released Ladd McConkey. Jake Ferguson is out at press time and on the bench. The lineup as set is the best this roster can field: 121.8, with $100 of FAAB still unspent.</p>
+  <span class="verdict">Desk pick: <b>D1LLIGAF</b>, by 3.9 as set and 5.3 with Kincaid. The desk is picking itself in a rematch of the only opener it has ever won, and it knows how that sounds.</span>
+
+  <h3>alyssagenther (5&ndash;4) <span class="vs">vs</span> jsdivine (6&ndash;3)</h3>
+  <div class="series">Series: tied 4&ndash;4 &middot; Last meeting jsdivine 143.16&ndash;124.60, Week 1 of 2026</div>
+  <p>Coming off 140.40 and a win over Dawnieo. Two claims Wednesday and Thursday: Audric Estime ($2) for J.K. Dobbins, and the Baltimore defense ($0) for Buffalo's, which starts Monday night. Amon-Ra St. Brown (19.9) and Denzel Boston (10.8) are questionable at press time and both start. Garrett Wilson, also questionable, projects for 12.2 on the bench. Christian McCaffrey projects for 21.9. The quarterback room is down to two, and Dak Prescott (18.7) and Tyler Shough (18.6) project 0.1 apart. As set: 130.3. Fixed: 131.7.</p>
+  <p>Coming off 151.36, the week's high, against the desk. Cam Skattebo started Thursday and scored 27.20 against a projection of 12.5. Josh Allen starts (24.1), and Jordan Love projects for 16.9 on the bench, which this week is the right side of the file. Two moves Thursday morning: the Green Bay defense ($0) for Denver's, which is on a bye, and George Pickens ($5) for Jaylen Waddle. Dawnieo had released Pickens Wednesday. Pickens is questionable at press time and on the bench. Josh Jacobs is out at press time. The lineup as set is the best this roster can field: 149.7.</p>
+  <span class="verdict">Desk pick: <b>jsdivine</b>, by 18.0. The desk picked alyssagenther in Week 1 and lost. It is reversing the pick, not the series.</span>
+
+  <h3>BrennaLynne (4&ndash;5) <span class="vs">vs</span> Dawnieo (4&ndash;5)</h3>
+  <div class="series">Series: BrennaLynne leads 4&ndash;2 &middot; Last meeting Dawnieo 146.20&ndash;93.62, Week 1 of 2026</div>
+  <p>Coming off 142.46 and a 36.64 win built on C.J. Stroud's 45.36. Stroud starts again (17.3) over Michael Penix (14.2). Malik Nabers started Thursday and scored 7.40. Jaxon Smith-Njigba projects for 22.2. Dallas Goedert and Makai Lemon are on the Philadelphia bye, and both are on the bench. The lineup as set is the best this roster can field: 116.9. Last week this roster had 10.4 on the bench at press time. This week it has none.</p>
+  <p>The carousel has stopped on Trevor Lawrence (20.6). Drake Maye projects for 21.5 on the bench. The Chicago defense starts, Chicago is on a bye, and there is no other defense on the roster. Two claims Wednesday: Jakobi Meyers ($8), questionable at press time and on the bench, for George Pickens; and Juwan Johnson ($10) for Mark Andrews. Jahmyr Gibbs projects for 24.4. Tony Pollard is questionable at press time and starts. As set: 103.8. Fixed: 110.7, before anyone finds a defense.</p>
+  <span class="verdict">Desk pick: <b>BrennaLynne</b>, by 6.2 against Dawnieo's best nine. A waiver-wire defense would make it close. A bye defense makes it 13.1.</span>
+
+  <h3>ITouchd0wnThere (6&ndash;3) <span class="vs">vs</span> mmcatee01 (5&ndash;4)</h3>
+  <div class="series">Series: ITouchd0wnThere leads 5&ndash;2 &middot; Last meeting ITouchd0wnThere 183.46&ndash;95.76, Week 1 of 2026</div>
+  <p>Coming off 102.92 and a win. Tied for first, with the ninth-most points in the league. Caleb Williams, Emeka Egbuka, Jonah Coleman and the kicker Chase McLaughlin are all on byes, and all four are correctly benched. The replacements came in Wednesday and Thursday: Drew Lock ($0) at quarterback, questionable at press time (16.2), Jason Sanders ($0) at kicker, and Rico Dowdle ($1). Trey McBride projects for 15.6. Bhayshul Tuten is questionable at press time and starts. Tyler Allgeier (10.4) sits behind Caleb Douglas (9.1). As set: 119.2. Fixed: 120.5. $8 of FAAB remains.</p>
+  <p>Coming off 131.64. Stefon Diggs started Thursday and scored 20.30 against 10.6 projected. Joe Burrow starts Sunday night (21.4), and Patrick Mahomes sits (18.5). Saquon Barkley is on the Philadelphia bye. Wednesday mmcatee01 claimed the San Francisco defense ($0) and released Hunter Henry. The round-9 kicker projects for 8.4, and the belief system has no comment. FAAB spent this season: $0. The lineup as set is the best this roster can field: 134.4.</p>
+  <span class="verdict">Desk pick: <b>mmcatee01</b>, by 13.9. Week 1 was ITouchd0wnThere by 87.70, and the desk is aware of that.</span>
+
+  <h3>divinethought (5&ndash;4) <span class="vs">vs</span> jgirsby (5&ndash;4)</h3>
+  <div class="series">Series: jgirsby leads 5&ndash;2 &middot; Last meeting divinethought 144.74&ndash;135.90, Week 1 of 2026</div>
+  <p>Coming off 103.90 and a loss. Tetairoa McMillan projects for 15.3 on the bench. Rhamondre Stevenson, questionable at press time, starts at FLEX at 5.3. The screen is off again. That swap alone accounts for the entire 10.0 gap between this lineup and its best nine. Bijan Robinson (20.3) and Drake London (15.5) start. Harold Fannin is questionable at press time and starts. As set: 111.6. Fixed: 121.6.</p>
+  <p>Coming off 105.82 and a loss to BrennaLynne. The recap billed this one as the screen against the chair. The chair has Brock Purdy starting (22.3) over Matthew Stafford (17.2), which is the projected call, at press time. Last week the chair also had the projected call at press time. Germie Bernard ($5, Wednesday) projects for 10.6 on the bench, and Jadarian Price starts at FLEX (10.2). Tyler Bass ($2) is the new kicker. Carnell Tate is questionable at press time and starts. Colston Loveland and D'Andre Swift are on the Chicago bye. As set: 116.8. Fixed: 117.2.</p>
+  <span class="verdict">Desk pick: <b>divinethought</b>, by 4.4 with the screen on. With it off, jgirsby by 5.2. The desk picks the fixed lineup every week, including weeks like this one.</span>
+
+  <h2><span class="tag">///</span>The Week 10 Ledger</h2>
+  <p>Five lines for the group chat, all of them checkable:</p>
+  <ul class="ranks">
+    <li><b>Five</b> &mdash; Week 1 rematches. The desk went 2&ndash;3 the first time, and it is reversing three of those picks.</li>
+    <li><b>One</b> &mdash; starting defense on a bye: Chicago's, for Dawnieo, with no other defense on the roster.</li>
+    <li><b>10.0</b> &mdash; the gap between divinethought's lineup and its best nine. All of it is the FLEX spot.</li>
+    <li><b>0.30</b> &mdash; Dawnieo's lead over the desk's franchise for third in points scored, 1152.04 to 1151.74. In the Week 9 recap the desk was ahead by 0.70. That was the column it was winning.</li>
+    <li><b>26&ndash;14</b> &mdash; the desk's pick record. This week it is picking itself.</li>
+  </ul>
+
+  <div class="clock-note">Filed Friday, after Thursday. Sunday opens in Germany with Detroit and New England at 9:30 a.m. Eastern. Sunday night is Pittsburgh at Cincinnati, and Monday night is Baltimore and the Chargers. Chicago, Denver, Philadelphia and Tampa Bay are off.</div>
+
+  <p>The desk will not be taking questions. It has already seen this week once, and it would like the same ending.</p>
+
+  <div class="foot">FamilyFootball Insider &middot; Week 10 Preview 2026 &middot; divinesleeper.com</div>
+</div>
+</body>
+</html>
