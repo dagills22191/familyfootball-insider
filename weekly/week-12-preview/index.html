@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Week Started Wednesday</title>
+<style>
+  :root {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0d1220;
+      --panel: #151c2e;
+      --ink: #e7eaf2;
+      --ink-soft: #9aa4ba;
+      --line: #2a3450;
+      --navy: #16233f;
+      --navy-text: #c3cde4;
+      --gold: #e8b23a;
+      --gold-strong: #f0c05e;
+      --chip-bg: #222d49;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0d1220;
+    --panel: #151c2e;
+    --ink: #e7eaf2;
+    --ink-soft: #9aa4ba;
+    --line: #2a3450;
+    --navy: #16233f;
+    --navy-text: #c3cde4;
+    --gold: #e8b23a;
+    --gold-strong: #f0c05e;
+    --chip-bg: #222d49;
+  }
+  :root[data-theme="light"] {
+    --ground: #f1f3f6;
+    --panel: #ffffff;
+    --ink: #131a26;
+    --ink-soft: #4a5468;
+    --line: #d4d9e2;
+    --navy: #16233f;
+    --navy-text: #16233f;
+    --gold: #b17d08;
+    --gold-strong: #8f6506;
+    --chip-bg: #e7eaf0;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 20px 80px;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; }
+
+  .display, h1, h2, h3 {
+    font-family: 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  .masthead {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    border-bottom: 3px solid var(--ink);
+    padding: 26px 0 10px;
+  }
+  .masthead .brand {
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em;
+    font-size: 0.85rem;
+  }
+  .masthead .brand em { color: var(--gold); font-style: normal; }
+  .masthead .date {
+    font-family: system-ui, sans-serif; font-size: 0.75rem; color: var(--ink-soft);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.02;
+    margin: 34px 0 14px;
+    text-wrap: balance;
+  }
+  h1 .kick { color: var(--gold); }
+  .deck {
+    font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 18px;
+    line-height: 1.5; text-wrap: balance;
+  }
+  .byline {
+    font-family: system-ui, sans-serif; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 9px 0; margin-bottom: 34px;
+  }
+  .byline b { color: var(--gold); }
+
+  p { margin: 0 0 1.15em; }
+
+  h2 {
+    font-size: 1.5rem; font-weight: 800; margin: 44px 0 18px;
+    padding-top: 18px; border-top: 3px solid var(--ink);
+  }
+  h2 .tag { color: var(--gold); margin-right: 8px; }
+
+  .pick { display: block; margin: 0 0 20px; }
+  .pick b { color: var(--ink); }
+
+  .clock-note {
+    border-left: 4px solid var(--gold); background: var(--panel);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 18px 4px; margin: 30px 0; font-style: italic; color: var(--ink-soft);
+  }
+
+  .ranks { margin: 0 0 20px; padding: 0; list-style: none; counter-reset: rk; }
+  .ranks li {
+    counter-increment: rk; position: relative;
+    padding: 8px 0 8px 44px; border-bottom: 1px solid var(--line);
+  }
+  .ranks li::before {
+    content: counter(rk); position: absolute; left: 0; top: 6px;
+    font-family: 'Arial Narrow', Arial, sans-serif; font-weight: 800;
+    font-size: 1.2rem; color: var(--gold); width: 32px; text-align: right;
+  }
+  .ranks b { color: var(--ink); }
+
+  h3 {
+    font-size: 1.15rem; font-weight: 800; margin: 30px 0 8px;
+    padding-bottom: 6px; border-bottom: 1px solid var(--line);
+  }
+  h3 .vs { color: var(--gold); margin: 0 6px; }
+  .series {
+    font-family: system-ui, sans-serif; font-size: 0.74rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-soft); margin: -2px 0 12px;
+  }
+  .verdict {
+    display: inline-block; background: var(--chip-bg); color: var(--ink);
+    font-family: system-ui, sans-serif; font-size: 0.82rem; font-weight: 700;
+    padding: 5px 10px; border-radius: 3px; margin: 2px 0 6px;
+  }
+  .verdict b { color: var(--gold-strong); }
+  .foot {
+    margin-top: 50px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-family: system-ui, sans-serif; font-size: 0.78rem; color: var(--ink-soft);
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 0 12px 60px; font-size: 15px; }
+    .masthead { flex-wrap: wrap; row-gap: 2px; padding-top: 18px; }
+    h1 { margin-top: 24px; }
+    .deck { font-size: 1.06rem; }
+  }
+</style>
+</head>
+<body>
+<div id="dspn-article-nav" style="background:#0b0d12;border-bottom:3px solid #e02b20;font-family:Arial,Helvetica,sans-serif"><div style="max-width:1120px;margin:0 auto;padding:8px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap"><a href="/" style="background:#000;color:#fff;font-weight:900;font-style:italic;font-size:1rem;letter-spacing:1px;padding:3px 11px;text-decoration:none;border-bottom:3px solid #f2b024;margin-right:8px">DSPN</a><a href="/" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Home</a><a href="/annual" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">The Annual</a><a href="/draft-central" style="color:#f2f3f6;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">Draft Central</a><a href="/live" style="color:#f2b024;text-decoration:none;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px">&#9679; Live</a></div></div>
+
+
+<div class="wrap">
+  <div class="masthead">
+    <span class="brand">FamilyFootball <em>Insider</em></span>
+    <span class="date">Week 12 Preview &middot; November 2026</span>
+  </div>
+  <h1>The Week Started Wednesday: <span class="kick">divinethought Is Still Starting Last Week's Bye Fix</span></h1>
+  <p class="deck">Green Bay and the Rams kicked off on Wednesday night, so the week started before the preview did. divinethought's lineup sits 24.7 points below its own best nine, jgirsby has reversed last week's FLEX call, and the desk's gut has picked a receiver. Every game is a Week 3 rematch, and three games remain before the playoffs.</p>
+  <div class="byline">By <b>The Insider Desk</b> &middot; Rosters, lineups and injury tags at press time, Wednesday, Nov. 25, 8:20 p.m. &middot; Records are 2026, eleven weeks of fourteen &middot; Projections: FantasyPros, Week 12 PPR</div>
+
+  <p>Filed Wednesday night, after waivers cleared, which is the schedule. This week, though, the schedule started at 8:00 p.m. Wednesday with Green Bay at the Rams, and the desk filed during the first quarter. Nine players on league rosters belong to the two teams playing tonight: two starters, and seven benched players who now cannot be moved. Thanksgiving brings three more games on Thursday, and Denver plays at Pittsburgh on Friday. No team has a bye. The schedule's third lap begins: every Week 12 game repeats Week 3. Three teams are 7&ndash;4, three are 6&ndash;5, and the playoffs take six.</p>
+
+  <h2><span class="tag">///</span>The Games</h2>
+
+  <h3>D1LLIGAF (4&ndash;7) <span class="vs">vs</span> jgirsby (6&ndash;5)</h3>
+  <div class="series">Series: jgirsby leads 5&ndash;2 &middot; Last meeting jgirsby 150.38&ndash;134.44, Week 3 of 2026</div>
+  <p>Disclosure: the desk's own franchise, two games out with three to play. The gut made this week's lineup call. Antonio Williams, the $8 claim Wednesday morning, starts at FLEX (10.4) after catches of 22 and 42 yards on Monday night's final drive. KC Concepcion sits (11.3). The analytics department has filed a 0.9-point objection. The gut has asked what it could hurt. The pick also pairs Williams with his own quarterback: Jayden Daniels projects for 21.6, and both play at Arizona Sunday afternoon. Ja'Marr Chase projects for 21.6 as well. DeVonta Smith (15.5) plays Thursday. Derrick Henry is questionable at press time after re-entering the concussion protocol this week, and he starts (14.8). Mark Andrews starts at tight end (7.2) over Dalton Kincaid, questionable at press time (8.5), who plays Thursday night. As set: 113.5. With Concepcion and Kincaid in: 115.7.</p>
+  <p>Last week the chair started Chase Brown at FLEX, and he scored 8.60, while Breece Hall scored 19.00 on the bench. This week it is the other way around: Hall starts (13.9) and Brown sits (15.8). The chair did not have to choose a quarterback this time. Matthew Stafford's game kicked off tonight with him on the bench, so Brock Purdy, questionable at press time, is the quarterback (17.5). Emmett Johnson (16.3) and D'Andre Swift (14.2) play Thursday. Brock Bowers, questionable at press time, projects for 14.3 on the bench, and Colston Loveland starts (12.0). As set: 116.1. Fixed: 120.3.</p>
+  <span class="verdict">Desk pick: <b>jgirsby</b>, by 2.6 as set and by 4.6 with both lineups fixed. The desk is picking against itself for the second straight week, and last week that was the right call.</span>
+
+  <h3>alyssagenther (6&ndash;5) <span class="vs">vs</span> divinethought (5&ndash;6)</h3>
+  <div class="series">Series: alyssagenther leads 6&ndash;1 &middot; Last meeting alyssagenther 132.24&ndash;131.66, Week 3 of 2026</div>
+  <p>The Week 3 game was decided by 0.58. Dak Prescott plays Thursday (20.1) and Tyler Shough sits (17.0). Amon-Ra St. Brown (19.7) and Sam LaPorta, the $7 claim (11.5), also play Thursday. Cam Little, a $0 claim Wednesday, replaces Spencer Shrader at kicker (9.8). The Denver defense, also $0, replaces Baltimore's (7.7). Nothing on the bench would help. The lineup as set is the best this roster can field: 131.5.</p>
+  <p>Last week every bench player on this roster was on a bye, and divinethought set a perfect lineup around them. This week the byes are over and the replacements are still in the lineup. Kenny Gainwell (8.1) and Dawson Knox (3.4), both $0 claims last Sunday, start, along with DK Metcalf (9.0). Bijan Robinson (18.5), Drake London (14.1), Quinshon Judkins (13.4) and Harold Fannin, questionable at press time (12.0), sit. So does Jason Myers (7.2), behind Jake Elliott (6.6). Knox plays Thursday night. As set: 98.6. Fixed: 123.3. The gap is 24.7, the largest in the league this week.</p>
+  <span class="verdict">Desk pick: <b>alyssagenther</b>, by 8.2 against divinethought's best nine, and by 32.9 as set.</span>
+
+  <h3>jsdivine (7&ndash;4) <span class="vs">vs</span> BrennaLynne (6&ndash;5)</h3>
+  <div class="series">Series: tied 4&ndash;4 &middot; Last meeting jsdivine 132.26&ndash;117.78, Week 3 of 2026</div>
+  <p>The points leader starts six players on Thursday: Josh Allen (19.6), James Cook (16.4) and Travis Kelce (10.9) at night, and CeeDee Lamb (20.7), Javonte Williams (16.9) and George Pickens (15.6) in the afternoon. The bench quarterback file opened early. Jordan Love (16.2) and Christian Watson (15.5) are on the field tonight from the bench, and they cannot be moved. Pat Freiermuth, a $0 claim Wednesday, sits. Will Reichard kicks (8.8). As set: 132.4, and nothing that can still be moved would help.</p>
+  <p>Three straight wins. Tucker Kraft is one of the two league starters already on the field tonight (10.2). Matthew Golden (16.1) and Blake Corum (12.3) are in the same game on the bench. Jaxon Smith-Njigba, questionable at press time, starts (22.4). C.J. Stroud projects for 20.7. Drew Stevens, last week's $11 kicker and 18.00 points, projects for 8.3. Caleb Douglas, the other $11 claim, sits (10.7) while Jacory Croskey-Merritt starts at FLEX (9.4). As set: 120.9. Fixed: 122.2.</p>
+  <span class="verdict">Desk pick: <b>jsdivine</b>, by 11.5 as set and by 10.2 fixed.</span>
+
+  <h3>ITouchd0wnThere (7&ndash;4) <span class="vs">vs</span> Dawnieo (5&ndash;6)</h3>
+  <div class="series">Series: tied 3&ndash;3 &middot; Last meeting Dawnieo 128.88&ndash;97.64, Week 3 of 2026</div>
+  <p>The Rams defense is the other league starter already on the field tonight, and it showed 10.00 in the first quarter. Jonah Coleman, last week's 34.90 at FLEX, plays Friday (16.9). Justin Jefferson projects for 17.7 and Trey McBride for 16.0. Bhayshul Tuten, questionable at press time, projects for 14.9 on the bench, and David Montgomery starts (10.9). As set: 125.2. Fixed: 129.2.</p>
+  <p>The carousel holds on Trevor Lawrence (22.3), and Bo Nix sits (14.1). Jahmyr Gibbs plays Thursday afternoon (25.6), and Bucky Irving Monday night (19.4). Keon Coleman starts at receiver (6.0), and Jakobi Meyers, questionable at press time, projects for 11.1 on the bench. The Buffalo defense starts (4.8) over Chicago's (5.9). As set: 121.7. Fixed: 127.9.</p>
+  <span class="verdict">Desk pick: <b>ITouchd0wnThere</b>, by 3.5 as set and by 1.3 fixed.</span>
+
+  <h3>mmcatee01 (7&ndash;4) <span class="vs">vs</span> sammyyy29 (2&ndash;9)</h3>
+  <div class="series">Series: sammyyy29 leads 5&ndash;3 &middot; Last meeting mmcatee01 117.04&ndash;97.34, Week 3 of 2026</div>
+  <p>Six straight wins, and still $0 spent. Joe Burrow starts over Patrick Mahomes for the sixth straight week, and the projections agree, 23.6 to 17.2. They agreed last week too, and Mahomes scored 31.00 on the bench. Zach Charbonnet starts (11.1) and Jonathan Taylor sits (15.5). Stefon Diggs, questionable at press time, sits (13.4) while Rashee Rice starts (11.3). The Seattle defense starts (5.3) over San Francisco's (5.9). Luther Burden plays Thursday at FLEX (14.8). The kicker plays Thursday afternoon (9.1). As set: 118.6. Fixed: 125.7.</p>
+  <p>sammyyy29 leads this series. The quarterback file is open again: Bryce Young starts (15.4) and Kirk Cousins sits (16.3). Kyren Williams projects for 16.2 on the bench, in tonight's game, where he will stay. Isaiah Likely, questionable at press time, starts at tight end (13.5) and T.J. Hockenson sits (10.7), which is the right way around. Mike Evans, questionable at press time, sits (13.3) and Khalil Shakir starts (8.9). As set: 100.2. Fixed: 105.5.</p>
+  <span class="verdict">Desk pick: <b>mmcatee01</b>, by 18.4 as set and by 20.2 fixed.</span>
+
+  <h2><span class="tag">///</span>The Week 12 Ledger</h2>
+  <p>Five lines for the group chat, all of them checkable:</p>
+  <ul class="ranks">
+    <li><b>8:00 p.m. Wednesday</b> &mdash; the first kickoff of Week 12. Nine league players belong to those two teams, and seven of them are on benches, where they will stay.</li>
+    <li><b>Six</b> &mdash; jsdivine's Thursday starters. By Friday morning, two-thirds of the points leader's lineup will be final.</li>
+    <li><b>24.7</b> &mdash; the gap between divinethought's lineup and its best nine. Dawson Knox plays Thursday night.</li>
+    <li><b>$0</b> &mdash; FAAB spent this season by mmcatee01 and sammyyy29, who play each other. One of them is 7&ndash;4.</li>
+    <li><b>33&ndash;17</b> &mdash; the desk's pick record after last week's 4&ndash;1. It is picking against itself again.</li>
+  </ul>
+
+  <div class="clock-note">Filed Wednesday at 8:20 p.m., with Green Bay at the Rams in the first quarter. Thursday: Chicago at Detroit at 1:00, Philadelphia at Dallas at 4:30, and Kansas City at Buffalo at 8:20. Friday: Denver at Pittsburgh at 3:00. Sunday's late window has Washington at Arizona, where the desk has its quarterback and FLEX. Monday night: Carolina at Tampa Bay. No byes.</div>
+
+  <p>The desk will not be taking questions. It filed on Wednesday, as promised, and the week started without it.</p>
+
+  <div class="foot">FamilyFootball Insider &middot; Week 12 Preview 2026 &middot; divinesleeper.com</div>
+</div>
+</body>
+</html>
